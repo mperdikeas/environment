@@ -45,6 +45,8 @@
 (progn ;; ace-jump-mode
   (require 'ace-jump-mode)
   (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+  (define-key global-map (kbd "C-u C-c SPC") 'ace-jump-char-mode)
+  (define-key global-map (kbd "C-u C-u C-c SPC") 'ace-jump-line-mode)
   ;;;; if you also use viper mode:
   ;; (define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
 )
