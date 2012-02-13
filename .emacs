@@ -59,8 +59,17 @@
   (eval-after-load "color-theme"
   '(progn
      (color-theme-initialize)
-     (color-theme-jsc-dark)))
+    ;; these are some agreeable themes (examined 14.II.2011)
+    ;; (color-theme-jsc-dark) ;; color-theme-arjen ;; color-theme-simple-1
+    ;; (color-theme-vim-colors) ;; (color-theme-tty-dark)   ;; color-theme-euphoria
+      (color-theme-tty-dark)
+    )
+   )    
 )
 
-
+(if nil ;; alternative: zenburn
+(progn
+  (require 'color-theme-zenburn)
+  (color-theme-zenburn)
+))
 
