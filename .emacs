@@ -43,10 +43,10 @@
 (global-set-key (kbd "C-x C-SPC") 'flash-crosshairs)
 
 (progn ;; ace-jump-mode
-  (require 'ace-jump-mode)
-  (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-  (define-key global-map (kbd "C-u C-c SPC") 'ace-jump-char-mode)
-  (define-key global-map (kbd "C-u C-u C-c SPC") 'ace-jump-line-mode)
+  (require 'ace-jump-mode) ;; below are the default values
+    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
+    (define-key global-map (kbd "C-c C-c SPC") 'ace-jump-char-mode)
+    (define-key global-map (kbd "C-c C-c C-c SPC") 'ace-jump-line-mode)
   ;;;; if you also use viper mode:
   ;; (define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
 )
