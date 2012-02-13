@@ -1,5 +1,6 @@
 (menu-bar-mode 0)
 (add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
 (global-linum-mode)
 (global-hl-line-mode 1)
 (setq column-number-mode t)
@@ -40,10 +41,10 @@
 ;;(toggle-crosshairs-when-idle t)
 ;;(crosshairs-mode)
 ;;(flash-crosshairs)
-(global-set-key (kbd "C-x C-SPC") 'flash-crosshairs)
+(global-set-key (kbd "C-x C-j") 'flash-crosshairs)
 
 (progn ;; ace-jump-mode
-  (require 'ace-jump-mode) ;; below are the default values
+  (require 'ace-jump-mode) 
     (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
     (define-key global-map (kbd "C-c C-c SPC") 'ace-jump-char-mode)
     (define-key global-map (kbd "C-c C-c C-c SPC") 'ace-jump-line-mode)
@@ -52,3 +53,14 @@
 )
 
 (global-set-key (kbd "M-g g") 'goto-line)
+
+(progn ;; color-theme
+  (require  'color-theme)
+  (eval-after-load "color-theme"
+  '(progn
+     (color-theme-initialize)
+     (color-theme-jsc-dark)))
+)
+
+
+
