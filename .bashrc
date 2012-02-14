@@ -113,3 +113,7 @@ export CLASSPATH=$CLASSPATH:/usr/share/java/servlet-api-2.5.jar
 export CLASSPATH=$CLASSPATH:/usr/share/java/jsp-api-2.1.jar
 export CLASSPATH=$CLASSPATH:/home/mperdikeas/mollypages/molly_1.0.9/molly_1.0.9.jar
 export CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
+
+# pushd and popd aliases
+alias p='pushd'
+alias o='popd'
