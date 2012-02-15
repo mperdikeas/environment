@@ -73,4 +73,7 @@
   (color-theme-zenburn)
 ))
 
-(require 'repeat)
+(require 'repeat) ;; to repeat last command: "C-x z"; once pressed, additional 'z's will keep repeating it.
+
+(setq initial-frame-alist '((top . 200) (left . 500)))
+      
