@@ -117,3 +117,6 @@ export CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
 # pushd and popd aliases
 alias p='pushd'
 alias o='popd'
+
+# 2012-02-22 using extglob shell option for more powerfull globs (e.g. ls !(*.cpp) )
+shopt -s extglob
