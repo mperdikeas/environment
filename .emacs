@@ -1,6 +1,7 @@
 (menu-bar-mode 0)
 (add-to-list 'load-path "~/.emacs.d")
 (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
+
 (global-linum-mode)
 (global-hl-line-mode 1)
 (setq column-number-mode t)
@@ -62,7 +63,8 @@
     ;; these are some agreeable themes (examined 14.II.2011)
     ;; (color-theme-jsc-dark) ;; color-theme-arjen ;; color-theme-simple-1
     ;; (color-theme-vim-colors) ;; (color-theme-tty-dark)   ;; color-theme-euphoria
-      (color-theme-tty-dark)
+    ;;  (color-theme-tty-dark)
+     (color-theme-jsc-dark)
     )
    )    
 )
@@ -74,3 +76,10 @@
 ))
 
 (require 'repeat)
+
+(progn ;; emacs tuareg
+  (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4/compiled")
+  (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
+  (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
+  (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+)
