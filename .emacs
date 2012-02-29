@@ -75,7 +75,9 @@
   (color-theme-zenburn)
 ))
 
-(require 'repeat)
+
+(require 'repeat) ;; to repeat last command: "C-x z"; once pressed, additional 'z's will keep repeating it.
+(setq initial-frame-alist '((top . 200) (left . 500)))
 
 (progn ;; emacs tuareg
   (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4/compiled")
@@ -83,3 +85,4 @@
   (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
   (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 )
+
