@@ -80,7 +80,7 @@
 (setq initial-frame-alist '((top . 200) (left . 500)))
 
 (progn ;; emacs tuareg
-  (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4/compiled")
+  (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4/compiled") ;; the "compiled" folder was created by running "make install DEST=compiled" - it was not part of the tgz archive - read README in the archive for more
   (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
   (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
   (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
