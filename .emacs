@@ -3,7 +3,12 @@
 (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
 
 (global-linum-mode)
-(global-hl-line-mode 1)
+
+(progn ;; current line highlight
+  (global-hl-line-mode 1)
+  (set-face-background hl-line-face "blue")
+)
+
 (setq column-number-mode t)
 
 ;; Remove completion buffer when done
