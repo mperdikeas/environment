@@ -105,14 +105,9 @@ alias l='ls -alF --color'
 HISTSIZE=10000
 HISTIGNORE=ls:ls\ -la:history
 
-export M2_HOME=/home/mperdikeas/apache-maven-2.2.1
-export JAVA_HOME=/usr/lib/jvm/java-6-sun
-export PATH=$PATH:$M2_HOME/bin
-export CLASSPATH=/usr/share/java/gnumail-1.1.2.jar
-export CLASSPATH=$CLASSPATH:/usr/share/java/servlet-api-2.5.jar
-export CLASSPATH=$CLASSPATH:/usr/share/java/jsp-api-2.1.jar
-export CLASSPATH=$CLASSPATH:/home/mperdikeas/mollypages/molly_1.0.9/molly_1.0.9.jar
-export CLASSPATH=$CLASSPATH:/usr/share/java/mysql.jar
+if [ -f ~/.bashrc_thisnode ]; then
+    . ~/.bashrc_thisnode
+fi
 
 # pushd and popd aliases
 alias p='pushd'

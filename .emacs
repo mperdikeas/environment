@@ -91,3 +91,29 @@
   (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 )
 
+(progn ;; AutoJavaComplete, AutoComplete and YASnippet install (together, as a group because their functionalities are linked and complementary and, further, AutoJavaComplete explicitly requires the other two
+  (progn ;; YASnippet
+    (add-to-list 'load-path "~/.emacs.d/yasnippet-0.6.1c")
+    (require 'yasnippet) ;; not yasnippet-bundle
+    (yas/initialize)
+    (yas/load-directory "~/.emacs.d/yasnippet-0.6.1c/snippets")
+  )
+ (progn ;; AutoComplete
+    (add-to-list 'load-path "~/.emacs.d/auto-complete")
+    (eval-after-load 'auto-complete-config
+       '(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
+    )
+    (require 'auto-complete-config)   
+    (ac-config-default)
+ )
+ (progn;; AutoJavaComplete
+   (add-to-list 'load-path "~/.emacs.d/ajc-java-complete/")
+   (require 'ajc-java-complete-config)
+   (add-hook 'java-mode-hook 'ajc-java-complete-mode)
+   (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
+;; AutoJavaComplete bindings:
+;; C-c i ajc-import-all-unimported-class
+;; C-c m ajc-import-class-under-point
+ )
+)
+
