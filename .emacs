@@ -32,7 +32,8 @@
 
 (progn ;; current line highlight
   (global-hl-line-mode 1)
-  (set-face-background hl-line-face "#4169E1") ;; royal blue
+  ;;  (set-face-background hl-line-face "#4169E1") ;; royal blue
+  (set-face-background hl-line-face "#E0B0FF") ;; mauve
   (set-face-foreground hl-line-face "#000000")
 )
 
@@ -91,23 +92,23 @@
 
 (if t
     (progn ;; option A : customize using color-theme
-        (progn ;; color-theme
-          (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
-          (require  'color-theme)
-          (eval-after-load "color-theme"
-          '(progn
-             (color-theme-initialize)
-            ;; these are some agreeable themes (examined 14.II.2011)
-            ;; (color-theme-jsc-dark) ;; color-theme-arjen ;; color-theme-simple-1
-            ;; (color-theme-vim-colors) ;; (color-theme-tty-dark)   ;; color-theme-euphoria
-            ;;  (color-theme-tty-dark)
-             (color-theme-jsc-dark)
+        (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
+        (if nil
+            (progn ;; option A.1 use one of the color-themes
+              (require  'color-theme)
+              (eval-after-load "color-theme"
+              '(progn
+                 (color-theme-initialize)
+                ;; these are some agreeable themes (examined 14.II.2011)
+                ;; (color-theme-jsc-dark) ;; color-theme-arjen ;; color-theme-simple-1
+                ;; (color-theme-vim-colors) ;; (color-theme-tty-dark)   ;; color-theme-euphoria
+                ;;  (color-theme-tty-dark)
+                 (color-theme-jsc-dark)
+                )
+               )   
             )
-           )    
-        )
-    
-        (if nil ;; alternative: zenburn
-            (progn
+
+            (progn ;; option A.2 use color-theme-zenburn which seems to be in its own package
               (require 'color-theme-zenburn)
               (color-theme-zenburn)
             )

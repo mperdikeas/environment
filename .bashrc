@@ -2,7 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-export TERM=xterm-color
+#export TERM=xterm-color
+export TERM=xterm-256color # support 256 colors - you also have to do a: apt-get install ncurses-term
+                           # to test whether the terminal really exports 256 colors, apart from echo $TERM
+                           # you ought to do a 'tput colors' (should print 256)
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
