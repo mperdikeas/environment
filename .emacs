@@ -143,8 +143,10 @@
 (progn ;; emacs tuareg
   (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4/compiled") ;; the "compiled" folder was created by running "make install DEST=compiled" - it was not part of the tgz archive - read README in the archive for more
   (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
-  (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
-  (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+  (autoload 'tuareg-mode              "tuareg"           "Major mode for editing Caml code" t)
+  (autoload 'camldebug                "camldebug"        "Run the Caml debugger" t)
+  (autoload 'tuareg-imenu-set-imenu   "tuareg-imenu"     "Configuration of imenu for tuareg" t) 
+  (add-hook 'tuareg-mode-hook 'tuareg-imenu-set-imenu)
 )
 
 (progn ;; AutoJavaComplete, AutoComplete and YASnippet install (together, as a group because their functionalities are linked and complementary and, further, AutoJavaComplete explicitly requires the other two
