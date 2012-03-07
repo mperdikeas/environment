@@ -1,0 +1,2 @@
+do have the `git ac` shortcut available do a:
+    git config --global alias.ac '!git add . -A && git commit'
