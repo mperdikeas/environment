@@ -2,7 +2,20 @@
 (add-to-list 'load-path "~/.emacs.d")
 
 
-(global-linum-mode)
+(global-linum-mode 1)
+(add-hook 'linum-before-numbering-hook
+    (lambda () (setq linum-format "%d ")))
+;; (setq linum-format "%d  ") ;; how is this line different from the above?
+
+;; make all "yes or no" prompts show "y or m" instead
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; no tabs, spaces instead!
+(setq-default indent-tabs-mode nil)
+(setq-default tabs-width 2)
+
+;; syntax highlight everywhere
+(global-font-lock-mode t)
 
 (progn ;; current line highlight
   (global-hl-line-mode 1)
@@ -17,6 +30,8 @@
         (let ((buffer "*Completions*"))
             (and (get-buffer buffer)
                 (kill-buffer buffer)))))    
+
+(global-set-key (kbd "C-x C-e") 'join-line)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
