@@ -1,10 +1,23 @@
 (menu-bar-mode 0)
 (add-to-list 'load-path "~/.emacs.d")
 
-
+(progn ;; progn
 (global-linum-mode 1)
 (add-hook 'linum-before-numbering-hook
-    (lambda () (setq linum-format "%d ")))
+    (lambda () (setq linum-format "%d  ")))
+(defun linum-face-settings ()
+  "Face settings for `linum'."
+  (custom-set-faces
+   '(linum
+     ((((background dark))
+       :foreground "green")
+      (t :foreground "gray")))))
+
+(eval-after-load 'linum
+  `(linum-face-settings))
+)
+
+(provide 'linum-face-settings)
 ;; (setq linum-format "%d  ") ;; how is this line different from the above?
 
 ;; make all "yes or no" prompts show "y or m" instead
