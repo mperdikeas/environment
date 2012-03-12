@@ -19,7 +19,8 @@
 
 (progn ;; current line highlight
   (global-hl-line-mode 1)
-  (set-face-background hl-line-face "blue")
+  (set-face-background hl-line-face "#4169E1") ;; royal blue
+  (set-face-foreground hl-line-face "#000000")
 )
 
 (setq column-number-mode t)
@@ -31,7 +32,7 @@
             (and (get-buffer buffer)
                 (kill-buffer buffer)))))    
 
-(global-set-key (kbd "C-x C-e") 'join-line)
+(global-set-key (kbd "C-x C-l") 'join-line) ;; shadows a disabled command (lowercase region)
 
 (custom-set-variables
   ;; custom-set-variables was added by Custom.
