@@ -1,14 +1,23 @@
 #!/bin/bash
 cd environment
-git status -s
-git ls-remote
+echo
 git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote -h
+
 cd ../ocaml-mutil
-git status -s
-git ls-remote
+echo
 git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote -h
+
 cd ../playground
-git status -s
-git ls-remote
+echo
 git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote -h
+
 cd ..
