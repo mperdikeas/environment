@@ -1,10 +1,14 @@
 #!/bin/bash
-cd ~/playground
-git fetch -v
+cd environment
 git status -s
-cd ~/environment
+git ls-remote
 git fetch -v
+cd ../ocaml-mutil
 git status -s
-cd ~/ocaml-mutil
+git ls-remote
 git fetch -v
+cd ../playground
 git status -s
+git ls-remote
+git fetch -v
+cd ..
