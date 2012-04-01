@@ -4,20 +4,20 @@ echo
 git fetch -v
 git status -s
 git rev-parse HEAD
-git ls-remote -h
+git ls-remote --heads -q
 
 cd ../ocaml-mutil
 echo
 git fetch -v
 git status -s
 git rev-parse HEAD
-git ls-remote -h
+git ls-remote --heads -q
 
 cd ../playground
 echo
 git fetch -v
 git status -s
 git rev-parse HEAD
-git ls-remote -h
+git ls-remote --heads -q
 
 cd ..
