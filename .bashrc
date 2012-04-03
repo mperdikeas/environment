@@ -2,6 +2,10 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+# This file is sourced by all *interactive* bash shells on startup,
+# including some apparently interactive shells such as scp and rcp
+# that can't tolerate any output.  So make sure this doesn't display
+# anything or bad things will happen !
 
 # 2348sd723asd97987 added 2012.04.03 from: http://www.jeremysands.com/archlinux/gentoo-bashrc-2008.0
 # Test for an interactive shell.  There is no need to set anything
