@@ -2,6 +2,18 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+
+# 2348sd723asd97987 added 2012.04.03 from: http://www.jeremysands.com/archlinux/gentoo-bashrc-2008.0
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+
+if [[ $- != *i* ]] ; then
+    # Shell is non-interactive.  Be done now!
+    return
+fi
+# 2348sd723asd97987 <- end
+
 #export TERM=xterm-color
 export TERM=xterm-256color # support 256 colors - you also have to do a: apt-get install ncurses-term
                            # to test whether the terminal really exports 256 colors, apart from echo $TERM
