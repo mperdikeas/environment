@@ -16,7 +16,7 @@ if [[ $- != *i* ]] ; then
     # Shell is non-interactive.  Be done now!
     return
 fi
-# 2348sd723asd97987 <- end
+# 2348sd723asd97987<-end
 
 #export TERM=xterm-color
 export TERM=xterm-256color # support 256 colors - you also have to do a: apt-get install ncurses-term
@@ -143,3 +143,4 @@ alias diskspace="du -S | sort -n -r |more"
 
 # Show me the size (sorted) of only the folders in this directory
 alias folders="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
+
