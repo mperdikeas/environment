@@ -1,0 +1,10 @@
+#!/bin/bash
+cd ~/playground
+git fetch -v
+git status -s
+cd ~/environment
+git fetch -v
+git status -s
+cd ~/ocaml-mutil
+git fetch -v
+git status -s

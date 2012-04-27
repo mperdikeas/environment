@@ -1,0 +1,10 @@
+#!/bin/bash
+cd ~/playground
+git push -v
+git status -s
+cd ~/environment
+git push -v
+git status -s
+cd ~/ocaml-mutil
+git push -v
+git status -s
