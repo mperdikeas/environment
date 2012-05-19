@@ -1,0 +1,20 @@
+#!/bin/bash
+cd ~/environment
+echo at `pwd`
+git status -s
+
+cd ~/ocaml-mutil
+echo at `pwd`
+git status -s
+
+
+cd ~/playground
+echo at `pwd`
+git status -s
+
+cd ~/reverie
+echo at `pwd`
+git status -s
+
+
+
