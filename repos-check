@@ -1,26 +1,26 @@
 #!/bin/bash
-cd environment
+cd ~/environment
 echo
 git fetch -v
 git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
 
-cd ../ocaml-mutil
+cd ~/ocaml-mutil
 echo
 git fetch -v
 git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
 
-cd ../playground
+cd ~/playground
 echo
 git fetch -v
 git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
 
-cd ../reverie
+cd ~/reverie
 echo
 git fetch -v
 git status -s
@@ -28,4 +28,4 @@ git rev-parse HEAD
 git ls-remote --heads -q
 
 
-cd ..
+
