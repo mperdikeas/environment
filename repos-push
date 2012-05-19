@@ -8,3 +8,6 @@ git status -s
 cd ~/ocaml-mutil
 git push -v
 git status -s
+cd ~/reverie
+git push -v
+git status -s

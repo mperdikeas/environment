@@ -5,4 +5,5 @@ cd ~/environment
 git merge origin/master
 cd ~/ocaml-mutil
 git merge origin/master
-
+cd ~/reverie
+git merge origin/master
