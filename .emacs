@@ -181,3 +181,14 @@
 ;;
 ;;    will compile all the .el files in the directory and in all subdirectories below.
 ;;    The C-u 0 part is to make it not ask about every .el file that does not have a .elc counterpart.
+
+
+(progn ;; show buffer's full path: http://stackoverflow.com/questions/3669511/the-function-to-show-current-files-full-path-in-mini-buffer
+    (defun show-file-name()
+      "Show the full path file name in the minibuffer."
+      (interactive)
+      (message (buffer-file-name))
+      (kill-new (file-truename buffer-file-name))
+    )
+    (global-set-key "\C-cz" 'show-file-name)
+)
