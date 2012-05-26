@@ -192,3 +192,26 @@
     )
     (global-set-key "\C-cz" 'show-file-name)
 )
+
+
+(if nil  ;; only one of the following two make sense
+    ;; whole path name of the buffer displayed in the mode line
+    (setq-default mode-line-buffer-identification
+    '((buffer-file-name
+    #("%12f" 0 4 (face bold))
+    #("%12b" 0 4 (face bold)))))
+    
+    ;; set the full path to the file to the title-bar
+    (setq frame-title-format `("@" ,(system-name) ": "
+    (buffer-file-name "%f"
+    (dired-directory dired-directory
+    "%b"))))
+)
+
+(if nil ;; it turns out that that's not very practical when doing C-x b
+    (progn  ;; http://compgroups.net/comp.emacs/mode-line-file-name-with-path/296677
+        (require 'uniquify)
+        (setq uniquify-buffer-name-style 'forward)
+        (setq uniquify-min-dir-content '5)
+    )
+)
