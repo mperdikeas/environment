@@ -1,4 +1,12 @@
 #!/bin/bash
+cd ~/tools
+echo at `pwd`
+git status -s
+
+cd ~/java-mutil/
+echo at `pwd`
+git status -s
+
 cd ~/environment
 echo at `pwd`
 git status -s

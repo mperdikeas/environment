@@ -79,8 +79,7 @@ fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
-case "$TERM" in
-xterm*|rxvt*)
+case "$TERM" in xterm*|rxvt*)
     PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
@@ -152,3 +151,4 @@ alias folders="find . -maxdepth 1 -type d -print | xargs du -sh | sort -rn"
 export ANT_ARGS='-logger org.apache.tools.ant.listener.AnsiColorLogger'
 
 alias emacs="emacs -nw"
+export PATH=$PATH:~/tools

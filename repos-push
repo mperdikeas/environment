@@ -1,4 +1,10 @@
 #!/bin/bash
+cd ~/tools
+git push -v
+git status -s
+cd ~/java-mutil/
+git push -v
+git status -s
 cd ~/playground
 git push -v
 git status -s
