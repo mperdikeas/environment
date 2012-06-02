@@ -1,9 +1,13 @@
 #!/bin/bash
-cd ~/playground
+cd ~/tools; echo `pwd`
 git merge origin/master
-cd ~/environment
+cd ~/java-mutil; echo `pwd`
 git merge origin/master
-cd ~/ocaml-mutil
+cd ~/playground; echo `pwd`
 git merge origin/master
-cd ~/reverie
+cd ~/environment; echo `pwd`
+git merge origin/master
+cd ~/ocaml-mutil; echo `pwd`
+git merge origin/master
+cd ~/reverie; echo `pwd`
 git merge origin/master
