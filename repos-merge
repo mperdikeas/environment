@@ -11,3 +11,5 @@ cd ~/ocaml-mutil; echo `pwd`
 git merge origin/master
 cd ~/reverie; echo `pwd`
 git merge origin/master
+cd ~/mperdikeas.github.com; echo `pwd`
+git merge origin/master

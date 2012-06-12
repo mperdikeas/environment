@@ -17,3 +17,6 @@ git status -s
 cd ~/reverie
 git push -v
 git status -s
+cd ~/mperdikeas.github.com/
+git push -v
+git status -s
