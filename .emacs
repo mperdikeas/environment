@@ -215,3 +215,9 @@
         (setq uniquify-min-dir-content '5)
     )
 )
+
+;; the following presumable enables clipboard sharing between the
+;; Emacs buffer and other applications but strangely I have found
+;; that to work even with the following line absent; still, it
+;; doesn't hurt to have it.
+(setq x-select-enable-clipboard t)
