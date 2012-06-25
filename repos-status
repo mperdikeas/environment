@@ -27,5 +27,9 @@ cd ~/mperdikeas.github.com
 echo at `pwd`
 git status -s
 
+cd ~/neuro-jsf-pilot
+echo at `pwd`
+git status -s
+
 
 

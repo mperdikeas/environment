@@ -20,3 +20,6 @@ git status -s
 cd ~/mperdikeas.github.com/
 git push -v
 git status -s
+cd ~/neuro-jsf-pilot/
+git push -v
+git status -s

@@ -13,3 +13,5 @@ cd ~/reverie; echo `pwd`
 git merge origin/master
 cd ~/mperdikeas.github.com; echo `pwd`
 git merge origin/master
+cd ~/neuro-jsf-pilot/; echo `pwd`
+git merge origin/master
