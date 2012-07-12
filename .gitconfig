@@ -2,7 +2,8 @@
 	excludesfile = /home/mperdikeas/.gitignore_global
 	editor = emacs
 [alias]
-	lgb = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+	lgb = log --color  --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+        lg  = log --color --graph --oneline --decorate
 [color]
 	ui = true
         diff=always
