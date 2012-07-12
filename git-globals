@@ -1,2 +1,0 @@
-git config --global --add color.ui true
-git config --global alias.lgb "log --graph --oneline --color --decorate"

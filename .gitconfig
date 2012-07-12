@@ -1,0 +1,10 @@
+[core]
+	excludesfile = /home/mperdikeas/.gitignore_global
+	editor = emacs
+[alias]
+	lgb = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
+[color]
+	ui = true
+        diff=always
+        status=auto
+        branch=auto
