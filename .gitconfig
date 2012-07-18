@@ -4,6 +4,7 @@
 [alias]
 	lgb = log --color  --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
         lg  = log --color --graph --oneline --decorate
+        sstatus = status -s --ignored
 [color]
 	ui = true
         diff=always
