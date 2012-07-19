@@ -5,6 +5,7 @@
 	lgb = log --color  --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold red)%d%Creset %s %Cgreen(%cr) %C(bold blue)%Creset' --abbrev-commit
         lg  = log --color --graph --oneline --decorate
         sstatus = status -s --ignored
+        ppush = "sh -c 'git push --all && git push --tags'"
 [color]
 	ui = true
         diff=always
