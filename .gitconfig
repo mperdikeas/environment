@@ -6,8 +6,11 @@
         lg  = log --color --graph --oneline --decorate
         sstatus = status -s --ignored
         ppush = "!sh -c 'git push --all && git push --tags'"
+        df = difftool
 [color]
 	ui = true
         diff=always
         status=auto
         branch=auto
+[diff]
+	tool = vimdiff
