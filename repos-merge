@@ -15,3 +15,5 @@ cd ~/mperdikeas.github.com; echo `pwd`
 git merge origin/master
 cd ~/neuro-jsf-pilot/; echo `pwd`
 git merge origin/master
+cd ~/neuro-jsf-pilot-envelope/; echo `pwd`
+git merge origin/master

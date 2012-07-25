@@ -56,4 +56,11 @@ git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
 
+cd ~/neuro-jsf-pilot-envelope
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
 
