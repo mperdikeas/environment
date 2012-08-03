@@ -152,3 +152,4 @@ export ANT_ARGS='-logger org.apache.tools.ant.listener.AnsiColorLogger'
 
 alias emacs="emacs -nw"
 export PATH=$PATH:~/tools
+export MONO_PATH=/opt/FSharp-2.0.0.0/bin

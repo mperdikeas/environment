@@ -35,5 +35,9 @@ cd ~/neuro-jsf-pilot-envelope
 echo at `pwd`
 git status -s --ignored
 
+cd ~/jsf-archetypes
+echo at `pwd`
+git status -s --ignored
+
 
 

@@ -26,3 +26,6 @@ git status -s
 cd ~/neuro-jsf-pilot-envelope/
 git ppush
 git status -s
+cd ~/jsf-archetypes/
+git ppush
+git status -s
