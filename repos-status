@@ -1,43 +1,43 @@
 #!/bin/bash
 cd ~/tools
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/java-mutil/
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/environment
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/ocaml-mutil
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/playground
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/reverie
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/mperdikeas.github.com
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/neuro-jsf-pilot
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/neuro-jsf-pilot-envelope
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 cd ~/jsf-archetypes
 echo at `pwd`
-git status -s --ignored
+git status -s
 
 
 
