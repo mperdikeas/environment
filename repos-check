@@ -63,7 +63,7 @@ git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
 
-cd ~/jsf-archetypes/
+cd ~/archetypes/
 echo
 git fetch -v
 git status -s

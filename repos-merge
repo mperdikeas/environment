@@ -17,6 +17,6 @@ cd ~/neuro-jsf-pilot/; echo `pwd`
 git merge origin/master
 cd ~/neuro-jsf-pilot-envelope/; echo `pwd`
 git merge origin/master
-cd ~/jsf-archetypes/; echo `pwd`
+cd ~/archetypes/; echo `pwd`
 git merge origin/master
 

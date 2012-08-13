@@ -35,7 +35,7 @@ cd ~/neuro-jsf-pilot-envelope
 echo at `pwd`
 git status -s
 
-cd ~/jsf-archetypes
+cd ~/archetypes
 echo at `pwd`
 git status -s
 
