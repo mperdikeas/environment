@@ -133,6 +133,9 @@ if [ -f ~/.bashrc_thisnode ]; then
     . ~/.bashrc_thisnode
 fi
 
+: ${JAVA_HOME:?"WARNING - Java home not set"}
+export CLASSPATH=$JAVA_HOME/jre/lib/rt.jar:.
+
 # pushd and popd aliases
 alias p='pushd'
 alias o='popd'

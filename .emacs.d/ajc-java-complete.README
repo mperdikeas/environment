@@ -1,0 +1,12 @@
+This emacs package was downloaded from:
+http://www.emacswiki.org/emacs/AutoJavaComplete
+
+I did a check on 18.VIII.2012 and I confirmed that the sources I have 
+are those of version 0.2.8. I did the test by downloading the following files:
+
+https://github.com/jixiuf/ajc-java-complete/raw/0.2.8/ajc-java-complete.el
+https://github.com/jixiuf/ajc-java-complete/raw/0.2.8/ajc-java-complete-config.el
+https://github.com/jixiuf/ajc-java-complete/raw/0.2.8/popup.el
+https://github.com/jixiuf/ajc-java-complete/raw/0.2.8/Tags.java
+
+and diffing them with those I currently have install in the ajc-java-complete folder.
