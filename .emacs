@@ -230,3 +230,5 @@
     (setq inferior-fsharp-program "fsharpi --readline-")
     (setq fsharp-compiler "fsharpc")
 )
+
+(add-to-list 'auto-mode-alist '("\\.xhtml$" . nxml-mode))
