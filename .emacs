@@ -154,7 +154,10 @@
     (add-to-list 'load-path "~/.emacs.d/yasnippet-0.6.1c")
     (require 'yasnippet) ;; not yasnippet-bundle
     (yas/initialize)
-    (yas/load-directory "~/.emacs.d/yasnippet-0.6.1c/snippets")
+    (progn ;; setup snippet directory for reference and development with 'yas/new-snippet'
+        (setq yas/root-directory ("~/.emacs.d/mysnippets" "~/.emacs.d/yasnippet-0.6.1c/snippets")) ;; 
+        (yas/load-directory yas/root-directory) ;; Load the snippets - all are referenced but only the first element of the list is (~/.emacs.d/mysnippets) is used for new development
+    )
   )
  (progn ;; AutoComplete
     (add-to-list 'load-path "~/.emacs.d/auto-complete")
