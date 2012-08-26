@@ -1,3 +1,4 @@
+
 (menu-bar-mode 0)
 (add-to-list 'load-path "~/.emacs.d")
 
@@ -235,3 +236,58 @@
 )
 
 (add-to-list 'auto-mode-alist '("\\.xhtml$" . nxml-mode))
+
+
+(if
+    (= emacs-major-version 23)
+    (load "package") ;; NB: for Emacs 23 that means you need package.el on your load path.
+)
+
+
+
+
+;; Clojure Mode https://github.com/technomancy/clojure-mode/blob/master/README.md
+(progn ;; Clojure mode, Paredit and Inferior Lisp
+    (if nil ;; apparently that doesn't work very well with Emacs 23 I received advice:
+            ;; https://groups.google.com/forum/#!topic/clojure/3o__0ZCI8rE
+            ;; switch to Emacs 24 which I will when the problems become too much.
+        (progn
+          (print "marmalade loading of clojure-mode and Paredit")
+          (require 'package)
+          (add-to-list 'package-archives
+                       '("marmalade" . "http://marmalade-repo.org/packages/"))
+          (package-initialize)
+          (when (not (package-installed-p 'clojure-mode))
+              (package-install 'clojure-mode)
+          )
+          (when (not (package-installed-p 'paredit))
+              (package-install 'paredit)
+          )
+        )
+        (progn
+          (print "manual loading of clojure-mode")
+          (load "clojure-mode")
+          (load "paredit")
+        )
+    )
+    (if nil ;; turn if off for now
+    (progn ;; Paredit
+        (require 'paredit) ;; if you didn't install via package.el
+        (defun turn-on-paredit () (paredit-mode 1))
+        (add-hook 'clojure-mode-hook 'turn-on-paredit)
+
+        ;; good. Now turn it off (for now) -> seems's not working
+        (add-hook 'clojure-mode-hook (lambda () (paredit-mode nil)))
+    )
+    )
+    (progn ;; Inferior Lisp
+    (add-hook 'clojure-mode-hook
+          (lambda ()
+            (setq inferior-lisp-program "~/.emacs.d/clojure/repl.sh")))
+    ;; (setq inferior-lisp-program "/home/mperdikeas/repl.sh") ;; it seems that that doesn't work - has to be in a hook
+    ;; ARE THE BELOW LINES NEEDED? I DON'T REMEMBER ANY MORE
+    ;; (setq inferior-lisp-load-command "(load \"%s\")\n")
+    ;; (setq lisp-function-doc-command "(doc %s)\n")
+    ;; (setq lisp-var-doc-command "(doc %s)\n")
+    )
+)
