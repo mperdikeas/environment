@@ -4,7 +4,7 @@
 ;; plesase send Bug reports and suggestions to 'Joseph at <jixiuf@gmail.com>
 
 ;;  License
-        
+
 ;; Copyright (C) 2011  Joseph <jixiuf@gmail.com> Limited
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -21,9 +21,37 @@
 ;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 ;; Boston, MA 02111-1307, USA.
 
-;;{{{ Commentary
+;;; Commentary
 
 ;;;this is "Auto Java Complete".
+
+;;; Commands:
+;;
+;; Below are complete command list:
+;;
+;;  `ajc-reload'
+;;    restart Auto Java Complete ,when your tag file changed,
+;;  `ajc-import-all-unimported-class'
+;;    import all unimported class .
+;;  `ajc-import-class-under-point'
+;;    import class under point.
+;;
+;;; Customizable Options:
+;;
+;; Below are customizable option list:
+;;
+;;  `ajc-tag-file'
+;;    the tag file is  used for java complete ,it  is generate by a Tags.java ,
+;;    default = "~/.java_base.tag"
+;;  `ajc-default-length-of-class'
+;;    the length of class name at dropdown-menu ,if the class
+;;    default = 36
+;;  `ajc-return-type-char'
+;;    the char  before return type when
+;;    default = ":"
+;;  `ajc-throws-char'
+;;    the char  before Exceptions  when completing
+;;    default = "   #"
 
 ;;1. it depends on auto complete ,so it would complete
 ;;   everything by dropdowning a menu.
@@ -51,11 +79,10 @@
 ;;      cd auto-complete-1.3/
 ;;      patch -p0 < popup-patch.diff
 ;;
-;;     don't forget to byte-compile it 
+;;     don't forget to byte-compile it
 
-;;}}}
 
-;;{{{ Features
+;;; Features
 
 ;; 1. support importing.
 ;;    when you type in  import javax.s-|-
@@ -65,11 +92,11 @@
 ;;                     javax.sql
 ;;                     javax.swing
 ;;                     javax.sound
-                       
+
 ;; 2. support import class with keybindings (even in jsp file)
 ;;         auto import all Class in source file
 ;;    (local-set-key (kbd "C-c i") (quote ajc-import-all-unimported-class))
-;;         import Class where under point 
+;;         import Class where under point
 ;;    (local-set-key (kbd "C-c m") (quote ajc-import-class-under-point))
 ;;   included in ajc-complete-config.el
 
@@ -94,20 +121,20 @@
 ;;                                      toString()
 ;;                                      getClass()
 ;;                                      notify()
-                                      
+
 ;; 5. support complete constructor
 ;;    after keyword 'new' it would try to complete constructor
 
 
 ;; 6. support completing in jsp files.
-      
+
 ;;    If your want to enable  ajc-java-complete-mode when openning
 ;;    a jsp file. you can
 ;;        (add-hook 'jsp-mode 'ajc-java-complete-mode)
 ;;    if you has a jsp-mode;
 ;;    if not ,you can do it like this
 ;;        (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
-      
+
 ;;    now it can complete class name,method ,constructor.
 ;;    it also support complete importing ,but it isn't auto completed,
 ;;    you must trigger it by a key binding
@@ -119,8 +146,6 @@
 ;;; Install
 ;;   see Install file in this directory
 
-;;}}}
-
 ;;; Code.
 
 
@@ -128,13 +153,6 @@
   "Auto Java Completion."
   :group 'convenience
   :prefix "auto-java-complete")
-
-(defcustom ajc-use-short-class-name t
-  "if it is not nil then ,when complete method and constructor,
-  params and exceptions will use short class name ,
-  instead of full class name"
-  :type 'boolean
-  :group 'auto-java-complete)
 
 (defcustom ajc-tag-file "~/.java_base.tag"
   "the tag file is  used for java complete ,it  is generate by a Tags.java ,
@@ -180,6 +198,7 @@ then search class is faster ")
   "in this list ,it looks like '((Ab 1 3 ) (Ac 4 15))that means
     all class those name starts with Ab are in the position of
   0~2 (because index from 0 not 1) in ajc-all-sorted-class-items " )
+(defvar ajc-tmp-sorted-class-buffer-name " *ajc-tmp-sorted-class*")
 
 (defvar ajc-tag-buffer nil "this is the buffer of .java_base.tag" )
 (defvar ajc-package-first-ln 0
@@ -193,6 +212,11 @@ actually it is the end of package section line number too" )
 (defvar ajc-member-end-ln 0
   "the end line number of the member section in tag file ,
 it is the last line number in tag file" )
+
+(defvar ajc-position-of-package-first-line 1)
+(defvar ajc-position-of-class-first-line 1)
+(defvar ajc-position-of-member-first-line 1)
+(defvar ajc-position-of-member-end-line 1)
 
 (defvar ajc-matched-class-items-cache nil
   "when search class-prefix without package-name ,
@@ -224,31 +248,26 @@ it is the last line number in tag file" )
     (buffer-substring-no-properties
      (line-beginning-position) (line-end-position))))
 
-(defun ajc-split-string-with-separator(str regexp &optional replacement OMIT-NULLS)
+(defun ajc-split-string-with-separator(str regexp &optional replacement omit-nulls)
   "this function is a tool like split-string,
   but it treat separator as an element of returned list
-  for example (ajc-split-string-with-separator abc.def.g \\. .)
-  will return '(abc . def . g )"
-  (if (and str  ( > (length str ) 0))
-      (let ((split-list)  (substr) (match-end ))
-        (if  (string-match regexp str)
-            (progn (while (string-match regexp  str  )
-                     (setq match-end (match-end 0))
-                     (setq  substr (substring-no-properties str 0 (- match-end 1)))
-                     (if OMIT-NULLS
-                         (if (> (length substr ) 0)
-                             (setq split-list (append split-list (list  substr))))
-                       (setq split-list (append split-list (list  substr))))
-                     (if replacement
-                         (setq split-list (append split-list (list replacement)))
-                       (setq split-list (append split-list (list regexp))))
-                     (setq str (substring-no-properties str  match-end)))
-                   (if OMIT-NULLS
-                       (if (> (length str ) 0)
-                           (setq split-list (append split-list (list str))))
-                     (setq split-list (append split-list (list  str))))
-                   (setq split-list split-list))
-          (setq split-list (list str))))))
+  for example (ajc-split-string-with-separator abc.def.g \"\\.\" \".\")
+  will return '(\"abc\" \".\" \"def\" \".\" \"g\" )"
+  (when str
+    (let (split-list  substr match-end)
+      (if  (string-match regexp str)
+          (progn
+            (while (string-match regexp  str)
+              (setq match-end (match-end 0))
+              (setq  substr (substring-no-properties str 0 (- match-end 1)))
+              (when (or (not omit-nulls) (> (length substr ) 0))
+                (setq split-list (append split-list (list  substr))) )
+              (setq split-list (append split-list (list (or replacement regexp))))
+              (setq str (substring-no-properties str  match-end)))
+            (when (or (not omit-nulls) (> (length str ) 0))
+              (setq split-list (append split-list (list str)))))
+        (setq split-list (list str)))
+      split-list)))
 
 (defun ajc-split-pkg-item ( pkg-line-string )
  "the format pkg-line-string is  str`num`num
@@ -302,29 +321,33 @@ it is the last line number in tag file" )
                                   (string-to-number return-type)) t))
       field-item )))
 
-;(ajc-field-to-string (ajc-split-field " in`24:691" ))
+(defun append-space-to-item(str)
+  (let ((len (length str)));; insert whitespace between classname and return type
+    (if (< len (- ajc-default-length-of-class 3))
+        (setq str
+              (concat str
+                      (make-string (- (- ajc-default-length-of-class 3) len ) 32 )));;32 mean whitespace
+      (setq str (concat str "     "))))
+  )
+
+;; (ajc-field-to-string (ajc-split-field " out`654 " ) )
+;; (ajc-field-to-string (ajc-split-field " out`654 " ) t)
 (defun ajc-field-to-string (field-item &optional with-return-type)
   (when field-item
     (if  with-return-type
         (let ((field-string  (car field-item)) (return-type (nth 1 field-item)))
-          (let ((len (length field-string)));; insert whitespace between classname and return type
-            (if (< len (- ajc-default-length-of-class 3))
-                (setq field-string
-                      (concat field-string
-                              (make-string (- (- ajc-default-length-of-class 3) len ) 32 )));;32 mean whitespace
-              (setq field-string (concat field-string "     "))))
+          (setq field-string (append-space-to-item field-string))
           (setq field-string (concat field-string ajc-return-type-char))
           (when (stringp return-type)
             (setq field-string (concat field-string return-type )   ))
           (when (listp return-type)
-            (if ajc-use-short-class-name
-                (setq field-string (concat field-string   (car return-type)))
-              (setq field-string (concat field-string
-                                         (car (ajc-split-pkg-item-by-pkg-ln (nth 1 return-type)))  "."
-                                         (car return-type)))))
+            (setq field-string (concat field-string   (car return-type))))
           field-string)
       (car field-item))))
 
+
+;; (ajc-method-to-string (ajc-split-method "skippedEntity`~void`784`4012"))
+;; (ajc-method-to-string (ajc-split-method "skippedEntity`~void`784`4012") t)
 
 (defun ajc-method-to-string (method-item &optional  with-return-type-and-throws )
   "this is a toString() like function .
@@ -343,57 +366,39 @@ it is the last line number in tag file" )
           (when (stringp param )
             (setq method-string (concat method-string param " , " )))
           (when (listp param)
-            (if ajc-use-short-class-name
-                (setq method-string (concat method-string  (car param)  " , " ))
-              (setq method-string
-                    (concat method-string
-                            (car (ajc-split-pkg-item-by-pkg-ln (nth 1 param)))  "."
-                            (car param)  " , " )))))
+            (setq method-string (concat method-string  (car param)  " , " ))
+            ))
         (setq method-string
               (replace-regexp-in-string  " , $" ")" method-string )))
       (when with-return-type-and-throws
-        (let ((len (length method-string)));; insert whitespace between classname and return type
-          (if (< len ajc-default-length-of-class )
-              (setq method-string
-                    (concat method-string
-                            (make-string (- ajc-default-length-of-class len ) 32 )));;32 mean whitespace
-            (setq method-string (concat method-string "     "))))
-        (if (stringp return-type)
-            (setq method-string (concat method-string ajc-return-type-char  return-type  ))
-          (when (listp return-type)
-            (if ajc-use-short-class-name
-                (setq method-string (concat method-string ajc-return-type-char  (car return-type)))
-              (setq method-string (concat method-string ajc-return-type-char
-                                          (car (ajc-split-pkg-item-by-pkg-ln (nth 1 return-type)))  "."
-                                          (car return-type))))))
+        (setq method-string (append-space-to-item method-string))
+        (cond ((stringp return-type)
+               (setq method-string (concat method-string ajc-return-type-char  return-type)))
+              ((listp return-type)
+               (setq method-string (concat method-string ajc-return-type-char  (car return-type))))
+              )
         (when (listp exceptions )
           (setq method-string (concat method-string ajc-throws-char))
           (dolist (exception  exceptions )
             (when (stringp exception ) (setq method-string (concat method-string exception " , " )))
             (when (listp exception)
-              (if ajc-use-short-class-name
-                  (setq method-string (concat method-string  (car exception)  " , " ))
-                (setq method-string (concat method-string
-                                            (car (ajc-split-pkg-item-by-pkg-ln (nth 1 exception)))  "."
-                                            (car exception)  " , " )))))
+              (setq method-string (concat method-string  (car exception)  " , " ))))
           (setq method-string  (replace-regexp-in-string  ", $" "" method-string )))
         )
       method-string )))
 
+;; (ajc-class-to-string (ajc-split-class-item  "RasterOp`18`15551`15556"))
+;; (ajc-class-to-string (ajc-split-class-item  "RasterOp`18`15551`15556") t)
 (defun ajc-class-to-string(class-item &optional  with-package-name-append)
   (when class-item
-    (let* ((class-string (car class-item)) (len (length class-string)))
+    (let* ((class-string (car class-item)))
       (when with-package-name-append
-        (if (< len ajc-default-length-of-class )
-            (setq class-string
-                  (concat class-string
-                          (make-string (- ajc-default-length-of-class len ) 32 )));;32 mean whitespace
-          (setq class-string (concat class-string "     ")))
         (setq class-string
-              (concat class-string ajc-return-type-char
-                      (car (ajc-split-pkg-item-by-pkg-ln (nth 1 class-item))))))
+              (concat  (append-space-to-item class-string) ajc-return-type-char
+                       (car (ajc-split-pkg-item-by-pkg-ln (nth 1 class-item))))))
       class-string
       )))
+
 
 ;; (yas/expand-snippet(ajc-method-to-yasnippet-templete    (car
 ;; (ajc-find-members (car  (ajc-find-out-matched-class-item-without-package-prefix "FileWriter" t )) "write" ))))
@@ -405,44 +410,40 @@ it is the last line number in tag file" )
   (when method-item
     (let ((method-string  (car method-item))
           (params (nth 2 method-item)   )
-          (exceptions (nth 3 method-item)))
+          (exceptions (nth 3 method-item))
+          (index 0))
       (if (stringp params ) (setq method-string (concat method-string "()"))
-        (progn
-          (setq method-string (concat method-string "("))
-          (let ((index 0) (length-of-params (length params))(param))
-            (while (< index length-of-params)
-              (setq param (nth index params ))
-              (when (stringp param ) (setq method-string
-                                           (concat  method-string "${" (number-to-string (+ index 1)) ":"
-                                                    param "} , " )))
-              (when (listp param)
-                (if ajc-use-short-class-name
-                    (setq method-string (concat method-string "${" (number-to-string (+ 1 index )) ":"
-                                                (car param)  "} , " ))
-                  (setq method-string (concat method-string "${" (number-to-string (+ 1 index)) ":"
-                                              (car (ajc-split-pkg-item-by-pkg-ln (nth 1 param)))  "."
-                                              (car param)  "} , " ))))
-              (setq index (+ 1 index ))))
-          (setq method-string  (replace-regexp-in-string  " , $" ")$0" method-string ))))
-      (setq method-string method-string))
-    )
-  )
-(defun ajc-method-item-to-candidate(method-item)
-  "translate `method-item' to candidate ,`method-item'
+        (setq method-string (concat method-string "("))
+        (dolist(param params)
+          (when (stringp param)
+            (setq method-string
+                  (concat  method-string "${" (number-to-string (+ index 1)) ":"
+                           param "} , " )))
+          (when (listp param)
+            (setq method-string
+                  (concat method-string "${" (number-to-string (+ 1 index )) ":"
+                          (car param)  "} , " )))
+          (setq index (1+ index)))
+        (setq method-string  (replace-regexp-in-string  " , $" ")$0" method-string )))
+      method-string)))
+
+(defun ajc-method-item-to-candidate(field-or-method-item)
+  "translate `field-or-method-item' to candidate ,`field-or-method-item'
 can be a method item ,or a field item"
   (let ((candidate))
-    (if (= 2   (length method-item ));; lenth of field is 2 (only field and returntype )
-        (let ((field-full-string (ajc-field-to-string method-item t))
-              (field-short-string (ajc-field-to-string method-item nil)))
+    (if (= 2   (length field-or-method-item ));; lenth of field is 2 (only field and returntype )
+        (let ((field-full-string (ajc-field-to-string field-or-method-item t))
+              (field-short-string (ajc-field-to-string field-or-method-item nil)))
           (setplist 'props nil ) (put 'props 'view field-full-string)
           (add-text-properties 0 (length field-short-string)
                                (symbol-plist  'props)  field-short-string)
           (setq candidate field-short-string)
           )
-      (let((method-full-string  (ajc-method-to-string method-item t))
-           (method-short-string (ajc-method-to-string method-item nil)))
+      (let((method-full-string  (ajc-method-to-string field-or-method-item t))
+           (method-short-string (ajc-method-to-string field-or-method-item nil)))
         (setplist 'props nil ) (put 'props 'view method-full-string)
-        (put 'props 'templete (ajc-method-to-yasnippet-templete method-item))
+        (put 'props 'templete field-or-method-item)
+        (put 'props 'templete-type 'method)
         (add-text-properties 0 (length method-short-string)
                              (symbol-plist  'props)  method-short-string)
         (setq candidate method-short-string)))
@@ -524,11 +525,7 @@ can be a method item ,or a field item"
           (dolist (param  params )
             (when (stringp param ) (setq constructor-string (concat constructor-string param " , " )))
             (when (listp param)
-              (if ajc-use-short-class-name
-                  (setq constructor-string (concat constructor-string  (car param)  " , " ))
-                (setq constructor-string (concat constructor-string
-                                                 (car (ajc-split-pkg-item-by-pkg-ln (nth 1 param)))  "."
-                                                 (car param)  " , " )))))
+              (setq constructor-string (concat constructor-string  (car param)  " , " ))))
           (setq constructor-string  (replace-regexp-in-string  " , $" ")" constructor-string ))))
       (when is-with-exceptions
         (when (listp exceptions )
@@ -536,11 +533,7 @@ can be a method item ,or a field item"
           (dolist (exception  exceptions )
             (when (stringp exception ) (setq constructor-string (concat constructor-string exception " , " )))
             (when (listp exception)
-              (if ajc-use-short-class-name
-                  (setq constructor-string (concat constructor-string  (car exception)  " , " ))
-                (setq constructor-string (concat constructor-string
-                                                 (car (ajc-split-pkg-item-by-pkg-ln (nth 1 exception)))  "."
-                                                 (car exception)  " , " )))))
+              (setq constructor-string (concat constructor-string  (car exception)  " , " ))))
           (setq constructor-string  (replace-regexp-in-string  ", $" "" constructor-string ))))
       constructor-string)))
 
@@ -548,26 +541,20 @@ can be a method item ,or a field item"
   (when constructor-item
     (let((constructor-string  (car constructor-item))
          (params (nth 1 constructor-item)   )
-         (exceptions (nth 2 constructor-item)))
+         (exceptions (nth 2 constructor-item))
+         (index 0))
       (if (stringp params ) (setq constructor-string (concat constructor-string "()"))
-        (progn
-          (setq constructor-string (concat constructor-string "("))
-          (let ((index 0) (length-of-params (length params))(param))
-            (while (< index length-of-params)
-              (setq param (nth index params ))
-              (when (stringp param ) (setq constructor-string
-                                           (concat  constructor-string "${" (number-to-string (+ index 1)) ":"
-                                                    param "} , " )))
-              (when (listp param)
-                (if ajc-use-short-class-name
-                    (setq constructor-string (concat constructor-string "${" (number-to-string (+ 1 index )) ":"
-                                                     (car param)  "} , " ))
-                  (setq constructor-string (concat constructor-string "${" (number-to-string (+ 1 index)) ":"
-                                                   (car (ajc-split-pkg-item-by-pkg-ln (nth 1 param)))  "."
-                                                   (car param)  "} , " ))))
-              (setq index (+ 1 index ))
-              ))
-          (setq constructor-string  (replace-regexp-in-string  " , $" ")$0" constructor-string ))))
+        (setq constructor-string (concat constructor-string "("))
+        (dolist (param params)
+          (when (stringp param ) (setq constructor-string
+                                       (concat  constructor-string "${" (number-to-string (+ index 1)) ":"
+                                                param "} , " )))
+          (when (listp param)
+            (setq constructor-string (concat constructor-string "${" (number-to-string (+ 1 index )) ":"
+                                             (car param)  "} , " )))
+          (setq index (+ 1 index ))
+          )
+        (setq constructor-string  (replace-regexp-in-string  " , $" ")$0" constructor-string )))
       (setq constructor-string constructor-string))))
 
 ;; find tag file
@@ -585,14 +572,20 @@ can be a method item ,or a field item"
           (fundamental-mode)
           (setq case-fold-search nil)
           (setq ajc-package-first-ln  (string-to-number (ajc-read-line 3)))
+          (setq ajc-position-of-package-first-line (progn   (ajc-goto-line  ajc-package-first-ln) (point)) )
           (setq ajc-class-first-ln    (string-to-number  (ajc-read-line 4)))
+          (setq  ajc-position-of-class-first-line (progn   (ajc-goto-line  ajc-class-first-ln) (point)) )
           (setq ajc-member-first-ln   (string-to-number (ajc-read-line 5)))
+          (setq  ajc-position-of-member-first-line (progn   (ajc-goto-line  ajc-member-first-ln) (point)) )
           (setq ajc-member-end-ln     (string-to-number (ajc-read-line 6)))
-          (ajc-load-all-sorted-class-items-to-memory))
+          (setq  ajc-position-of-member-end-line (progn   (ajc-goto-line  ajc-member-end-ln) (point)) )
+;;          (ajc-load-all-sorted-class-items-to-memory)
+          (ajc-sort-class)
+          )
       (message  ( concat ajc-tag-file " doesn't exists !!!")))
     (setq ajc-is-running t)
     ))
-
+;;;###autoload
 (defun ajc-reload()
   "restart Auto Java Complete ,when your tag file changed,
 you can use this function restart AutoJavaComplete "
@@ -600,6 +593,8 @@ you can use this function restart AutoJavaComplete "
   (setq ajc-is-running nil)
   (ajc-init)
   )
+;;;###autoload
+(defalias 'auto-java-complete-reload 'ajc-reload)
 
 (defun ajc-reload-tag-buffer-maybe( )
   "check if the ajc-tag-buffer is still live ,if not reload it "
@@ -607,36 +602,39 @@ you can use this function restart AutoJavaComplete "
     (ajc-init))
   ajc-tag-buffer)
 
+;; (ajc-find-out-matched-pkg-item "java.awt")
+;; (ajc-find-out-matched-pkg-item "java.awt" t)
 (defun ajc-find-out-matched-pkg-item
-  (pkg-prefix &optional exactly_match  &optional buffer)
-  "this function is used to find out all matched packaged whose prefix is pkg-prefix
-  for example: support  pkg-prefix=javax.xm  then it will return
-   '( '(\"javax.xml.bind\" 2741 2767 ) '(\"javax.xml.bind.attachment\" 2776 2778 ))
+  (pkg-prefix &optional exactly_match  buffer)
+  "this function is used to find out all matched packages whose prefix is `pkg-prefix'
+  for example: suppose  pkg-prefix=javax.xm  then it will return
+   '( (\"javax.xml.bind\" 2741 2767 ) (\"javax.xml.bind.attachment\" 2776 2778 ))
 if exactly_match is not nil then pkg-prefix will be seen as full package name , and
-we will suppose you are searching package name = pkg-prefix , if exactly_match is set
-in normal only 1 or 0 item will returned so we will try to
+we will suppose you are searching package name = pkg-prefix , if exactly_match is given
+then only 1 or 0 item will returned so we will try to
  convert '((packageName 12 33 )) to '(packageName 12 33 ) "
   (with-current-buffer (or buffer  (ajc-reload-tag-buffer-maybe))
-    (let ((line-num ajc-package-first-ln) (matched-package)
-          (regexp-pkg-prefix (concat "^" (regexp-quote pkg-prefix)))
-          (current-pkg-line))
-      (if exactly_match ;;I use ` char as the separator in tag file
-          (setq regexp-pkg-prefix (concat "^"  (regexp-quote  pkg-prefix )  "`" )))
-      (while (< line-num ajc-class-first-ln)
-        (setq current-pkg-line (ajc-read-line line-num))
-        (if (string-match regexp-pkg-prefix  current-pkg-line)
-            (add-to-list 'matched-package (ajc-split-pkg-item current-pkg-line)))
-        (setq line-num  (+ line-num 1 )))
+    (let ((regexp-pkg-prefix (concat "^" (regexp-quote pkg-prefix)))
+          matched-package)
+      (when exactly_match ;;I use ` char as the separator in tag file
+        (setq regexp-pkg-prefix (concat "^"  (regexp-quote  pkg-prefix )  "`" )))
+      (goto-char ajc-position-of-package-first-line)
+      (while (re-search-forward regexp-pkg-prefix ajc-position-of-class-first-line t)
+        (add-to-list 'matched-package
+                     (ajc-split-pkg-item
+                      (buffer-substring-no-properties (line-beginning-position)(line-end-position)))))
       (when exactly_match (setq matched-package (car matched-package)))
       matched-package )))
 
-(defun ajc-shrunk-matched-pkgs (pkg-prefix matched-pkg-items)
+;; (ajc-shrunk-matched-pkgs "java.aw") == java.awt
+(defun ajc-shrunk-matched-pkgs (pkg-prefix)
   "this function is used for list matched package.
 when you import a package in head of your java file,
 when you typed in 'jav-|-', then it will list 'java javax'
 instead of 'java.lang java.lang.rel javax.xml javax.xml.ws'"
-  (let ((index-of-first-dot 0) (return-list)
-        (length-of-pkg-prefix (length pkg-prefix)))
+  (let ((matched-pkg-items (ajc-find-out-matched-pkg-item pkg-prefix))
+         (index-of-first-dot 0) (return-list)
+         (length-of-pkg-prefix (length pkg-prefix)))
     (dolist (current-item matched-pkg-items)
       (if (setq index-of-first-dot
                 (string-match "\\." (car current-item) length-of-pkg-prefix))
@@ -651,50 +649,65 @@ if doesn't exists,find from the tag file,
 if more than one class item matched class-name in tag file,
 then imported one of them first"
   (let* ((imported-class (ajc-caculate-all-imported-class-items))
-         (matched-class-item))
-    (dolist (current-class-item imported-class)
-      (when (string-equal class-name (car current-class-item))
-        (setq matched-class-item current-class-item)))
+         (matched-class-item
+          (catch 'found
+            (dolist (item imported-class)
+              (when (string-equal class-name (car item))
+                (throw 'found item))))))
     (unless matched-class-item;;if not found from imported section
       (let ((matched-class-items
              (ajc-find-out-matched-class-item-without-package-prefix class-name t)))
-        (if (< (length matched-class-items) 2)
+        (if (= (length matched-class-items) 1)
             (setq matched-class-item (car matched-class-items))
           (setq matched-class-item
                 (car (ajc-insert-import-at-head-of-source-file matched-class-items))))))
     matched-class-item))
+
+;; (ajc-find-out-matched-class-item "java.io" "Fil")
+;; (ajc-find-out-matched-class-item "java.io" "")
+;; (ajc-find-out-matched-class-item "java.io" nil)
+;; (ajc-find-out-matched-class-item "java.io" "File" t)
+;; (ajc-find-out-matched-class-item nil "File" )
+;; (print (length (ajc-find-out-matched-class-item nil nil )))
 (defun ajc-find-out-matched-class-item
-  (package-name class-prefix &optional exactly_match &optional buffer)
+  (package-name class-prefix &optional exactly_match  buffer)
   "this function is use to find out all Class whose package name is
-package-name and ClassName is start with class-prefix if package-name
-is nil, then try to find out all Class whose ClassName is start with
-class-prefix if class-prefix is nil or empty string ,it will try to
-find out all Class in package package-name if both  package-name
-and class-prefix are nil then  it will return all Class in all package
-the param exactly_match ,means only class name exactly equals
- to class-prefix will be return"
-  (let ((matched-pkg-item )(return-list)(regexp-class-prefix)
-        (line-num )(end-line-num)(current-line-string))
-    (with-current-buffer (or buffer  (ajc-reload-tag-buffer-maybe))
-      (if package-name
-          (progn
-            (setq matched-pkg-item (ajc-find-out-matched-pkg-item package-name t))
-            (if matched-pkg-item
-                (setq line-num (nth 1 matched-pkg-item)
-                      end-line-num (nth 2 matched-pkg-item))
-              (setq line-num   1 end-line-num  1)))
-        (setq line-num   ajc-class-first-ln end-line-num  ajc-member-first-ln))
-      (unless class-prefix (setq class-prefix ""))
-      (if exactly_match (setq regexp-class-prefix
-                              (concat "^" (regexp-quote class-prefix) "`" ))
-        (setq regexp-class-prefix (concat "^" (regexp-quote class-prefix))))
-      (while (< line-num end-line-num)
+`package-name' and ClassName  starts with `class-prefix' if package-name
+is nil, then try to find out all Class whose ClassName starts with
+`class-prefix' if `class-prefix' is nil or empty string ,it will try to
+find out all Class in package `package-name' if both  `package-name'
+and class-prefix are nil, then it will return all Class in all package
+the param `exactly_match' ,means only class name exactly equals
+ to `class-prefix' will be return"
+  (let* ((class-prefix (or class-prefix ""))
+        (regexp-class-prefix
+         (if exactly_match (concat "^" (regexp-quote class-prefix) "`" )
+           (concat "^" (regexp-quote class-prefix))))
+        (matched-pkg-item (when package-name (ajc-find-out-matched-pkg-item package-name t)))
+        (line-num    ajc-class-first-ln)
+        (end-position ajc-member-first-ln)
+        return-list current-line-string)
+    (with-current-buffer (or buffer (ajc-reload-tag-buffer-maybe))
+      (when matched-pkg-item
+        (setq line-num (nth 1 matched-pkg-item)
+              end-position (nth 2 matched-pkg-item)))
+      (while (< line-num end-position)
         (setq current-line-string (ajc-read-line line-num))
         (when (string-match regexp-class-prefix current-line-string)
           (add-to-list 'return-list (ajc-split-class-item current-line-string)))
         (setq line-num (1+ line-num)))
       return-list)))
 
+;;(ajc-sort-class)
+;;(ajc-get-two-char-item "Sy")
+(defun ajc-get-two-char-item(two-char-string)
+  (catch 'found
+    (dolist (item  ajc-two-char-list)
+      (when (string= (car item)  two-char-string)
+        (throw 'found item)))))
+
+;;(ajc-find-out-matched-class-item-without-package-prefix "System" t)
+;; (ajc-find-out-matched-class-item-without-package-prefix "_ServantLocatorStub")
 (defun ajc-find-out-matched-class-item-without-package-prefix
   (class-prefix &optional exactly_match)
   "actully you can use ajc-find-out-matched-class-item to do
@@ -703,122 +716,92 @@ it need to search all the line in tag file just to find out one class item .
 so this function use ajc-load-all-sorted-clas-items-to-memory
 to sort the class section and load it in memory and build a index for it,
 limit : length of class-prefix must larger than 2"
-  (let ((ajc-two-char-list-length (length ajc-two-char-list))(two-char-item)
-           (not_found t) (index 0) (matched-class-items))
-    (setq case-fold-search nil)
-    (if (string-match "^[A-Z][a-zA-Z]" class-prefix);; actually we only index this
-          (while  (and not_found (< index ajc-two-char-list-length ))
-               (setq two-char-item (nth index ajc-two-char-list))
-               (when (string-equal (substring-no-properties class-prefix 0 2) (car two-char-item))
-                   (let* ((start (1- (nth 1 two-char-item)))
-                          (end  (nth 2 two-char-item))
-                           (i start) (current-class-item) (regexp-class-prefix))
-                     (if exactly_match (setq regexp-class-prefix (concat "^" class-prefix "$"))
-                       (setq regexp-class-prefix (concat "^" class-prefix )))
-                     (while (< i end) (setq current-class-item (nth i ajc-all-sorted-class-items))
-                           (if (string-match  regexp-class-prefix (car  current-class-item ))
-                               (add-to-list 'matched-class-items current-class-item t))
-                     (setq i (1+ i))))
-                   (setq  not_found nil);; exit while
-               )
-               (setq index (1+ index)))
-      ;;actually  I only index  those class whose class name match [A-Z][a-zA-Z].
-      ;; other class like   _RMIConnection_Stub should be search line by line at the class section  in tag file
-      (let ((line-num ajc-class-first-ln) (current-line-string) (regexp-class-prefix))
-        (if exactly_match (setq regexp-class-prefix  (concat "^" class-prefix "`" ))
-                          (setq regexp-class-prefix  (concat "^" class-prefix  )))
-        (with-current-buffer (ajc-reload-tag-buffer-maybe)
-        (while (< line-num ajc-member-first-ln)
-          (setq current-line-string (ajc-read-line line-num))
-          (if (string-match regexp-class-prefix current-line-string)
-              (add-to-list 'matched-class-items (ajc-split-class-item current-line-string)))
-          (setq line-num (+ line-num 1))))))
-      (setq matched-class-items matched-class-items)))
-
+  (with-current-buffer (get-buffer ajc-tmp-sorted-class-buffer-name)
+    (let ((matched-class-items) (case-fold-search nil)
+          (regexp-class-prefix (if exactly_match
+                                   (concat "^" class-prefix "`")
+                                 (concat "^" class-prefix ) ))
+          (two-char-item  (or (and (> (length class-prefix) 1)
+                                   (ajc-get-two-char-item (substring-no-properties class-prefix 0 2)))
+                               (list nil (point-min) (point-max)) )))
+      (goto-char (nth 1 two-char-item))
+      (while (re-search-forward regexp-class-prefix (nth 2 two-char-item) t )
+        (add-to-list 'matched-class-items
+                     (ajc-split-class-item
+                      (buffer-substring-no-properties
+                       (line-beginning-position) (line-end-position))) t))
+      matched-class-items
+      )))
 
 
 (defun ajc-sort-class ()
   "sort class for search ,we build a table for example ((Ab 1 3) (Ac 4 6))
 then we search AbstractC ,we just need to search line number from 1 3 "
-     (let ((begin ) (end) (ajc-tmp-sorted-class-buffer "**ajc-tmp-sorted-class**"))
-  (with-current-buffer (ajc-reload-tag-buffer-maybe)
-       (setq case-fold-search nil)
-    (ajc-goto-line ajc-class-first-ln)(beginning-of-line) (setq begin (point))
-    (ajc-goto-line ajc-member-first-ln) (beginning-of-line) (setq end (point))
-    (if (get-buffer ajc-tmp-sorted-class-buffer) (kill-buffer (get-buffer ajc-tmp-sorted-class-buffer )))
-    (append-to-buffer ajc-tmp-sorted-class-buffer begin end ))
-    (with-current-buffer ajc-tmp-sorted-class-buffer
-      (setq case-fold-search nil)
-     (sort-lines nil 1 (point-max))
-     (let ((end ?Z) (index ?A) (index2 ?A)  (two-char)
-           (return-two-list)(two-char-item)(next-start-search-line-num))
-       (while  (<= index end) (setq index2 ?A)
-         (while ( <= index2 ?z)
-          (setq two-char (concat (char-to-string index) (char-to-string index2)))
-          (if next-start-search-line-num
-              (setq two-char-item
-                   (ajc-build-map-4-search-class
-                    two-char ajc-tmp-sorted-class-buffer next-start-search-line-num))
-              (setq two-char-item
-                   (ajc-build-map-4-search-class two-char ajc-tmp-sorted-class-buffer 1)))
-          (if two-char-item
-          (add-to-list 'return-two-list  two-char-item  t)
-          (setq next-start-search-line-num (nth 2 two-char-item)))
-           (if (= index2 ?Z) (setq index2 ?a) (setq index2 (+ index2 1))))
-         (setq index (+ index 1)))
-        (setq ajc-two-char-list return-two-list)))))
+  (let ((case-fold-search nil))
+    (with-current-buffer (get-buffer-create ajc-tmp-sorted-class-buffer-name)
+      (erase-buffer)
+      (insert-buffer-substring (ajc-reload-tag-buffer-maybe)
+                               ajc-position-of-class-first-line ajc-position-of-member-first-line)
+      (sort-lines nil 1 (point-max))
+      (let ((end ?Z) (index ?A) (index2 ?A)  (two-char)
+            (two-char-item)(next-start-search-postion))
+        (setq ajc-two-char-list nil)
+        (while  (<= index end) (setq index2 ?A)
+                (while ( <= index2 ?z)
+                  (setq two-char (concat (char-to-string index) (char-to-string index2)))
+                  (setq two-char-item
+                        (ajc-build-map-4-search-class
+                         two-char ajc-tmp-sorted-class-buffer-name (or next-start-search-postion 1)))
+                  (if two-char-item
+                      (add-to-list 'ajc-two-char-list  two-char-item  t)
+                    (setq next-start-search-postion (nth 2 two-char-item)))
+                  (if (= index2 ?Z) (setq index2 ?a) (setq index2 (+ index2 1))))
+                (setq index (+ index 1)))))))
 
-(defun ajc-build-map-4-search-class (two-char-prefix ajc-tmp-sorted-class-buffer  start-search-line-num)
-  "suppose two-char-prefix is 'Ab' and ajc-tmp-sorted-class-buffer is the buffer
+(defun ajc-build-map-4-search-class (two-char-prefix ajc-tmp-sorted-class-buffer-name  start-search-postion)
+  "suppose two-char-prefix is 'Ab' and ajc-tmp-sorted-class-buffer-name is the buffer
  ,all lines in it is the classname has been sorted by classname
 it is cut from tag file between ajc-class-first-ln and ajc-member-first-ln ,and sorted by (sort-lines)
-then this function is try to find out className begin with two-char-prefix ,and got the start line-number
-and end-line-number ,record in a list ,when search class name begin with two-char-prefix ,we just need to
-find it from the start line number to the end line number ,it is faster than directly searching the unsorted
+then this function is try to find out className begin with two-char-prefix ,and got the start position
+and end position ,record in a list ,when search class name begin with two-char-prefix ,we just need to
+find it from the start position to the end position ,it is faster than directly searching the unsorted
 tag buffer file "
-  (with-current-buffer  ajc-tmp-sorted-class-buffer
-    (ajc-goto-line start-search-line-num)
-    (let ((char1 ) (char2)(end-prefix-regexp )(end-line-num)
-          (start nil) (end nil) (has-found-first nil) (return-item))
-      (setq case-fold-search nil)
-      (setq char1 (string-to-char (substring-no-properties two-char-prefix 0 1)))
-      (setq char2 (string-to-char (substring-no-properties two-char-prefix 1 2)))
+  (with-current-buffer  ajc-tmp-sorted-class-buffer-name
+    (goto-char start-search-postion)
+    (let ((char1 (string-to-char (substring-no-properties two-char-prefix 0 1)))
+          (char2 (string-to-char (substring-no-properties two-char-prefix 1 2)))
+          start end has-found-first return-item end-position end-prefix-regexp  case-fold-search)
       (if (or  (= char1 ?Z)  (= char2 ?z) (= char2 ?Z))
-          (setq end-line-num (line-number-at-pos (point-max)))
+          (setq end-position (line-number-at-pos (point-max)))
         (progn
-        (if (< char2 ?a)
-            (setq end-prefix-regexp (concat  "^" (char-to-string char1)
-                         "[a-z" (char-to-string (+ 1 char2)) "-Z]\\|^" (char-to-string (+ char1 1)) "[a-zA-Z]"  ))
-          (setq end-prefix-regexp (concat "^" (char-to-string char1)
-                     "[" (char-to-string (+ 1 char2)) "-z]\\|^" (char-to-string (+ char1 1)) "[a-zA-Z]"  )))
-        (ajc-goto-line start-search-line-num)
-        (if ( re-search-forward end-prefix-regexp  (point-max) t)
-            (setq end-line-num (point))
-            (setq end-line-num (point-max)))))
-        (ajc-goto-line start-search-line-num)
-      (add-to-list 'return-item two-char-prefix)
-         (while (re-search-forward (concat "^" two-char-prefix ) (point-max) t )
-                  (when (not has-found-first)
-                    (setq has-found-first t)
-                    (setq start (line-number-at-pos (point))))
-                  (setq end (line-number-at-pos (point))))
-         (if (numberp start )
-           (progn (setq return-item (append return-item (list start)))
-             (setq return-item (append return-item (list end ))))
-           (setq return-item nil))
-         (setq return-item return-item))))
+          (if (< char2 ?a)
+              (setq end-prefix-regexp (concat  "^" (char-to-string char1)
+                                               "[a-z" (char-to-string (+ 1 char2)) "-Z]\\|^" (char-to-string (+ char1 1)) "[a-zA-Z]"  ))
+            (setq end-prefix-regexp (concat "^" (char-to-string char1)
+                                            "[" (char-to-string (+ 1 char2)) "-z]\\|^" (char-to-string (+ char1 1)) "[a-zA-Z]"  )))
+          (goto-char start-search-postion)
+          (if (re-search-forward end-prefix-regexp  (point-max) t)
+              (setq end-position (point))
+            (setq end-position (point-max)))))
+      (goto-char start-search-postion)
+      (while (re-search-forward (concat "^" two-char-prefix ) end-position t )
+        (when (not has-found-first)
+          (setq has-found-first t)
+          (setq start (line-beginning-position)))
+        (setq end (line-end-position)))
+      (when (numberp start) (setq return-item (list two-char-prefix start end)))
+      return-item)))
 
-
-(defun ajc-load-all-sorted-class-items-to-memory()
-  (ajc-sort-class);;first sort the class ,and populate ajc-two-char-list variable
-  (with-current-buffer "**ajc-tmp-sorted-class**"
-    (goto-char (point-min))
-    (let ((max-line-num (line-number-at-pos (point-max)))(line-num 1))
-      (while  (< line-num max-line-num)
-        (add-to-list 'ajc-all-sorted-class-items
-                     (ajc-split-class-item (ajc-read-line line-num)) t)
-        (setq line-num (+ line-num 1)))))
-  (kill-buffer (get-buffer "**ajc-tmp-sorted-class**")))
+;; (defun ajc-load-all-sorted-class-items-to-memory()
+;;   (ajc-sort-class);;first sort the class ,and populate ajc-two-char-list variable
+;;   (with-current-buffer  ajc-tmp-sorted-class-buffer-name
+;;     (goto-char (point-min))
+;;     (let ((max-line-num (line-number-at-pos (point-max)))(line-num 1))
+;;       (while  (< line-num max-line-num)
+;;         (add-to-list 'ajc-all-sorted-class-items
+;;                      (ajc-split-class-item (ajc-read-line line-num)) t)
+;;         (setq line-num (+ line-num 1)))))
+;;   (kill-buffer (get-buffer  ajc-tmp-sorted-class-buffer-name)))
 
 (defun ajc-import-package-candidates()
   "this function is the candidates , so you can bind it with a key sequence
@@ -837,7 +820,7 @@ tag buffer file "
         (when (= (length matched-pkg-strings ) 0 ) ;;if there are 0 matched in cache then find it out from tag files
           (setq matched-pkg-strings ;;add pkgs
                 (append matched-pkg-strings
-                        (ajc-shrunk-matched-pkgs prefix-string  (ajc-find-out-matched-pkg-item prefix-string))))
+                        (ajc-shrunk-matched-pkgs prefix-string)))
           (let ((index_of_last_dot (string-match "\\.[a-zA-Z_0-9]*$" prefix-string));;add classes
                  (package-prefix)(class-prefix))
             (when index_of_last_dot
@@ -1063,8 +1046,8 @@ return a list of each line string (exclude keyword 'import') "
     ;;then we can got the imported class item , we complete its constructor
     (dolist (matched-class-item matched-class-items)
       (let ((line-num     (nth 2  matched-class-item))  (matching-constructor t)
-            (end-line-num (nth 3  matched-class-item)) (current-line))
-        (while (and matching-constructor  (< line-num end-line-num ))
+            (end-position (nth 3  matched-class-item)) (current-line))
+        (while (and matching-constructor  (< line-num end-position ))
           (setq current-line (ajc-read-line line-num (ajc-reload-tag-buffer-maybe)))
           (if (string-match "^  "  current-line)
               (add-to-list 'matched-constructor-items (ajc-split-constructor current-line))
@@ -1076,7 +1059,9 @@ return a list of each line string (exclude keyword 'import') "
             (add-to-list 'return-complete-list  constructor-short-string t)
             (setplist 'props nil )
             (put 'props 'view constructor-full-string)
-            (put 'props 'templete (ajc-constructor-to-yasnippet-templete constructor))
+            (put 'props 'templete-type 'constructor)
+            ;;
+            (put 'props 'templete constructor)
             (add-text-properties 0 (length constructor-short-string)
                                  (symbol-plist  'props)  constructor-short-string)
             ))))
@@ -1136,7 +1121,7 @@ check out ajc-matched-class-items-cache to find out if ant matched class exists 
 (defun ajc-find-members (class-item  &optional member-prefix &optional exactly_match)
   "find members(field method) under class-item which member name match member-prefix ,
 if member-prefix is nil or empty string it will return all members under class-item"
-  (let ((line-num (nth 2 class-item))  (end-line-num (nth 3 class-item)) (return-member-items)
+  (let ((line-num (nth 2 class-item))  (end-position (nth 3 class-item)) (return-member-items)
        (regexp-method-prefix)(regexp-field-prefix) (current-line-string ))
        (if exactly_match
             (setq regexp-method-prefix (concat "^" member-prefix "`")
@@ -1146,7 +1131,7 @@ if member-prefix is nil or empty string it will return all members under class-i
             (setq regexp-method-prefix (concat "^" member-prefix )
                   regexp-field-prefix (concat "^ " member-prefix ))))
        (with-current-buffer (ajc-reload-tag-buffer-maybe)
-         (while (< line-num  end-line-num)
+         (while (< line-num  end-position)
            (setq current-line-string (ajc-read-line line-num))
            (if (string-match regexp-method-prefix current-line-string)
                (add-to-list 'return-member-items (ajc-split-method current-line-string ) t)
@@ -1412,7 +1397,7 @@ then this function split it to
 
 (defun ajc-java-keywords-candidates ()
   (let ((keywords))
-            (setq keywords (list "public" "protected"  "private" "native" "final" "synchronized" "transient" "abstract"  "static" "import" "this" "if" "else" "else if" "break" "case" "switch"  "continue" "class" "interface" "package" "new" "try" "catch" "finally" "super" "void"  "int" "float" "double" "short" "char" "byte" "long" "boolean" "enum" "intanceof"  "for" "while" "throw" "throws"  "extends" "implements" ))
+            (setq keywords (list "public" "protected"  "private" "native" "final" "synchronized" "transient" "abstract"  "static" "import" "this" "if" "else" "else if" "break" "case" "switch"  "continue" "class" "interface" "package" "new" "try" "catch" "finally" "super" "void"  "int" "float" "double" "short" "char" "byte" "long" "boolean" "enum" "instanceof"  "for" "while" "throw" "throws"  "extends" "implements" ))
     ))
 (provide 'ajc-java-complete)
 

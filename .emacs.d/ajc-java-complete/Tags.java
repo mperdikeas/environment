@@ -5,11 +5,6 @@
 // the Free Software Foundation; either version 2, or (at your option)
 // any later version.
 
-// So here’s how to generate the home directory’s tags file:
-//     javac -d ~/ Tags.java
-//     java -cp ~/:$JAVA_HOME/jre/lib/rt.jar Tags "java.*"
-//  or java Tags
-// then it will generate a file ~/.java_base.tag in your home
 
 // This program is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -20,6 +15,14 @@
 // along with this program; see the file COPYING.  If not, write to the
 // Free Software Foundation, Inc., 59 Temple Place - Suite 330,
 // Boston, MA 02111-1307, USA.
+
+// So here’s how to generate the home directory’s tags file:
+//     java -cp $JAVA_HOME/jre/lib/rt.jar Tags
+//     java -cp /path/to/your/jars_and_classesfiles/:$JAVA_HOME/jre/lib/rt.jar Tags
+//  or java Tags
+//  or java Tags "javax\." ,exclude javax.*.ClassName
+//  or java Tags "javax\.,java\." ,exclude javax.**ClassName,and java.**ClassName
+// then it will generate a file ~/.java_base.tag in your home directory
 
 //Sometimes you may see some exceptions like:
 //
@@ -43,7 +46,7 @@ import java.util.zip.*;
 /** Make a tags table from the class files in a classpath.
  * The classpath is obtained from the property <code>java.class.path</code>
  *
- * The class names that get output must match the <code>packageFilter</code>
+ * The class names that get output must match the <code>classExcludeRegexPatternArray</code>
  * if it is specified.
  *
  * @author joseph <jixiuf@gmail.com>
@@ -61,12 +64,19 @@ public class Tags {
 
     public Tags(){
         try {
-            tagFile = new BufferedWriter(new FileWriter (new File(System.getProperty("user.home"),".java_base.tag"))) ;
+            tagFile = new BufferedWriter(new FileWriter (new File(getHomePath(),".java_base.tag"))) ;
             logError= new PrintWriter(new File(System.getProperty("java.io.tmpdir"), "ajc_error.log")) ;
             logInfo= new PrintWriter(new File(System.getProperty("java.io.tmpdir"), "ajc_info.log")) ;
         }catch (Exception e){
             System.err.print(e.getMessage());
         }
+    }
+    private String getHomePath(){
+        String home = System.getenv("HOME");
+        if(home==null){
+            home=System.getProperty("user.home");
+        }
+        return home;
     }
 
     private void log(Throwable e){
@@ -81,9 +91,9 @@ public class Tags {
 
 
     /** If this is not null it's used as a filter for acceptable classes.
-     * Only packages that <code>matches(packageFilter)</code> will be tagged.
+     * Only packages that <code>matches(classExcludeRegexPatternArray)</code> will be tagged.
      */
-    protected String packageFilter;
+    protected Pattern[] classExcludeRegexPatternArray=null;
     File  randomTmpPath = new File(System.getProperty("java.io.tmpdir")+File.separatorChar+UUID.randomUUID().toString()+File.separatorChar);
     ClassLoader cl = new CL(randomTmpPath);
 
@@ -155,18 +165,24 @@ public class Tags {
 
     */
     private void processClass(String className){
-        if (packageFilter != null && !(className.matches(packageFilter))) return;
         if (className.startsWith("sun")) return;
         if (className.startsWith("com.sun")) return;
         if (className.startsWith("com.thaiopensource")) return;
         if (className .contains("org.iso_relax.ant")) return;
         if (className .contains("$")) return;
+        if (classExcludeRegexPatternArray != null ){
+            for (int i = 0; i < classExcludeRegexPatternArray.length; i++) {
+                if(classExcludeRegexPatternArray[i].matcher(className).find()){
+                    return;
+                }
+            }
+        }
         try{
             //            Class c = Class.forName(className,false,ClassLoader.getSystemClassLoader()) ;
             Class c = Class.forName(className ,false,cl);
             clss.add(c);
         } catch(Throwable t){
-             log(t);
+            log(t);
         }
     }
 
@@ -433,6 +449,7 @@ public class Tags {
             memItem.field=fields[i];
             localMems.add(memItem);
         }
+        Collections.sort(localMems);
         return localMems;
     }
     private List<MemberItem> tagConstructors(ClassItem cItem)throws Throwable {
@@ -460,6 +477,7 @@ public class Tags {
             memItem.exceptions=exceptionsKV;
             localMems.add(memItem);
         }
+        Collections.sort(localMems);
         return localMems;
     }
     private List<MemberItem> tagMethods(ClassItem cItem) throws Throwable{
@@ -485,6 +503,7 @@ public class Tags {
             memItem.exceptions=exceptionsKV;
             localMems.add(memItem);
         }
+        Collections.sort(localMems);
         return localMems;
     }
 
@@ -534,7 +553,7 @@ public class Tags {
     public static void main (String[] argv) throws Exception {
         System.out.println(
                            "*****************************************************************\n"+
-                           "**   this program will need about 3 to 5 min ,                  **\n"+
+                           "**   this program will need about 3 to 15 min,                  **\n"+
                            "**   maybe half an hour ,(just kidding),but you must be patient.**\n" +
                            "**   before it exit,you may see a few exceptions                **\n" +
                            "**   If it don't kill the program ,just ignore it .             **\n" +
@@ -547,33 +566,45 @@ public class Tags {
         System.out.println("log file is located at: " +System.getProperty("java.io.tmpdir")+ "/ajc_info.log\n\n");
 
         System.out.println(
-                           "******************************************************************************\n"+
-                           "***     you can use this Class like this:                                  ***\n"+
-                           "***           java Tags com.company.*                                      ***\n"+
-                           "***           java -cp yourclasspath Tags                                  ***\n"+
-                           "***    only those package  name  starts with com.company  will be tagged.  ***\n"+
-                           "***    or all jar file in $CLASSPATH will be tagged .                      ***\n"+
-                           "***    before that you'd better backup the  file ~/.java_base.tag,if exists***\n"+
-                           "******************************************************************************\n"
+                           "********************************************************************************************\n"+
+                           "***    you can use this Class like this:                                                 ***\n"+
+                           "***           java Tags                                                                  ***\n"+
+                           "***    all class  in classpath will be tagged.                                           ***\n"+
+                           "***                                                                                      ***\n"+
+                           "***           java Tags \"org\\.hello,org\\.world\"                                      ***\n"+
+                           "***    it would NOT tag those class match \"org.hello\" or \"org.world\" .               ***\n"+
+                           "***                                                                                      ***\n"+
+                           "***           java -cp yourclasspath Tags                                                ***\n"+
+                           "***  if you see java.lang.OutOfMemoryError: PermGen space ,you can increment permsize:   ***\n"+
+                           "***       java -XX:MaxPermSize=512m -Xms256M -Xmx512M Tags                               ***\n"+
+                           "***                                                                                      ***\n"+
+                           "***  before that you'd better backup the  file ~/.java_base.tag,if exists                ***\n"+
+                           "*******************************************************************************************\n\n"
                            );
-        System.out.println("if you see java.lang.OutOfMemoryError: PermGen space ,you can increment permsize:");
-        System.out.println("        java  -XX:MaxPermSize=512m  Tags");
-        // System.out.println("sleep 20 seconds...");
-        // try {
-        //     Thread.sleep(20000);
-        // } catch (Exception ex) {}
+        try {
+            System.out.println("sleep 20 seconds...");
+            Thread.sleep(20000);
+        } catch (Exception ex) {}
 
         Tags tags = new Tags();
-        if (argv.length > 0) tags.packageFilter = argv[0];
+        if (argv.length > 0){
+            String[] regexs=argv[0].split(",");
+            tags.classExcludeRegexPatternArray = new Pattern[regexs.length];
+            for (int m = 0; m < tags.classExcludeRegexPatternArray.length; m++) {
+                tags.classExcludeRegexPatternArray[m]=Pattern.compile(regexs[m].replaceAll("\"" , "").replaceAll("'" , ""));
+            }
+        }
         tags.process() ;
 
         System.out.println(
-                           "\n*********************************************************************\n"+
-                           "***                  exit successful!!!                             ***\n"+
-                           "***you will see a file named '.java_base.tag' in your home directory***\n"+
-                           "***********************************************************************\n"
+                           "\n******************************************************************************************\n"+
+                           "***                  exit successful!!!                                                  ***\n"+
+                           "***you will see a file named '.java_base.tag' in your home directory                     ***\n"+
+                           "***  the size of the generated ~/.java_base.tag  is about 2M or bigger,so if your        ***\n"+
+                           "*** .java_base.tag  is too small ,that means your CLASSPATH don't configure correctly.   ***\n"+
+                           "********************************************************************************************\n"
                            );
-        System.out.println(new File (System.getProperty("user.home"), ".java_base.tag").getAbsolutePath());
+        System.out.println(new File (tags.getHomePath(), ".java_base.tag").getAbsolutePath());
         System.exit(0);
     }
 }
