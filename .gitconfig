@@ -14,3 +14,6 @@
         branch=auto
 [diff]
 	tool = vimdiff
+[user]
+        name = mperdikeas
+        email = mperdikeas@gmail.com
