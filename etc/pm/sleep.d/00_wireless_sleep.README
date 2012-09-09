@@ -1,0 +1,61 @@
+9.IX.2012
+I followed the advise found below this gist.
+What worked for me was the 00_wireless_sleep script (with the driver my own
+invocation of 'nm-tool' produced).
+Things to note:
+[  i] the file has to be made executable
+[ ii] you can't just soft link the ~/environment, it has to be copied
+      in the /etc/pm/sleep.d location
+[iii] in my environment I changed #!/bin/sh to #!/bin/bash
+
+================================================================
+source: http://askubuntu.com/questions/67280/wireless-doesnt-connect-after-suspend-on-an-asus-k52f
+
+You can reload the wireless driver after suspend to avoid a reboot. My driver is 'ath9k' which you can find by running 'nm-tool' and look for the line similar to
+
+Driver:   ath9k
+
+Then to reload the driver:
+
+sudo rmmod ath9k
+sudo modprobe ath9k
+
+To make this happen automatically when you come back from suspend we can add the following script at /etc/pm/sleep.d/00_wireless_sleep
+
+#!/bin/sh
+
+case "$1" in
+  suspend|hibernate)
+    /sbin/rmmod ath9k
+    ;;
+  resume|thaw)
+    /sbin/rmmod ath9k
+    /sbin/modprobe ath9k
+    ;;
+esac
+exit 0
+
+Replace the "ath9k" module name with the module you discovered from the nm-tool output mentioned above. I had to name the script "00_wireless_sleep" so it gets run after all the other resume scripts (scripts get run in reverse order on resume). Don't forget to make file "00_wireless_sleep" executable:
+
+sudo chmod 755 /etc/pm/sleep.d/00_wireless_sleep
+shareimprove this answer
+             
+edited Oct 24 '11 at 11:28
+
+16.5k74894
+        
+answered Oct 17 '11 at 1:05
+Ryan Houston
+963
+        
+        
+That worked perfectly! Thank you! – Archer13 Oct 18 '11 at 20:15
+     
+Adding options iwlwifi bt_coex_active=0 to /etc/modprobe.d/iwlwifi.conf worked for me. reference – Jared Beck Jul 29 at 8:40
+Was this post useful to you?     
+up vote 0 down vote
+   
+
+I've the same problem, but with different laptop/wificard. Try to restart the network-manager service:
+
+sudo service network-manager restart
