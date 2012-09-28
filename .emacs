@@ -160,23 +160,25 @@
         (mapc 'yas/load-directory yas/root-directory) ;; Load the snippets - all are referenced but only the first element of the list is (~/.emacs.d/mysnippets) is used for new development
     )
   )
- (progn ;; AutoComplete
-    (add-to-list 'load-path "~/.emacs.d/auto-complete")
-    (eval-after-load 'auto-complete-config
-       '(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
-    )
-    (require 'auto-complete-config)   
-    (ac-config-default)
- )
- (progn;; AutoJavaComplete
-   (add-to-list 'load-path "~/.emacs.d/ajc-java-complete/")
-   (require 'ajc-java-complete-config)
-   (add-hook 'java-mode-hook 'ajc-java-complete-mode)
-   (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
-;; AutoJavaComplete bindings:
-;; C-c i ajc-import-all-unimported-class
-;; C-c m ajc-import-class-under-point
- )
+  (if nil ;; decided on 28.IX to turn off auto-complete and ajc-java-complete as they seem to bog down the editor
+   (progn ;; AutoComplete
+      (add-to-list 'load-path "~/.emacs.d/auto-complete")
+      (eval-after-load 'auto-complete-config
+         '(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
+      )
+      (require 'auto-complete-config)   
+      (ac-config-default)
+   )
+   (progn;; AutoJavaComplete
+     (add-to-list 'load-path "~/.emacs.d/ajc-java-complete/")
+     (require 'ajc-java-complete-config)
+     (add-hook 'java-mode-hook 'ajc-java-complete-mode)
+     (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
+  ;; AutoJavaComplete bindings:
+  ;; C-c i ajc-import-all-unimported-class
+  ;; C-c m ajc-import-class-under-point
+   )
+  )
 )
 
 ;; useful emacs tips
