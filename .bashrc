@@ -162,3 +162,4 @@ export EDITOR=emacs
 # overriding on demand the 'svn diff' tool customization I 've used (do a grep diff ~/.subversion/config  to find out how and which tool it points to?)
 # shouldn't I perhaps use a svn alias intead of a bash alias ?
 alias svn-diff-traditional='svn diff --diff-cmd /usr/bin/diff'
+export SVN_EDITOR=emacs
