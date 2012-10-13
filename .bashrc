@@ -163,3 +163,4 @@ export EDITOR=emacs
 # shouldn't I perhaps use a svn alias intead of a bash alias ?
 alias svn-diff-traditional='svn diff --diff-cmd /usr/bin/diff'
 export SVN_EDITOR=emacs
+alias grep='grep --color=always'
