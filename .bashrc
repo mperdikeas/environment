@@ -164,3 +164,4 @@ export EDITOR=emacs
 alias svn-diff-traditional='svn diff --diff-cmd /usr/bin/diff'
 export SVN_EDITOR=emacs
 alias grep='grep --color=always'
+alias git-fire-away='git add . -A && git commit -m ".." && git push'
