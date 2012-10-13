@@ -293,3 +293,11 @@
     ;; (setq lisp-var-doc-command "(doc %s)\n")
     )
 )
+
+(progn ;; dirtree from: http://code.google.com/p/ywb-codes/source/browse/trunk/emacs/site-lisp/contrib/dirtree.el
+       ;; through     : https://github.com/zkim/emacs-dirtree
+       ;; through     : http://stackoverflow.com/questions/3538064/nerdtree-for-emacs
+    (require 'tree-mode)
+    (require 'windata)
+    (require 'dirtree) ;; activated with M-x dirtree
+ )
