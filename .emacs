@@ -301,3 +301,19 @@
     (require 'windata)
     (require 'dirtree) ;; activated with M-x dirtree
  )
+
+(progn ;; Emacs Ant in Java mode - I can't get the error hyperlinks to work
+    (defun ant-compile ()
+      "Traveling up the path, find build.xml file and run compile."
+      (interactive)
+      (with-temp-buffer
+        (while (and (not (file-exists-p "build.xml"))
+                    (not (equal "/" default-directory)))
+          (cd ".."))
+        (call-interactively 'compile)))
+    (add-hook 'java-mode-hook
+        (lambda ()
+            (progn
+                (local-set-key (kbd "C-x RET") 'ant-compile)
+                (setq compile-command "ant -emacs -find build.xml "))))
+)
