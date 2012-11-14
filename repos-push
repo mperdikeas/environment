@@ -20,12 +20,6 @@ git status -s
 cd ~/mperdikeas.github.com/
 git ppush -v --tags
 git status -s
-cd ~/neuro-jsf-pilot/
-git ppush
-git status -s
-cd ~/neuro-jsf-pilot-envelope/
-git ppush
-git status -s
 cd ~/archetypes/
 git ppush
 git status -s

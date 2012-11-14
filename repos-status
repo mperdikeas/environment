@@ -27,14 +27,6 @@ cd ~/mperdikeas.github.com
 echo at `pwd`
 git status -s
 
-cd ~/neuro-jsf-pilot
-echo at `pwd`
-git status -s
-
-cd ~/neuro-jsf-pilot-envelope
-echo at `pwd`
-git status -s
-
 cd ~/archetypes
 echo at `pwd`
 git status -s
