@@ -317,3 +317,5 @@
                 (local-set-key (kbd "C-x RET") 'ant-compile)
                 (setq compile-command "ant -emacs -find build.xml "))))
 )
+
+(global-set-key "\C-x\C-b" 'buffer-menu)
