@@ -78,7 +78,7 @@
 ;;(toggle-crosshairs-when-idle t)
 ;;(crosshairs-mode)
 ;;(flash-crosshairs)
-(global-set-key (kbd "C-x C-j") 'flash-crosshairs)
+
 
 (progn ;; ace-jump-mode
   (require 'ace-jump-mode) 
@@ -301,6 +301,9 @@
     (require 'windata)
     (require 'dirtree) ;; activated with M-x dirtree
  )
+
+(global-set-key (kbd "C-x C-j") 'flash-crosshairs) ;; make sure crosshairs C-x C-j overrides dired similar binding
+                                                   ;; (which I believe is also available with C-x d)
 
 (progn ;; Emacs Ant in Java mode - I can't get the error hyperlinks to work
     (defun ant-compile ()
