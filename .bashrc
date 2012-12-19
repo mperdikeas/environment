@@ -166,3 +166,5 @@ export SVN_EDITOR=emacs
 alias grep='grep --color=always'
 alias git-fire-away='git add . -A && git commit -m ".." && git push'
 alias ack='ack-grep'
+export LANG=en_US.UTF-8
+export LC_ALL=$LANG
