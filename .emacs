@@ -322,3 +322,8 @@
 )
 
 (global-set-key "\C-x\C-b" 'buffer-menu)
+
+(progn
+    (load "TypeScript")
+    (add-to-list 'auto-mode-alist '("\\.ts" . typescript-mode))
+)
