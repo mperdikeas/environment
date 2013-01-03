@@ -285,7 +285,8 @@
     (progn ;; Inferior Lisp
     (add-hook 'clojure-mode-hook ;; copied from: http://ubercode.de/blog/make-emacs-evaluate-clojure-in-5-minutes
           (lambda ()
-            (setq inferior-lisp-program "~/.emacs.d/clojure/repl.sh")))
+            (setq inferior-lisp-program "~/.emacs.d/clojure/repl.sh"))) ;  I've also seen the following:
+                                                                        ;    (setq inferior-lisp-program "lein repl")))
     ;; (setq inferior-lisp-program "/home/mperdikeas/repl.sh") ;; it seems that that doesn't work - has to be in a hook
     ;; ARE THE BELOW LINES NEEDED? I DON'T REMEMBER ANY MORE
     ;; (setq inferior-lisp-load-command "(load \"%s\")\n")

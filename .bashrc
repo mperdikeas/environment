@@ -168,3 +168,6 @@ alias git-fire-away='git add . -A && git commit -m ".." && git push'
 alias ack='ack-grep'
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
+
+#autojump (maintained in ~/software-deployed in my work system where the install.sh and uninstall.sh scripts are located)
+[[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
