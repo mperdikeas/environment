@@ -1,0 +1,34 @@
+I originally downloaded the clojure *.clj files I needed from
+github one by one and kept them in what is now "clojure-manually-fetched"
+(and was at the time named, simply, "clojure").
+I quickly grew tired from hunting dependencies and stuff and
+just cloned the entired clojure-contrib module from:
+
+git clone https://github.com/richhickey/clojure-contrib.git
+
+(the clone prensently lives in ~/software-deployed/)
+
+and then copied everything from:
+~/software-deployed/clojure-contrib/src/main/clojure
+into the present "clojure" folder (the old "clojure" folder
+being renamed "clojure-manually-fetched").
+
+** UPDATE **
+Furthermore, after some time I noticed problems with the
+clojure-contrib sources I downloaded from the address above
+(which I understand to correspond to the monolithic version
+of the Clojure contrib library and which is not compatible
+with Clojure 1.3 I am using and is only retained as a historic
+artifact).
+So I renamed "clojure" to "clojure-1.2-monolithic" and
+cloned clojure.java.jdbc (which replaces clojure.contrib.sql)
+from the proper location of the now modular contrib libraries:
+
+git clone https://github.com/clojure/java.jdbc.git
+
+These are, at the time of this writing the present contents of
+the "clojure" folder.
+
+I also created script "synch-with-repos" to syncrhonize
+with the clojure modules I download at the "~/software-deployed"
+location.
