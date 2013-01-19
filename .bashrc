@@ -86,6 +86,13 @@ case "$TERM" in xterm*|rxvt*)
     ;;
 esac
 
+# Keep it simple if running in emacs (see: http://unix.stackexchange.com/questions/61836/emacs-shell-mode-m-x-shell)
+case "$TERM" in
+  xterm-256color)
+    PROMPT_COMMAND=
+    PS1="\u@\h:\W$ "
+esac
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
