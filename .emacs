@@ -328,3 +328,9 @@
     (load "TypeScript")
     (add-to-list 'auto-mode-alist '("\\.ts" . typescript-mode))
 )
+
+(progn
+;; see: http://stackoverflow.com/questions/1128927/how-to-scroll-line-by-line-in-gnu-emacs
+    (setq scroll-step            1
+          scroll-conservatively  10000)
+)
