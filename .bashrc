@@ -1,3 +1,4 @@
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -178,3 +179,5 @@ export LC_ALL=$LANG
 
 #autojump (maintained in ~/software-deployed in my work system where the install.sh and uninstall.sh scripts are located)
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
+
+export PATH=$PATH:/opt/NeuroCode/bin
