@@ -341,3 +341,8 @@
 (global-set-key [M-up] 'windmove-up)      ; move to upper window
 (global-set-key [M-down] 'windmove-down)  ; move to downer window
 )
+
+(progn ;; ST mode
+    (require 'stringtemplate-mode)
+    (autoload 'stringtemplate-mode "stringtemplate-mode" "StringTemplate editing mode" t)
+)
