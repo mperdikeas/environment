@@ -179,5 +179,7 @@ export LC_ALL=$LANG
 
 #autojump (maintained in ~/software-deployed in my work system where the install.sh and uninstall.sh scripts are located)
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
+#autojump @ home (I will have to merge it with the above)
+[[ -s /usr/share/autojump/autojump.sh ]] && . /usr/share/autojump/autojump.sh
 
 export PATH=$PATH:/opt/NeuroCode/bin
