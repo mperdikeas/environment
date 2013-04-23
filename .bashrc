@@ -177,9 +177,10 @@ alias ack='ack-grep'
 export LANG=en_US.UTF-8
 export LC_ALL=$LANG
 
-#autojump (maintained in ~/software-deployed in my work system where the install.sh and uninstall.sh scripts are located)
+# for some reason autojump is located in different locations in my work environment versus the home environment
+# autojump (maintained in ~/software-deployed in my work system where the install.sh and uninstall.sh scripts are located)
 [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
-#autojump @ home (I will have to merge it with the above)
+# autojump @ home (I will have to merge it with the above)
 [[ -s /usr/share/autojump/autojump.sh ]] && . /usr/share/autojump/autojump.sh
 
 export PATH=$PATH:/opt/NeuroCode/bin
