@@ -55,3 +55,10 @@ git fetch -v
 git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
+
+cd ~/esavo-reg/
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q

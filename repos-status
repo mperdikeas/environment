@@ -31,5 +31,9 @@ cd ~/archetypes
 echo at `pwd`
 git status -s
 
+cd ~/esavo-reg
+echo at `pwd`
+git status -s
+
 
 
