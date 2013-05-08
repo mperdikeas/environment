@@ -238,6 +238,7 @@
 )
 
 (add-to-list 'auto-mode-alist '("\\.xhtml$" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.wsdl$" . nxml-mode))
 
 
 (if
