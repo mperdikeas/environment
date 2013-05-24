@@ -23,3 +23,6 @@ git status -s
 cd ~/archetypes/
 git ppush
 git status -s
+cd ~/esavo-reg/
+git push
+git status -s
