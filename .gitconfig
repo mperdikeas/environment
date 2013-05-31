@@ -17,3 +17,5 @@
 [user]
         name = mperdikeas
         email = mperdikeas@gmail.com
+[push]
+	default = simple
