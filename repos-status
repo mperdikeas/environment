@@ -35,5 +35,9 @@ cd ~/esavo-reg
 echo at `pwd`
 git status -s
 
+cd ~/clojure-mutil/
+echo at `pwd`
+git status -s
+
 
 
