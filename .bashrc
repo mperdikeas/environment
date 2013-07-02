@@ -184,3 +184,5 @@ export LC_ALL=$LANG
 [[ -s /usr/share/autojump/autojump.sh ]] && . /usr/share/autojump/autojump.sh
 
 export PATH=$PATH:/opt/NeuroCode/bin
+
+alias h='xdg-open .'
