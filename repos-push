@@ -35,6 +35,10 @@ cd ~/esavo-reg/
 echo $(pwd)
 git push
 git status -s
+cd ~/esavo-reg-II/
+echo $(pwd)
+git push
+git status -s
 cd ~/clojure-mutil/
 echo $(pwd)
 git push

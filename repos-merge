@@ -16,7 +16,9 @@ git merge origin/master
 cd ~/archetypes/; echo `pwd`
 git merge origin/master
 cd ~/esavo-reg/; echo `pwd`
-git merge origin/master
+git merge origin/masterg
+cd ~/esavo-reg-II/; echo `pwd`
+git merge origin/masterg
 cd ~/clojure-mutil/; echo `pwd`
 git merge origin/master
 
