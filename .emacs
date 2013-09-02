@@ -292,7 +292,8 @@
           (lambda ()
             (setq inferior-lisp-program "~/.emacs.d/clojure/repl.sh"))) ;  I've also seen the following:
                                                                         ;    (setq inferior-lisp-program "lein repl")))
-    ;; (setq inferior-lisp-program "/home/mperdikeas/repl.sh") ;; it seems that that doesn't work - has to be in a hook
+    (setq inferior-lisp-program "~/.emacs.d/clojure/repl.sh") ;; the hook above is necessary to automatically set inferior-lisp when in clojure mode, this command here is not
+                                                              ;; redundant but necessary to be able to invoke inferior-lisp in a buffer when editing non-clojure files
     ;; ARE THE BELOW LINES NEEDED? I DON'T REMEMBER ANY MORE
     ;; (setq inferior-lisp-load-command "(load \"%s\")\n")
     ;; (setq lisp-function-doc-command "(doc %s)\n")
