@@ -186,3 +186,5 @@ export LC_ALL=$LANG
 export PATH=$PATH:/opt/NeuroCode/bin
 
 alias h='xdg-open .'
+
+alias bd='. bd -s'
