@@ -12,3 +12,4 @@ bin/*
 log*.txt
 .git
 lib-ivy/
+dist
