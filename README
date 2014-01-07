@@ -1,0 +1,14 @@
+2012.02.10 repository created to keep track of various configuration files
+
+Most of these files, and definitely the following;
+
+.bashrc
+.gitconfig
+.dircolors
+.emacs
+.emacs.d
+
+will need to be soft-linked from the home directory.
+
+I also keep (for reference) local .bashrc modifications applied
+in various systems, e.g. file ".bashrc_thisnode-lenovo".

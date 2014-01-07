@@ -1,0 +1,24 @@
+#!/bin/bash
+cd ~/tools; echo `pwd`
+git merge origin/master
+cd ~/java-mutil; echo `pwd`
+git merge origin/master
+cd ~/playground; echo `pwd`
+git merge origin/master
+cd ~/environment; echo `pwd`
+git merge origin/master
+cd ~/ocaml-mutil; echo `pwd`
+git merge origin/master
+cd ~/reverie; echo `pwd`
+git merge origin/master
+cd ~/mperdikeas.github.com; echo `pwd`
+git merge origin/master
+cd ~/archetypes/; echo `pwd`
+git merge origin/master
+cd ~/esavo-reg/; echo `pwd`
+git merge origin/master
+cd ~/esavo-reg-II/; echo `pwd`
+git merge origin/master
+cd ~/clojure-mutil/; echo `pwd`
+git merge origin/master
+

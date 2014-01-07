@@ -1,0 +1,6 @@
+#export JAVA_HOME=/usr/lib/jvm/jdk1.7.0
+export JAVA_HOME=/usr/lib/jvm/java-7-oracle
+export PATH=$PATH:~/software-downloads/gwt-2.5.1/gwt-2.5.1:~/local-tools:$JAVA_HOME/bin
+export CXF_HOME=~/software-downloads/apache-cxf/apache-cxf-2.7.6
+export PATH=$PATH:$CXF_HOME/bin
+alias dbvis=/home/mperdikeas/software-downloads/db-visualizer-9.1/tarball-install/DbVisualizer/dbvis

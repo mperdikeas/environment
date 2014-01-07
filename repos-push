@@ -1,0 +1,45 @@
+#!/bin/bash
+cd ~/tools
+echo $(pwd)
+git ppush
+git status -s
+cd ~/java-mutil/
+echo $(pwd)
+git ppush
+git status -s
+cd ~/playground
+echo $(pwd)
+git ppush
+git status -s
+cd ~/environment
+echo $(pwd)
+git ppush
+git status -s
+cd ~/ocaml-mutil
+echo $(pwd)
+git ppush
+git status -s
+cd ~/reverie
+echo $(pwd)
+git ppush
+git status -s
+cd ~/mperdikeas.github.com/
+echo $(pwd)
+git ppush -v --tags
+git status -s
+cd ~/archetypes/
+echo $(pwd)
+git ppush
+git status -s
+cd ~/esavo-reg/
+echo $(pwd)
+git push
+git status -s
+cd ~/esavo-reg-II/
+echo $(pwd)
+git push
+git status -s
+cd ~/clojure-mutil/
+echo $(pwd)
+git push
+git status -s

@@ -1,0 +1,14 @@
+*.class
+build/*
+bin/*
+*.war
+*~
+*.lock
+*.swp
+*.out
+*.bak
+*.tmp
+*.log
+log*.txt
+.git
+lib-ivy/

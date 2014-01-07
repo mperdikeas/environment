@@ -1,0 +1,12 @@
+sudo apt-get-install ipconfig
+sudo apt-get install net-tools
+sudo apt-get install bzip2
+sudo apt-get install make
+sudo apt-get install openjdk-6-jdk
+sudo apt-get install nmap
+sudo apt-get-cache search dos2unix
+sudo apt-get install dos2unix
+sudo apt-get install ocaml
+sudo apt-get install ocaml
+sudo apt-get install ncurses-term # this is necessary for 256 colors
+

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+case "$1" in
+     suspend|hibernate)
+     /sbin/rmmod r8712u
+     ;;
+     resume|thaw)
+     /sbin/rmmod r8712u
+     /sbin/modprobe r8712u
+     ;;
+esac
+exit 0

@@ -1,0 +1,78 @@
+#!/bin/bash
+cd ~/tools
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/java-mutil
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+
+cd ~/environment
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/ocaml-mutil
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/playground
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/reverie
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/mperdikeas.github.com
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/archetypes/
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/esavo-reg/
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/esavo-reg-II
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+
+cd ~/clojure-mutil/
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
