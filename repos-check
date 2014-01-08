@@ -35,13 +35,6 @@ git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
 
-cd ~/reverie
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
 cd ~/mperdikeas.github.com
 echo
 git fetch -v

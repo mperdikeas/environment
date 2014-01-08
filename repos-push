@@ -19,10 +19,6 @@ cd ~/ocaml-mutil
 echo $(pwd)
 git ppush
 git status -s
-cd ~/reverie
-echo $(pwd)
-git ppush
-git status -s
 cd ~/mperdikeas.github.com/
 echo $(pwd)
 git ppush -v --tags
