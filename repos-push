@@ -39,3 +39,7 @@ cd ~/clojure-mutil/
 echo $(pwd)
 git push
 git status -s
+cd ~/mant-tasks/
+echo $(pwd)
+git push
+git status -s

@@ -19,4 +19,6 @@ cd ~/esavo-reg-II/; echo `pwd`
 git merge origin/master
 cd ~/clojure-mutil/; echo `pwd`
 git merge origin/master
+cd ~/mant-tasks/; echo `pwd`
+git merge origin/master
 

@@ -39,5 +39,9 @@ cd ~/clojure-mutil/
 echo at `pwd`
 git status -s
 
+cd ~/mant-tasks
+echo at `pwd`
+git status -s
+
 
 
