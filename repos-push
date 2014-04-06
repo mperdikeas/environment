@@ -27,10 +27,6 @@ cd ~/archetypes/
 echo $(pwd)
 git ppush
 git status -s
-cd ~/esavo-reg/
-echo $(pwd)
-git push
-git status -s
 cd ~/esavo-reg-II/
 echo $(pwd)
 git push
