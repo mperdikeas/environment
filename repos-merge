@@ -13,8 +13,6 @@ cd ~/mperdikeas.github.com; echo `pwd`
 git merge origin/master
 cd ~/archetypes/; echo `pwd`
 git merge origin/master
-cd ~/esavo-reg-II/; echo `pwd`
-git merge origin/master
 cd ~/clojure-mutil/; echo `pwd`
 git merge origin/master
 cd ~/mant-tasks/; echo `pwd`
