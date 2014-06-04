@@ -35,3 +35,7 @@ cd ~/mant-tasks/
 echo $(pwd)
 git push
 git status -s
+cd ~/starjava/
+echo $(pwd)
+git push
+git status -s
