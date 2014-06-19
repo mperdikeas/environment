@@ -366,3 +366,5 @@
 (if nil
  (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode) ;; do not enable the enh-ruby-mode (I guess that means 'enhanced')
  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)))
+
+(global-set-key "\C-x\C-k" 'compile)
