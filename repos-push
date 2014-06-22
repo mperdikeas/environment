@@ -39,3 +39,7 @@ cd ~/starjava/
 echo $(pwd)
 git push
 git status -s
+cd ~/zip-diff/
+echo $(pwd)
+git push
+git status -s

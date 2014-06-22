@@ -69,3 +69,11 @@ git ls-remote --heads -q
 #git status -s
 #git rev-parse HEAD
 #git ls-remote --heads -q
+
+cd ~/zip-diff/
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
+

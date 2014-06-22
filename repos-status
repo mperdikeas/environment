@@ -43,5 +43,9 @@ cd ~/starjava
 echo at `pwd`
 git status -s
 
+cd ~/zip-diff
+echo at `pwd`
+git status -s
+
 
 
