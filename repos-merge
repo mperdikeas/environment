@@ -18,7 +18,7 @@ git merge origin/master
 cd ~/mant-tasks/; echo `pwd`
 git merge origin/master
 cd ~/starjava/; echo `pwd`
-git merge origin/master
+git merge origin/eurovo-mods
 cd ~/zip-diff/; echo `pwd`
 git merge origin/master
 
