@@ -63,12 +63,12 @@ git status -s
 git rev-parse HEAD
 git ls-remote --heads -q
 
-#cd ~/starjava
-#echo
-#git fetch -v
-#git status -s
-#git rev-parse HEAD
-#git ls-remote --heads -q
+cd ~/starjava
+echo
+git fetch -v
+git status -s
+git rev-parse HEAD
+git ls-remote --heads -q
 
 cd ~/zip-diff/
 echo
