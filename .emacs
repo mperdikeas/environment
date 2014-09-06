@@ -368,3 +368,22 @@
  (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)))
 
 (global-set-key "\C-x\C-k" 'compile)
+
+(progn;; http://unix.stackexchange.com/a/154154/24044
+(defun last-message (&optional num)
+  (or num (setq num 1))
+  (if (= num 0)
+      (current-message)
+    (save-excursion
+      (set-buffer "*Messages*")
+      (save-excursion
+    (forward-line (- 1 num))
+    (backward-char)
+    (let ((end (point)))
+      (forward-line 0)
+      (buffer-substring-no-properties (point) end))))))
+(defun insert-last-message (&optional num)
+  (interactive "*p")
+  (insert (last-message num)))
+(global-set-key "\C-cm" 'insert-last-message)
+)
