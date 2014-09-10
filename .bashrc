@@ -111,7 +111,7 @@ if [ -x /usr/bin/dircolors ]; then
         eval "`dircolors -b`"
     fi
     alias ls='ls --color'
-    alias ls='ls -la --color'
+    alias ls='ls -laF --color'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
