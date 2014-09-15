@@ -387,3 +387,12 @@
   (insert (last-message num)))
 (global-set-key "\C-cm" 'insert-last-message)
 )
+
+(progn ;; http://unix.stackexchange.com/a/45381/24044
+(defun insert-buffer-name ()
+    "Insert the full path file name into the current buffer."
+    (interactive) 
+    (insert (buffer-name (window-buffer (minibuffer-selected-window))))
+)
+(global-set-key "\C-x\C-i" 'insert-buffer-name)
+)
