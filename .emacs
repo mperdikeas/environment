@@ -396,3 +396,5 @@
 )
 (global-set-key "\C-x\C-i" 'insert-buffer-name)
 )
+
+(setq Buffer-menu-buffer+size-width 60) ;; http://stackoverflow.com/a/26062716/274677
