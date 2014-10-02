@@ -165,7 +165,7 @@ alias emacs="emacs -nw"
 export PATH=$PATH:~/tools
 export MONO_PATH=/opt/FSharp-2.0.0.0/bin
 export ANT_OPTS="-Xms256m -Xmx1024m -XX:MaxPermSize=256m -Dant.logger.defaults=$HOME/environment/AnsiColorLogger.override"
-export EDITOR=emacs
+export EDITOR="emacs -nw"
 
 # overriding on demand the 'svn diff' tool customization I 've used (do a grep diff ~/.subversion/config  to find out how and which tool it points to?)
 # shouldn't I perhaps use a svn alias intead of a bash alias ?
