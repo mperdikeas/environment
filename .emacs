@@ -403,3 +403,4 @@
     (load "json-mode")
     (add-to-list 'auto-mode-alist '("\\.json" . json-mode))
 )
+(put 'downcase-region 'disabled nil)
