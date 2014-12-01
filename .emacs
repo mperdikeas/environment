@@ -404,3 +404,6 @@
     (add-to-list 'auto-mode-alist '("\\.json" . json-mode))
 )
 (put 'downcase-region 'disabled nil)
+
+
+(setq tramp-mode nil) ;; disable tramp-mode, see: https://groups.google.com/forum/#!topic/gnu.emacs.help/OLRkGgJqgu8
