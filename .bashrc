@@ -188,3 +188,12 @@ export PATH=$PATH:/opt/NeuroCode/bin
 alias h='xdg-open .'
 
 alias bd='. bd -s'
+
+function sedescape {
+  echo "$1" | sed -e 's/[]\/$*.^|[]/\\&/g'
+}
+export -f sedescape
+# example use:
+#     $ sedescape 'how < do you (escape [this] & "that"). ? >'
+#     how < do you (escape \[this\] & "that")\. ? >
+#     $
