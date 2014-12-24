@@ -2,11 +2,11 @@
 
 Most of these files, and definitely the following;
 
-.bashrc
-.gitconfig
-.dircolors
-.emacs
-.emacs.d
+    .bashrc
+    .gitconfig
+    .dircolors
+    .emacs
+    .emacs.d
 
     ... will need to be soft-linked from the home directory.
 
