@@ -87,9 +87,9 @@ case "$TERM" in xterm*|rxvt*)
     ;;
 esac
 
-# Keep it simple if running in emacs (see: http://unix.stackexchange.com/questions/61836/emacs-shell-mode-m-x-shell)
-case "$TERM" in
-    xterm-256color)
+# Keep it simple if running in emacs (http://unix.stackexchange.com/a/175770/24044)
+case "$EMACS" in
+    t)
     PROMPT_COMMAND=
     PS1="[\u@\h:\w]$ "
 esac
