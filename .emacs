@@ -353,7 +353,7 @@
     (autoload 'stringtemplate-mode "stringtemplate-mode" "StringTemplate editing mode" t)
 )
 
-(if nil ;; doesn't seem to be working: http://unix.stackexchange.com/questions/61836/emacs-shell-mode-m-x-shell
+(if nil ;; doesn't seem to be working: http://unix.stackexchange.com/a/77360/24044
 (eval-after-load 'shell
    '(progn
       (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
