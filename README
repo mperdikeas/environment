@@ -10,5 +10,5 @@ Most of these files, and definitely the following;
 
     ... will need to be soft-linked from the home directory.
 
-I also keep (for reference) local .bashrc modifications applied
+I also keep (for reference) local [.bashrc] file modifications applied
 in various systems, e.g. file ".bashrc_thisnode-lenovo".
