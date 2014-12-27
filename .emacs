@@ -407,3 +407,10 @@
 
 
 (setq tramp-mode nil) ;; disable tramp-mode, see: https://groups.google.com/forum/#!topic/gnu.emacs.help/OLRkGgJqgu8
+
+(progn ;; http://emacs.stackexchange.com/a/5750
+    (defun my-shell-hook ()
+      (define-key shell-mode-map (kbd "C-c SPC") 'ace-jump-mode))
+    (add-hook 'shell-mode-hook 'my-shell-hook)
+)
+
