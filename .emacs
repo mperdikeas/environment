@@ -414,3 +414,4 @@
     (add-hook 'shell-mode-hook 'my-shell-hook)
 )
 
+(put 'upcase-region 'disabled nil)
