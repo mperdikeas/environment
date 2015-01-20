@@ -415,3 +415,5 @@
 )
 
 (put 'upcase-region 'disabled nil)
+
+(global-set-key "\C-x%" 'shrink-window)
