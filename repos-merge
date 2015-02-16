@@ -21,4 +21,6 @@ cd ~/starjava/; echo `pwd`
 git merge origin/eurovo-mods
 cd ~/zip-diff/; echo `pwd`
 git merge origin/master
+cd ~/esac-rawdar/; echo `pwd`
+git merge origin/master
 
