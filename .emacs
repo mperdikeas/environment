@@ -443,6 +443,10 @@ With a prefix argument, insert a newline above the current line."
   (if abovep
       (vi-open-line-above)
     (vi-open-line-below)))
-
-(define-key global-map [(meta insert)] 'vi-open-line)
+(if nil ;; this was the original binding but the [insert] key is too far away
+    (define-key global-map [(meta insert)] 'vi-open-line)
+)
+(if t ;; I prefer this binding instead
+    (define-key global-map (kbd "M-o") 'vi-open-line)
+)
 )
