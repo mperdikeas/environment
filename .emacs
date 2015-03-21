@@ -450,3 +450,9 @@ With a prefix argument, insert a newline above the current line."
     (define-key global-map (kbd "M-o") 'vi-open-line)
 )
 )
+
+(progn;; http://www.emacswiki.org/emacs/ColumnMarker
+    (require 'column-marker)
+    (global-set-key [?\C-c ?c] 'column-marker-1)
+    (add-hook 'java-mode-hook (lambda () (interactive) (column-marker-1 120)))
+)
