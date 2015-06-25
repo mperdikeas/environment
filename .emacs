@@ -109,10 +109,13 @@
                )   
             )
 
+            (if nil
             (progn ;; option A.2 use color-theme-zenburn which seems to be in its own package
               (require 'color-theme-zenburn)
-              (color-theme-zenburn)
-            )
+              (color-theme-zenburn)))
+            (progn ;; option A.3 (annum 2015, use the latest zenburn theme for Emacs 24)
+                (require 'zenburn-theme)
+                (load-theme 'zenburn t))
         )
     )
     (progn ;; option B : customize by hand ;; I tried it on 2012-03-07 and wasn't very pleased with the results
