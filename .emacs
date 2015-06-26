@@ -459,3 +459,10 @@ With a prefix argument, insert a newline above the current line."
     (global-set-key [?\C-c ?c] 'column-marker-1)
     (add-hook 'java-mode-hook (lambda () (interactive) (column-marker-1 120)))
 )
+
+(progn;; instructed to add the below lines from [http://orgmode.org/orgguide.pdf], section 1.3
+    (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode)) ; not needed since Emacs 22.2
+    (add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
+    (global-set-key "\C-cl" 'org-store-link)
+    (global-set-key "\C-ca" 'org-agenda)
+    (global-set-key "\C-cb" 'org-iswitchb))
