@@ -51,3 +51,7 @@ cd ~/esac-rawdar
 echo at `pwd`
 git status -s
 
+cd ~/esavo-reg-II
+echo at `pwd`
+git status -s
+

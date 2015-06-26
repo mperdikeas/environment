@@ -47,4 +47,8 @@ cd ~/esac-rawdar/
 echo $(pwd)
 git push
 git status -s
+cd ~/esavo-reg-II/
+echo $(pwd)
+git push
+git status -s
 
