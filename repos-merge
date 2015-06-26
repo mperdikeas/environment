@@ -23,4 +23,6 @@ cd ~/zip-diff/; echo `pwd`
 git merge origin/master
 cd ~/esac-rawdar/; echo `pwd`
 git merge origin/master
+cd ~/esavo-reg-II/; echo `pwd`
+git merge origin/master
 
