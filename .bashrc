@@ -197,3 +197,5 @@ export -f sedescape
 #     $ sedescape 'how < do you (escape [this] & "that"). ? >'
 #     how < do you (escape \[this\] & "that")\. ? >
 #     $
+
+alias g='gradle'

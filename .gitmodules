@@ -1,0 +1,3 @@
+[submodule ".emacs.d/groovy-emacs-modes"]
+	path = .emacs.d/groovy-emacs-modes
+	url = https://github.com/Groovy-Emacs-Modes/groovy-emacs-modes.git
