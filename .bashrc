@@ -199,3 +199,4 @@ export -f sedescape
 #     $
 
 alias g='gradle'
+alias e='emacs'
