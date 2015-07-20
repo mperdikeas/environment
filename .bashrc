@@ -200,3 +200,4 @@ export -f sedescape
 
 alias g='gradle'
 alias e='emacs'
+. ~/environment/gradle-tab-completion.bash
