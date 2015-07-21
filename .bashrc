@@ -141,8 +141,9 @@ if [ -f ~/.bashrc_thisnode ]; then
     . ~/.bashrc_thisnode
 fi
 
-: ${JAVA_HOME:?"WARNING - Java home not set"}
-export CLASSPATH=$JAVA_HOME/jre/lib/rt.jar:.
+# disable the below two lines due to a problem with groovy [https://issues.apache.org/jira/browse/GROOVY-1386]
+#: ${JAVA_HOME:?"WARNING - Java home not set"}
+#export CLASSPATH=$JAVA_HOME/jre/lib/rt.jar:.
 
 # pushd and popd aliases
 alias p='pushd'
@@ -201,3 +202,5 @@ export -f sedescape
 alias g='gradle'
 alias e='emacs'
 . ~/environment/gradle-tab-completion.bash
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/home/mperdikeas/.gvm/bin/gvm-init.sh" ]] && source "/home/mperdikeas/.gvm/bin/gvm-init.sh"
