@@ -481,3 +481,7 @@ With a prefix argument, insert a newline above the current line."
                  (require 'groovy-electric)
                  (groovy-electric-mode)))
 )
+
+(fset 'html-mode 'nxml-mode) ;; http://stackoverflow.com/a/144938 and remember that C-j enters a new line with proper indentation in nXML mode
+                             ;; see also: http://stackoverflow.com/a/6247579
+(setq nxml-child-indent 4) 
