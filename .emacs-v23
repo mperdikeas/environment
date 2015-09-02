@@ -479,7 +479,7 @@ With a prefix argument, insert a newline above the current line."
 
 (setq nxml-child-indent 4) 
 
-(if f
+(if nil
     (fset 'html-mode 'nxml-mode) ;; http://stackoverflow.com/a/144938 and remember that C-j enters a new line with proper indentation in nXML mode
                                  ;; see also: http://stackoverflow.com/a/6247579
     (progn ;; http://web-mode.org/
