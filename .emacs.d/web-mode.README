@@ -1,0 +1,5 @@
+To add the [web-mode] git repo as a submodule, I executed the following;
+
+    git submodule add https://github.com/fxbois/web-mode.git .emacs.d/web-mode
+
+.. at the toplevel of the working tree for this repository (e.g. from ..)
