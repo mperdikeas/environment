@@ -1,4 +1,3 @@
-
 (menu-bar-mode 0)
 (add-to-list 'load-path "~/.emacs.d")
 
@@ -482,6 +481,14 @@ With a prefix argument, insert a newline above the current line."
                  (groovy-electric-mode)))
 )
 
-(fset 'html-mode 'nxml-mode) ;; http://stackoverflow.com/a/144938 and remember that C-j enters a new line with proper indentation in nXML mode
-                             ;; see also: http://stackoverflow.com/a/6247579
-(setq nxml-child-indent 4) 
+(setq nxml-child-indent 4)
+
+(if nil
+    (fset 'html-mode 'nxml-mode) ;; http://stackoverflow.com/a/144938 and remember that C-j enters a new line with proper indentation in nXML mode
+                                 ;; see also: http://stackoverflow.com/a/6247579
+    (progn ;; http://web-mode.org/
+        (add-to-list 'load-path "~/.emacs.d/web-mode/")
+        (load "web-mode")
+        (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode)))
+)
+
