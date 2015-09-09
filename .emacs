@@ -492,3 +492,6 @@ With a prefix argument, insert a newline above the current line."
         (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode)))
 )
 
+(require 'openwith)
+(openwith-mode t)
+(setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
