@@ -504,3 +504,6 @@ With a prefix argument, insert a newline above the current line."
 (add-hook 'org-mode-hook #'visual-line-mode)
 
 (setq org-agenda-files (list "~/esac-rawdar/rawdar.org"))
+
+(add-hook 'java-mode-hook #'hs-minor-mode)
+
