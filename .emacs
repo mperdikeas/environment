@@ -33,9 +33,15 @@
 (progn ;; current line highlight
   (global-hl-line-mode 1)
   ;;  (set-face-background hl-line-face "#4169E1") ;; royal blue
-  (set-face-background hl-line-face "#E0B0FF") ;; mauve
-  (set-face-foreground hl-line-face "#000000")
-)
+  (if nil
+    (progn
+      (set-face-background hl-line-face "#E0B0FF") ;; mauve
+      (set-face-foreground hl-line-face "#000000"))
+    (progn
+      (set-face-background hl-line-face "#2E2E00")))) ;; background only: don't change foreground. Other interesting values I've tried: 470047, 2E2E00, 333300, 191975
+
+
+
 
 (setq column-number-mode t)
 
