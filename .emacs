@@ -513,9 +513,13 @@ With a prefix argument, insert a newline above the current line."
     )
 )
 
-(require 'openwith)
-(openwith-mode t)
-(setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+(progn
+    (require 'openwith)
+    (openwith-mode t)
+    (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+    (setq openwith-associations '(("\\.jpg\\'" "eog" (file))))
+    (setq openwith-associations '(("\\.png\\'" "eog" (file))))
+)
 
 (add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
           (lambda ()
