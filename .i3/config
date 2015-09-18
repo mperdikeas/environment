@@ -160,3 +160,7 @@ exec --no-startup-id xset dpms 600
 bindsym $mod+Control+l exec "~/.i3/fuzzy-lock.sh"
 # requires [sudo apt-get install xautolock]
 exec --no-startup-id xautolock -time 10 -locker '~/.i3/fuzzy-lock.sh' &
+
+# https://faq.i3wm.org/question/1416/keyboard-layout-change-problem/
+bindsym Ctrl+Shift+1 exec --no-startup-id "setxkbmap us"
+bindsym Ctrl+Shift+2 exec --no-startup-id "setxkbmap gr"
