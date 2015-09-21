@@ -158,6 +158,9 @@ bar {
 #autostart section
 exec --no-startup-id xset dpms 600
 bindsym $mod+Control+l exec "~/.i3/fuzzy-lock.sh"
+
+# For Ubuntu 13.04 and 14.04 this requires: [sudo apt-get install gksu]
+# see http://askubuntu.com/a/290817/89663
 bindsym $mod+Control+s exec "gksudo pm-suspend && ~/.i3/fuzzy-lock.sh"
 # requires [sudo apt-get install xautolock]
 exec --no-startup-id xautolock -time 10 -locker '~/.i3/fuzzy-lock.sh' &
