@@ -562,3 +562,11 @@ With a prefix argument, insert a newline above the current line."
 (global-set-key [f8] 'copy-to-clipboard)
 (global-set-key [f9] 'paste-from-clipboard)
 )
+
+(progn ;; https://github.com/mooz/js2-mode/tree/master
+       ;; https://truongtx.me/2014/02/23/set-up-javascript-development-environment-in-emacs/
+    (add-to-list 'load-path "~/.emacs.d/js2-mode/")
+    (load "js2-mode")
+    (add-hook 'js-mode-hook 'js2-minor-mode)
+    (add-hook 'js2-mode-hook 'ac-js2-mode)
+    (setq js2-highlight-level 3))
