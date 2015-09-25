@@ -473,6 +473,12 @@ With a prefix argument, insert a newline above the current line."
     (global-set-key "\C-ca" 'org-agenda)
     (global-set-key "\C-cb" 'org-iswitchb))
 
+(progn
+  (defun my-org-mode-hook ()
+    "My hook for the web-mode"
+     (setq org-hide-emphasis-markers f))
+  (add-hook 'org-mode-hook 'my-org-mode-hook))
+
 (progn ;; https://jpace.wordpress.com/2015/01/09/adding-groovy-emacs-mode/
     ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
     (add-to-list 'load-path ".emacs.d/groovy-emacs-modes")
