@@ -168,3 +168,7 @@ exec --no-startup-id xautolock -time 10 -locker '~/.i3/fuzzy-lock.sh' &
 # https://faq.i3wm.org/question/1416/keyboard-layout-change-problem/
 bindsym Ctrl+Shift+1 exec --no-startup-id "setxkbmap us"
 bindsym Ctrl+Shift+2 exec --no-startup-id "setxkbmap gr"
+
+# scrot & eog
+bindsym Print exec scrot -e 'mv $f /tmp/ && eog /tmp/$f'
+bindsym $mod+Print --release exec scrot -s -e 'mv $f /tmp/ && eog /tmp/$f'
