@@ -501,6 +501,8 @@ With a prefix argument, insert a newline above the current line."
                                  ;; see also: http://stackoverflow.com/a/6247579
     (progn ;; http://web-mode.org/
         (add-to-list 'load-path "~/.emacs.d/web-mode/")
+        (setq web-mode-enable-current-element-highlight t)
+        (setq web-mode-enable-current-column-highlight t)
         (load "web-mode")
         (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
         (defun my-web-mode-hook ()
@@ -512,10 +514,10 @@ With a prefix argument, insert a newline above the current line."
           (setq web-mode-style-padding 1)
           (setq web-mode-script-padding 1)
           (setq web-mode-block-padding 0)
-          (setq web-mode-enable-current-element-highlight nil)
-          (setq web-mode-enable-current-column-highlight nil)
         )
         (add-hook 'web-mode-hook  'my-web-mode-hook)
+        (eval-after-load "web-mode"
+          '(set-face-background 'web-mode-current-element-highlight-face "color-88"))
     )
 )
 
