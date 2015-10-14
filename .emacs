@@ -88,9 +88,9 @@
 
 (progn ;; ace-jump-mode
   (require 'ace-jump-mode) 
-    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-    (define-key global-map (kbd "C-c C-c SPC") 'ace-jump-char-mode)
-    (define-key global-map (kbd "C-c C-c C-c SPC") 'ace-jump-line-mode)
+    (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+    (define-key global-map (kbd "C-c C-c C-SPC") 'ace-jump-char-mode)
+    (define-key global-map (kbd "C-c C-c C-c C-SPC") 'ace-jump-line-mode)
   ;;;; if you also use viper mode:
   ;; (define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
 )
@@ -521,13 +521,23 @@ With a prefix argument, insert a newline above the current line."
     )
 )
 
+;;(progn
+;;    (require 'openwith)
+;;    (openwith-mode t)
+;;    (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
+;;    (setq openwith-associations '(("\\.jpg\\'" "eog" (file))))
+;;    (setq openwith-associations '(("\\.png\\'" "eog" (file))))
+;;)
+
 (progn
     (require 'openwith)
     (openwith-mode t)
-    (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
-    (setq openwith-associations '(("\\.jpg\\'" "eog" (file))))
-    (setq openwith-associations '(("\\.png\\'" "eog" (file))))
-)
+    (setq openwith-associations '(
+                                  ("\\.pdf\\'" "evince" (file))
+                                  ("\\.mp3\\'" "xmms" (file))
+                                  ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file))
+                                  ("\\.\\(?:jp?g\\|png\\)\\'" "eog" (file))
+                                  ("\\.png\\'" "eog" (file)))))
 
 (add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
           (lambda ()
