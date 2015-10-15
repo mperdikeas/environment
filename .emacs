@@ -494,11 +494,12 @@ With a prefix argument, insert a newline above the current line."
 (if (= whichSolutionToUseForOrgModePDF 2) ;; http://stackoverflow.com/a/9116029/274677
     (eval-after-load "org"
       '(progn
-         ;; .txt files aren't in the list initially, but in case that changes
-         ;; in a future version of org, use if to avoid errors
-         (if (assoc "\\.txt\\'" org-file-apps)
-             (setcdr (assoc "\\.txt\\'" org-file-apps) "emacs %s")
-           (add-to-list 'org-file-apps '("\\.txt\\'" . "emacs %s") t))
+         (if nil ;; this is messing up with my opening of txt files
+             ;; .txt files aren't in the list initially, but in case that changes
+             ;; in a future version of org, use if to avoid errors
+             (if (assoc "\\.txt\\'" org-file-apps)
+                 (setcdr (assoc "\\.txt\\'" org-file-apps) "emacs %s")
+               (add-to-list 'org-file-apps '("\\.txt\\'" . "emacs %s") t)))
          ;; Change .pdf association directly within the alist
          (setcdr (assoc "\\.pdf\\'" org-file-apps) "evince %s"))))
 
