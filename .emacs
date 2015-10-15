@@ -476,7 +476,9 @@ With a prefix argument, insert a newline above the current line."
 (progn
   (defun my-org-mode-hook ()
     "My hook for the web-mode"
-     (setq org-hide-emphasis-markers nil))
+     (setq org-hide-emphasis-markers nil)
+     (delete '("\\.pdf\\'" . default) org-file-apps)
+     (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s")))
   (add-hook 'org-mode-hook 'my-org-mode-hook))
 
 (progn ;; https://jpace.wordpress.com/2015/01/09/adding-groovy-emacs-mode/
