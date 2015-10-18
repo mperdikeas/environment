@@ -21,7 +21,7 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-
+#gsettings set org.gnome.desktop.background show-desktop-icons false
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/home/mperdikeas/.gvm/bin/gvm-init.sh" ]] && source "/home/mperdikeas/.gvm/bin/gvm-init.sh"
