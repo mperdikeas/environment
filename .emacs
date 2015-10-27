@@ -339,10 +339,6 @@
 
 (global-set-key "\C-x\C-b" 'buffer-menu)
 
-(progn
-  (load "TypeScript")
-  (add-to-list 'auto-mode-alist '("\\.ts" . typescript-mode))
-  )
 
 (progn
   ;; see: http://stackoverflow.com/questions/1128927/how-to-scroll-line-by-line-in-gnu-emacs
@@ -612,3 +608,45 @@ With a prefix argument, insert a newline above the current line."
   (add-hook 'js-mode-hook 'js2-minor-mode)
   (add-hook 'js2-mode-hook 'ac-js2-mode)
   (setq js2-highlight-level 3))
+
+(progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
+;; https://stable.melpa.org/#/getting-started
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+;;(add-to-list 'package-archives
+;;             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+
+(package-initialize)
+
+;;(package-install 'tss)
+
+(setq package-list '(tss))
+
+
+;; If use bundled typescript.el,
+(require 'typescript)
+(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+
+(require 'tss)
+
+;; Key binding
+(setq tss-popup-help-key "C-:")
+(setq tss-jump-to-definition-key "C->")
+(setq tss-implement-definition-key "C-c i")
+
+;; Make config suit for you. About the config item, eval the following sexp.
+;; (customize-group "tss")
+
+;; Do setting recommemded configuration
+(tss-config-default)
+
+
+
+(unless package-archive-contents
+  (package-refresh-contents))
+
+(dolist (package package-list)
+  (unless (package-installed-p package)
+    (package-install package)))
+)
