@@ -610,77 +610,81 @@ With a prefix argument, insert a newline above the current line."
   (setq js2-highlight-level 3))
 
 (if nil
-(progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
-;; https://stable.melpa.org/#/getting-started
-(require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
-;;(add-to-list 'package-archives
-;;             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
+    (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
+      ;; https://stable.melpa.org/#/getting-started
+      (require 'package)
+      (add-to-list 'package-archives
+                   '("melpa" . "http://melpa.org/packages/") t)
+      ;;(add-to-list 'package-archives
+      ;;             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
 
-(package-initialize)
+      (package-initialize)
 
-;;(package-install 'tss)
+      ;;(package-install 'tss)
 
-(setq package-list '(tss))
-
-
-;; If use bundled typescript.el,
-(require 'typescript)
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-
-(require 'tss)
-
-;; Key binding
-(setq tss-popup-help-key "C-:")
-(setq tss-jump-to-definition-key "C->")
-(setq tss-implement-definition-key "C-c i")
-
-;; Make config suit for you. About the config item, eval the following sexp.
-;; (customize-group "tss")
-
-;; Do setting recommemded configuration
-(tss-config-default)
+      (setq package-list '(tss))
 
 
+      ;; If use bundled typescript.el,
+      (require 'typescript)
+      (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
 
-(unless package-archive-contents
-  (package-refresh-contents))
+      (require 'tss)
 
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
+      ;; Key binding
+      (setq tss-popup-help-key "C-:")
+      (setq tss-jump-to-definition-key "C->")
+      (setq tss-implement-definition-key "C-c i")
+
+      ;; Make config suit for you. About the config item, eval the following sexp.
+      ;; (customize-group "tss")
+
+      ;; Do setting recommemded configuration
+      (tss-config-default)
+
+
+
+      (unless package-archive-contents
+        (package-refresh-contents))
+
+      (dolist (package package-list)
+        (unless (package-installed-p package)
+          (package-install package)))
+      )
+  ;; I am now using the below method instead
+  ;; see: http://stackoverflow.com/a/21065066/274677
+  ;;      http://stackoverflow.com/a/21342883/274677
+  (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
+    ;; https://stable.melpa.org/#/getting-started
+
+    (require 'package)
+    (setq package-enable-at-startup nil)
+    (mapc (lambda(p) (add-to-list 'package-archives p t))
+          '(("marmalade" . "http://marmalade-repo.org/packages/")
+            ("melpa" . "http://melpa.org/packages/")))
+    ;;(package-refresh-contents) ;; uncomment this line every couple of months or so ...
+    (package-initialize)
+
+    ;; Bootstrap `use-package' ;; http://www.lunaryorn.com/2015/01/06/my-emacs-configuration-with-use-package.html
+    (unless (package-installed-p 'use-package)
+      (package-refresh-contents)
+      (package-install 'use-package))
+    (require 'use-package)
+
+    (use-package typescript
+      :mode ("\\.ts0\\'" . typescript-mode)
+      :interpreter ("typescript" . typescript-mode)
+      :ensure t)
+
+
+
+    (use-package tss
+      :init
+      (bind-key "C-:" 'tss-popup-help-key)
+      (bind-key "C->" 'tss-jump-to-definition-key)
+      (bind-key "C-c i:" 'tss-implement-definition-key)
+      :config
+      (tss-config-default)
+      :ensure t))
 )
-;; I am now using the below method instead
-;; see: http://stackoverflow.com/a/21065066/274677
-;;      http://stackoverflow.com/a/21342883/274677
-(progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
-;; https://stable.melpa.org/#/getting-started
-
-(push "~/.emacs.d/use-package" load-path)
-(require 'use-package)
-(require 'package)
-(mapc (lambda(p) (push p package-archives))
-      '(("marmalade" . "http://marmalade-repo.org/packages/")
-        ("melpa" . "http://melpa.org/packages/")))
-(package-refresh-contents)
-(package-initialize)
-
-
-
-(use-package typescript
-  :mode ("\\.ts\\'" . typescript-mode)
-  :interpreter ("typescript" . typescript-mode)
-  :ensure t)
-
-
-
-(use-package tss
-:init
- (bind-key "C-:" 'tss-popup-help-key)
- (bind-key "C->" 'tss-jump-to-definition-key)
- (bind-key "C-c i:" 'tss-implement-definition-key)
-:config
- (tss-config-default)
-:ensure t)))
 
