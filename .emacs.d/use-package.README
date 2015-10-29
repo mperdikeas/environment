@@ -1,0 +1,3 @@
+Execute the following from the root of the repo:
+
+    git submodule add https://github.com/jwiegley/use-package.git .emacs.d/use-package

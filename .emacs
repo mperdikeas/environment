@@ -609,6 +609,7 @@ With a prefix argument, insert a newline above the current line."
   (add-hook 'js2-mode-hook 'ac-js2-mode)
   (setq js2-highlight-level 3))
 
+(if nil
 (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
 ;; https://stable.melpa.org/#/getting-started
 (require 'package)
@@ -650,3 +651,33 @@ With a prefix argument, insert a newline above the current line."
   (unless (package-installed-p package)
     (package-install package)))
 )
+;; I am now using the below method instead (requires installing the 
+(progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
+;; https://stable.melpa.org/#/getting-started
+
+(push "~/.emacs.d/use-package" load-path)
+(require 'use-package)
+(require 'package)
+(mapc (lambda(p) (push p package-archives))
+      '(("marmalade" . "http://marmalade-repo.org/packages/")
+        ("melpa" . "http://melpa.org/packages/")))
+(package-refresh-contents)
+(package-initialize)
+
+
+
+(use-package typescript
+  :mode ("\\.ts\\'" . typescript-mode)
+  :interpreter ("typescript" . typescript-mode)
+  :ensure t)
+
+
+
+(use-package tss
+:init
+ (bind-key "C-:" 'tss-popup-help-key)
+ (bind-key "C->" 'tss-jump-to-definition-key)
+ (bind-key "C-c i:" 'tss-implement-definition-key)
+:config
+ (tss-config-default))
+))
