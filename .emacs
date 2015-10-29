@@ -672,7 +672,7 @@ With a prefix argument, insert a newline above the current line."
     (require 'use-package)
 
     (use-package typescript
-      :mode ("\\.ts0\\'" . typescript-mode)
+      :mode ("\\.ts\\'" . typescript-mode)
       :interpreter ("typescript" . typescript-mode)
       :ensure t)
 
@@ -687,4 +687,5 @@ With a prefix argument, insert a newline above the current line."
       (tss-config-default)
       :ensure t))
 )
+
 
