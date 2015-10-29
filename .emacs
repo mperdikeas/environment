@@ -651,7 +651,9 @@ With a prefix argument, insert a newline above the current line."
   (unless (package-installed-p package)
     (package-install package)))
 )
-;; I am now using the below method instead (requires installing the 
+;; I am now using the below method instead
+;; see: http://stackoverflow.com/a/21065066/274677
+;;      http://stackoverflow.com/a/21342883/274677
 (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
 ;; https://stable.melpa.org/#/getting-started
 
@@ -679,5 +681,6 @@ With a prefix argument, insert a newline above the current line."
  (bind-key "C->" 'tss-jump-to-definition-key)
  (bind-key "C-c i:" 'tss-implement-definition-key)
 :config
- (tss-config-default))
-))
+ (tss-config-default)
+:ensure t)))
+
