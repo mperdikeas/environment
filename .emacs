@@ -605,9 +605,14 @@ With a prefix argument, insert a newline above the current line."
   ;; https://truongtx.me/2014/02/23/set-up-javascript-development-environment-in-emacs/
   (add-to-list 'load-path "~/.emacs.d/js2-mode/")
   (load "js2-mode")
-  (add-hook 'js-mode-hook 'js2-minor-mode)
+;;  (add-hook 'js-mode-hook 'js2-minor-mode) ;; this is only to install it as a minor mode
+                                             ;; just for JavaScript linting
   (add-hook 'js2-mode-hook 'ac-js2-mode)
-  (setq js2-highlight-level 3))
+  (setq js2-highlight-level 3)
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+  (add-hook 'js2-mode-hook (lambda () (progn (auto-revert-mode)
+                                             (custom-set-variables
+                                              '(auto-revert-interval 0.1))))))
 
 (if nil
     (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
@@ -672,20 +677,6 @@ With a prefix argument, insert a newline above the current line."
     (require 'use-package)
 
     (use-package typescript
-      :mode ("\\.ts\\'" . typescript-mode)
-      :interpreter ("typescript" . typescript-mode)
-      :ensure t)
-
-
-
-    (use-package tss
-      :init
-      (bind-key "C-:" 'tss-popup-help-key)
-      (bind-key "C->" 'tss-jump-to-definition-key)
-      (bind-key "C-c i:" 'tss-implement-definition-key)
-      :config
-      (tss-config-default)
-      :ensure t))
-)
+      :ensure t)))
 
 
