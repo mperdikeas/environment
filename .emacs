@@ -159,36 +159,6 @@
   (add-hook 'tuareg-mode-hook 'tuareg-imenu-set-imenu)
   )
 
-(if nil ;; decided on 28.IX to turn off auto-complete and ajc-java-complete as they seem to bog down the editor
-    (progn ;; AutoJavaComplete, AutoComplete and YASnippet install (together, as a group because their functionalities are linked and complementary and, further, AutoJavaComplete explicitly requires the other two
-      (progn ;; YASnippet
-        (add-to-list 'load-path "~/.emacs.d/yasnippet-0.6.1c")
-        (require 'yasnippet) ;; not yasnippet-bundle
-        (yas/initialize)
-        (progn ;; setup snippet directory for reference and development with 'yas/new-snippet'
-          (setq yas/root-directory '("~/.emacs.d/mysnippets" "~/.emacs.d/yasnippet-0.6.1c/snippets")) ;; 
-          (mapc 'yas/load-directory yas/root-directory) ;; Load the snippets - all are referenced but only the first element of the list is (~/.emacs.d/mysnippets) is used for new development
-          )
-        )
-      (progn ;; AutoComplete
-        (add-to-list 'load-path "~/.emacs.d/auto-complete")
-        (eval-after-load 'auto-complete-config
-          '(add-to-list 'ac-dictionary-directories "~/.emacs.d/auto-complete/dict")
-          )
-        (require 'auto-complete-config)   
-        (ac-config-default)
-        )
-      (progn;; AutoJavaComplete
-        (add-to-list 'load-path "~/.emacs.d/ajc-java-complete/")
-        (require 'ajc-java-complete-config)
-        (add-hook 'java-mode-hook 'ajc-java-complete-mode)
-        (add-hook 'find-file-hook 'ajc-4-jsp-find-file-hook)
-        ;; AutoJavaComplete bindings:
-        ;; C-c i ajc-import-all-unimported-class
-        ;; C-c m ajc-import-class-under-point
-        )
-      )
-  )
 
 ;; useful emacs tips
 ;; how to byte-compile everything in a folder:
@@ -601,19 +571,6 @@ With a prefix argument, insert a newline above the current line."
   (global-set-key [f9] 'paste-from-clipboard)
   )
 
-(progn ;; https://github.com/mooz/js2-mode/tree/master
-  ;; https://truongtx.me/2014/02/23/set-up-javascript-development-environment-in-emacs/
-  (add-to-list 'load-path "~/.emacs.d/js2-mode/")
-  (load "js2-mode")
-;;  (add-hook 'js-mode-hook 'js2-minor-mode) ;; this is only to install it as a minor mode
-                                             ;; just for JavaScript linting
-  (add-hook 'js2-mode-hook 'ac-js2-mode)
-  (setq js2-highlight-level 3)
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-hook 'js2-mode-hook (lambda () (progn (auto-revert-mode)
-                                             (custom-set-variables
-                                              '(auto-revert-interval 0.1))))))
-
   ;; see: http://stackoverflow.com/a/21065066/274677
   ;;      http://stackoverflow.com/a/21342883/274677
   (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
@@ -634,6 +591,30 @@ With a prefix argument, insert a newline above the current line."
     (require 'use-package)
 
     (use-package typescript
-      :ensure t))
+      :ensure t)
+
+    (use-package auto-complete
+      :ensure t) 
+
+    (use-package ac-js2
+      :ensure t) ;; NB: I also had to do this:
+                 ;;        just replace line 285 of ac-js2.el with this:
+                 ;;               (eval '(ac-define-source "js2"
+                 ;; see: https://github.com/ScottyB/ac-js2/issues/18#issuecomment-74518558
+                 ;;      http://stackoverflow.com/q/26812853/274677
+
+    (use-package js2-mode
+      :mode "\\.js\\'"
+      :init
+      (setq js2-highlight-level 3) 
+      (add-hook 'js2-mode-hook 'ac-js2-mode)
+      (add-hook 'js2-mode-hook (lambda () (progn (auto-revert-mode)
+                                             (custom-set-variables
+                                              '(auto-revert-interval 0.1)))))
+      (add-hook 'js2-mode-hook 'ac-js2-setup-auto-complete-mode)
+      (message "js2-mode-config")
+      :ensure t)
+
+)
 
 
