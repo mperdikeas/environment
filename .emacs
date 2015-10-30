@@ -614,49 +614,6 @@ With a prefix argument, insert a newline above the current line."
                                              (custom-set-variables
                                               '(auto-revert-interval 0.1))))))
 
-(if nil
-    (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
-      ;; https://stable.melpa.org/#/getting-started
-      (require 'package)
-      (add-to-list 'package-archives
-                   '("melpa" . "http://melpa.org/packages/") t)
-      ;;(add-to-list 'package-archives
-      ;;             '("melpa-stable" . "http://stable.melpa.org/packages/") t)
-
-      (package-initialize)
-
-      ;;(package-install 'tss)
-
-      (setq package-list '(tss))
-
-
-      ;; If use bundled typescript.el,
-      (require 'typescript)
-      (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-
-      (require 'tss)
-
-      ;; Key binding
-      (setq tss-popup-help-key "C-:")
-      (setq tss-jump-to-definition-key "C->")
-      (setq tss-implement-definition-key "C-c i")
-
-      ;; Make config suit for you. About the config item, eval the following sexp.
-      ;; (customize-group "tss")
-
-      ;; Do setting recommemded configuration
-      (tss-config-default)
-
-
-
-      (unless package-archive-contents
-        (package-refresh-contents))
-
-      (dolist (package package-list)
-        (unless (package-installed-p package)
-          (package-install package)))
-      )
-  ;; I am now using the below method instead
   ;; see: http://stackoverflow.com/a/21065066/274677
   ;;      http://stackoverflow.com/a/21342883/274677
   (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
@@ -677,6 +634,6 @@ With a prefix argument, insert a newline above the current line."
     (require 'use-package)
 
     (use-package typescript
-      :ensure t)))
+      :ensure t))
 
 
