@@ -121,8 +121,8 @@ bindsym $mod+Shift+0 move container to workspace 10
 
 #move focused container to workspace left / right and back and forth
 bindsym $mod+b workspace back_and_forth
-#bindsym $mod+Control+semicolon workspace next
-#bindsym $mod+Control+j workspace prev
+bindsym $mod+Control+semicolon workspace next
+bindsym $mod+Control+j workspace prev
 
 bindsym $mod+Tab workspace next
 bindsym $mod+Shift+Tab workspace prev
