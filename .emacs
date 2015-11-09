@@ -571,6 +571,19 @@ With a prefix argument, insert a newline above the current line."
   (global-set-key [f9] 'paste-from-clipboard)
   )
 
+
+(if nil                        ;; in the end switched it off because of some issues
+    (add-hook 'LaTeX-mode-hook ;; http://emacs.stackexchange.com/q/17954/4003
+          (lambda ()
+            (progn
+              (outline-minor-mode 1)
+              (local-set-key "\C-c\C-c"
+                             outline-mode-prefix-map)
+              (local-set-key (kbd "TAB")
+                             (lambda ()
+                               (interactive)
+                               (outline-toggle-children)))))))
+
   ;; see: http://stackoverflow.com/a/21065066/274677
   ;;      http://stackoverflow.com/a/21342883/274677
   (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
