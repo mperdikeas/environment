@@ -321,19 +321,13 @@
   (global-set-key [M-right] 'windmove-right); move to right window
   (global-set-key [M-up] 'windmove-up)      ; move to upper window
   (global-set-key [M-down] 'windmove-down)  ; move to downer window
+  (global-set-key (kbd "M-j") 'windmove-left)  ; move to left windnow
+  (global-set-key (kbd "M-;") 'windmove-right); move to right window
+  (global-set-key (kbd "M-k") 'windmove-up)      ; move to upper window
+  (global-set-key (kbd "M-l")'windmove-down)  ; move to downer window
   )
 
-(progn ;; ST mode
-  (require 'stringtemplate-mode)
-  (autoload 'stringtemplate-mode "stringtemplate-mode" "StringTemplate editing mode" t)
-  )
 
-(if nil ;; doesn't seem to be working: http://unix.stackexchange.com/a/77360/24044
-    (eval-after-load 'shell
-      '(progn
-         (autoload 'ansi-color-for-comint-mode-on "ansi-color" nil t)
-         (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on t)
-         t)))
 
 (progn ;; see http://melpa.milkbox.net/#/inf-ruby and http://stackoverflow.com/a/6385982/274677
   (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
@@ -626,6 +620,12 @@ With a prefix argument, insert a newline above the current line."
                                               '(auto-revert-interval 0.1)))))
 ;;      (add-hook 'js2-mode-hook 'ac-js2-setup-auto-complete-mode)
       (message "js2-mode-config")
+      :ensure t)
+
+    (use-package ace-window
+      :mode "\\.js\\'"
+      :init
+      (global-set-key (kbd "C-x o") 'ace-window)
       :ensure t)
 
 )
