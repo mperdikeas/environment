@@ -17,6 +17,7 @@ set $mod Mod4
 
 font pango: M+ 1m, FontAwesome, Ionicons, 9
 
+focus_follows_mouse no
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -196,8 +197,10 @@ bindsym Ctrl+Shift+1 exec --no-startup-id "setxkbmap us"
 bindsym Ctrl+Shift+2 exec --no-startup-id "setxkbmap gr"
 
 # scrot & eog
-bindsym Print exec scrot -e 'mv $f /tmp/ && eog /tmp/$f'
+# for some weird reason the below line started hijacking the $mod+Print key binding
+# bindsym Print exec scrot -e 'mv $f /tmp/ && eog /tmp/$f'
 bindsym $mod+Print --release exec scrot -s -e 'mv $f /tmp/ && eog /tmp/$f'
+
 
 # rename workspace
 bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace:'

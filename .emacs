@@ -630,4 +630,5 @@ With a prefix argument, insert a newline above the current line."
 
 )
 
+(define-key global-map (kbd "M-s M-s") 'replace-string)
 
