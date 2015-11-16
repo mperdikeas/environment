@@ -1,5 +1,5 @@
 (menu-bar-mode 0)
-(add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp/"))
 
 (progn ;; progn
   (global-linum-mode 1)
@@ -59,8 +59,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes (quote ("f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" "d6a00ef5e53adf9b6fe417d2b4404895f26210c52bb8716971be106550cea257" default)))
  '(inhibit-startup-screen t)
- '(org-agenda-files nil))
+ '(org-agenda-files nil t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -97,53 +98,6 @@
 
 (global-set-key (kbd "M-g g") 'goto-line)
 
-(if t
-    (progn ;; option A : customize using color-theme
-      (add-to-list 'load-path "~/.emacs.d/color-theme-6.6.0")
-      (if nil
-          (progn ;; option A.1 use one of the color-themes
-            (require  'color-theme)
-            (eval-after-load "color-theme"
-              '(progn
-                 (color-theme-initialize)
-                 ;; these are some agreeable themes (examined 14.II.2011)
-                 ;; (color-theme-jsc-dark) ;; color-theme-arjen ;; color-theme-simple-1
-                 ;; (color-theme-vim-colors) ;; (color-theme-tty-dark)   ;; color-theme-euphoria
-                 ;;  (color-theme-tty-dark)
-                 (color-theme-jsc-dark)
-                 )
-              )   
-            )
-
-        (if nil
-            (progn ;; option A.2 use color-theme-zenburn which seems to be in its own package
-              (require 'color-theme-zenburn)
-              (color-theme-zenburn)))
-        (progn ;; option A.3 (annum 2015, use the latest zenburn theme for Emacs 24)
-          (require 'zenburn-theme)
-          (load-theme 'zenburn t))
-        )
-      )
-  (progn ;; option B : customize by hand ;; I tried it on 2012-03-07 and wasn't very pleased with the results
-    (custom-set-faces
-     ;; custom-set-faces was added by Custom.
-     ;; If you edit it by hand, you could mess it up, so be careful.
-     ;; Your init file should contain only one such instance.
-     ;; If there is more than one, they won't work right.
-     '(default ((t (:inherit nil :stipple nil :background "lightyellow2" :foreground "gray20" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight bold :width normal :family "liberation mono"))))
-     '(background "blue")
-     '(font-lock-builtin-face ((((class color) (background dark)) (:foreground "Turquoise"))))
-     '(font-lock-comment-face ((t (:foreground "MediumAquamarine"))))
-     '(font-lock-constant-face ((((class color) (background dark)) (:bold t :foreground "DarkOrchid"))))
-     '(font-lock-doc-string-face ((t (:foreground "green2"))))
-     '(font-lock-function-name-face ((t (:foreground "SkyBlue"))))
-     '(font-lock-keyword-face ((t (:bold t :foreground "CornflowerBlue"))))
-     '(font-lock-preprocessor-face ((t (:italic nil :foreground "CornFlowerBlue"))))
-     '(font-lock-reference-face ((t (:foreground "DodgerBlue"))))
-     '(font-lock-string-face ((t (:foreground "LimeGreen"))))
-     )
-    )
-  )
 
 
 
@@ -626,6 +580,11 @@ With a prefix argument, insert a newline above the current line."
       :mode "\\.js\\'"
       :init
       (global-set-key (kbd "C-x o") 'ace-window)
+      :ensure t)
+
+    (use-package zenburn-theme
+      :init
+      (load-theme 'zenburn)
       :ensure t)
 
 )
