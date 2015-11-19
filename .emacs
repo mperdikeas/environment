@@ -591,3 +591,6 @@ With a prefix argument, insert a newline above the current line."
 
 (define-key global-map (kbd "M-s M-s") 'replace-string)
 
+(custom-set-faces ;; http://emacs.stackexchange.com/q/18221/4003
+  `(lazy-highlight ((t (:foreground "white" :background "SteelBlue")))))
+
