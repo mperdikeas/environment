@@ -577,7 +577,6 @@ With a prefix argument, insert a newline above the current line."
       :ensure t)
 
     (use-package ace-window
-      :mode "\\.js\\'"
       :init
       (global-set-key (kbd "C-x o") 'ace-window)
       :ensure t)
