@@ -594,3 +594,5 @@ With a prefix argument, insert a newline above the current line."
 (custom-set-faces ;; http://emacs.stackexchange.com/q/18221/4003
   `(lazy-highlight ((t (:foreground "white" :background "SteelBlue")))))
 
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
