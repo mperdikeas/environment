@@ -541,7 +541,8 @@ With a prefix argument, insert a newline above the current line."
     (setq package-enable-at-startup nil)
     (mapc (lambda(p) (add-to-list 'package-archives p t))
           '(("marmalade" . "http://marmalade-repo.org/packages/")
-            ("melpa" . "http://melpa.org/packages/")))
+            ("melpa" . "http://melpa.org/packages/")
+            ("org" . "http://orgmode.org/elpa/"))) ;; org-mode has its own repo, see: http://stackoverflow.com/a/14838150/274677
     ;;(package-refresh-contents) ;; uncomment this line every couple of months or so ...
     (package-initialize)
 
