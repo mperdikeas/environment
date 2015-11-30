@@ -587,6 +587,12 @@ With a prefix argument, insert a newline above the current line."
       (load-theme 'zenburn)
       :ensure t)
 
+    (use-package helm
+      :init
+      (helm-mode 1)
+      :ensure t)
+
+
 )
 
 (define-key global-map (kbd "M-s M-s") 'replace-string)
