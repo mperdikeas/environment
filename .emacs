@@ -602,3 +602,6 @@ With a prefix argument, insert a newline above the current line."
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
+
+;; http://stackoverflow.com/a/13341583/274677
+(global-set-key (kbd "C-x C-b") 'ibuffer)
