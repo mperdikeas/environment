@@ -590,6 +590,10 @@ With a prefix argument, insert a newline above the current line."
     (use-package helm
       :init
       (helm-mode 1)
+      (if nil ;; this was supposed to switch TAB and C-z but it's not working
+          (define-key helm-map (kbd "C-z") 'helm-select-action)
+        (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+        )
       :ensure t)
 
 
