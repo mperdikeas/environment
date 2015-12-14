@@ -590,14 +590,15 @@ With a prefix argument, insert a newline above the current line."
     (use-package helm
       :init
       (helm-mode 1)
-      (if nil ;; this was supposed to switch TAB and C-z but it's not working
-          (define-key helm-map (kbd "C-z") 'helm-select-action)
-        (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+      (progn ;; http://emacs.stackexchange.com/q/2867/4003
+             ;; see also: http://tuhdo.github.io/helm-intro.html
+          (define-key helm-map (kbd "C-z") 'helm-select-action) ; list actions using C-z
+          (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+          (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
         )
       :ensure t)
+    )
 
-
-)
 
 (define-key global-map (kbd "M-s M-s") 'replace-string)
 
