@@ -1,4 +1,14 @@
 #export JAVA_HOME=/usr/lib/jvm/jdk1.7.0
 export JAVA_HOME=/usr/lib/jvm/java-7-oracle
 export PATH=$PATH:~/.rvm/bin:~/local-tools:$JAVA_HOME/bin
+export PATH=~/esavo-svn/esavo.registry/trunk/esavo-reg-II/scripts:$PATH
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+export SCALA_HOME=/usr/local/share/scala
+export PATH=$SCALA_HOME/bin:$PATH
+export PATH=~/software-downloads/gradle/gradle-2.4/bin:$PATH
+export PATH=~/esac-rawdar/scripts:$PATH
+export PATH=~/software-downloads/jad:$PATH
+export PATH=~/software-downloads/yEd-3.14.2:$PATH
+export PATH=~/DbVisualizer:$PATH
+# http://askubuntu.com/a/264540/89663
+unset GNOME_KEYRING_CONTROL
