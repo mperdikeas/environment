@@ -590,10 +590,15 @@ With a prefix argument, insert a newline above the current line."
     (use-package helm
       :init
       (helm-mode 1)
+      (progn ;; http://emacs.stackexchange.com/q/2867/4003
+             ;; see also: http://tuhdo.github.io/helm-intro.html
+          (define-key helm-map (kbd "C-z") 'helm-select-action) ; list actions using C-z
+          (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+          (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
+        )
       :ensure t)
+    )
 
-
-)
 
 (define-key global-map (kbd "M-s M-s") 'replace-string)
 
@@ -603,5 +608,17 @@ With a prefix argument, insert a newline above the current line."
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
 
-;; http://stackoverflow.com/a/13341583/274677
-(global-set-key (kbd "C-x C-b") 'ibuffer)
+(progn ;; ibuffer stuff
+
+(global-set-key (kbd "C-x C-b") 'ibuffer) ;; http://stackoverflow.com/a/13341583/274677
+(setq ibuffer-formats                     ;; http://emacs.stackexchange.com/a/623/4003
+      '((mark modified read-only " "
+              (name 30 30 :left :elide) ; change: 30s were originally 18s
+              " "
+              (size 9 -1 :right)
+              " "
+              (mode 16 16 :left :elide)
+              " " filename-and-process)
+        (mark " "
+              (name 16 -1)
+                            " " filename))))
