@@ -395,7 +395,7 @@ With a prefix argument, insert a newline above the current line."
 
 (progn
   (defun my-org-mode-hook ()
-    "My hook for the web-mode"
+    "My hook for the org-mode"
     (setq org-hide-emphasis-markers nil)
     (if (= whichSolutionToUseForOrgModePDF 1) ;; http://stackoverflow.com/a/8836108
         (progn
@@ -434,30 +434,7 @@ With a prefix argument, insert a newline above the current line."
 
 (setq nxml-child-indent 4)
 
-(if nil
-    (fset 'html-mode 'nxml-mode) ;; http://stackoverflow.com/a/144938 and remember that C-j enters a new line with proper indentation in nXML mode
-  ;; see also: http://stackoverflow.com/a/6247579
-  (progn ;; http://web-mode.org/
-    (add-to-list 'load-path "~/.emacs.d/web-mode/")
-    (setq web-mode-enable-current-element-highlight t)
-    (setq web-mode-enable-current-column-highlight t)
-    (load "web-mode")
-    (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-    (defun my-web-mode-hook ()
-      "Hooks for Web mode."
-      (setq web-mode-markup-indent-offset 2)
-      (setq web-mode-markup-indent-offset 2)
-      (setq web-mode-css-indent-offset 2)
-      (setq web-mode-code-indent-offset 2)
-      (setq web-mode-style-padding 1)
-      (setq web-mode-script-padding 1)
-      (setq web-mode-block-padding 0)
-      )
-    (add-hook 'web-mode-hook  'my-web-mode-hook)
-    (eval-after-load "web-mode"
-      '(set-face-background 'web-mode-current-element-highlight-face "color-88"))
-    )
-  )
+
 
 ;;(progn
 ;;    (require 'openwith)
@@ -597,6 +574,28 @@ With a prefix argument, insert a newline above the current line."
           (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
         )
       :ensure t)
+
+    (use-package web-mode
+      :init
+      (progn
+        (setq web-mode-enable-current-element-highlight t)
+        (setq web-mode-enable-current-column-highlight t)
+        (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+        (defun my-web-mode-hook ()
+          "Hooks for Web mode."
+          (setq web-mode-markup-indent-offset 2)
+          (setq web-mode-css-indent-offset 2)
+          (setq web-mode-code-indent-offset 2)
+          (setq web-mode-style-padding 1)
+          (setq web-mode-script-padding 1)
+          (setq web-mode-block-padding 0)
+          )
+        (add-hook 'web-mode-hook  'my-web-mode-hook)
+        (eval-after-load "web-mode"
+          '(set-face-background 'web-mode-current-element-highlight-face "color-88"))
+        )
+      :ensure t)
+
     )
 
 
