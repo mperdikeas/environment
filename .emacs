@@ -598,6 +598,11 @@ With a prefix argument, insert a newline above the current line."
 
     )
 
+(progn ;; http://www.emacswiki.org/emacs/HalfScrolling
+  (require 'view)
+  (global-set-key "\C-v"   'View-scroll-half-page-forward)
+  (global-set-key "\M-v"   'View-scroll-half-page-backward)
+  )
 
 (define-key global-map (kbd "M-s M-s") 'replace-string)
 
