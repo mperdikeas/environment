@@ -401,6 +401,7 @@ With a prefix argument, insert a newline above the current line."
         (progn
           (delete '("\\.pdf\\'" . default) org-file-apps)
           (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+          (add-to-list 'org-file-apps '("\\.xls\\'" . "libreoffice %s"))          
           )
       ))
   (add-hook 'org-mode-hook 'my-org-mode-hook))
@@ -408,6 +409,7 @@ With a prefix argument, insert a newline above the current line."
 (if (= whichSolutionToUseForOrgModePDF 2) ;; http://stackoverflow.com/a/9116029/274677
     (eval-after-load "org"
       '(progn
+         (add-to-list 'org-file-apps '("\\.xls\\'" . "libreoffice %s"))
          (if nil ;; this is messing up with my opening of txt files
              ;; .txt files aren't in the list initially, but in case that changes
              ;; in a future version of org, use if to avoid errors
@@ -416,6 +418,9 @@ With a prefix argument, insert a newline above the current line."
                (add-to-list 'org-file-apps '("\\.txt\\'" . "emacs %s") t)))
          ;; Change .pdf association directly within the alist
          (setcdr (assoc "\\.pdf\\'" org-file-apps) "evince %s"))))
+
+
+
 
 (progn ;; https://jpace.wordpress.com/2015/01/09/adding-groovy-emacs-mode/
     ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
