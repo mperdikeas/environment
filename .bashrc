@@ -166,7 +166,14 @@ alias emacs="emacs -nw"
 export PATH=$PATH:~/tools
 export MONO_PATH=/opt/FSharp-2.0.0.0/bin
 export ANT_OPTS="-Xms256m -Xmx1024m -XX:MaxPermSize=256m -Dant.logger.defaults=$HOME/environment/AnsiColorLogger.override"
-export EDITOR="emacs -nw"
+
+# below instructions from: https://www.emacswiki.org/emacs/EmacsAsDaemon
+export EDITOR="emacsclient -t"
+export VISUAL="emacsclient -c -a emacs"
+export ALTERNATE_EDITOR=""
+alias emax="emacsclient -t"                      # used to be "emacs -nw"
+alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
+alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
 
 # overriding on demand the 'svn diff' tool customization I 've used (do a grep diff ~/.subversion/config  to find out how and which tool it points to?)
 # shouldn't I perhaps use a svn alias intead of a bash alias ?
