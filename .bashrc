@@ -171,9 +171,11 @@ export ANT_OPTS="-Xms256m -Xmx1024m -XX:MaxPermSize=256m -Dant.logger.defaults=$
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
 export ALTERNATE_EDITOR=""
-alias emax="emacsclient -t"                      # used to be "emacs -nw"
-alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
-alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
+# this should be implemented as a script (see ~/tools/prompttest2)
+alias emax="emacsclient -t"                       # used to be "emacs -nw"
+# I don't think I need the below any more:
+#alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
+#alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
 
 # overriding on demand the 'svn diff' tool customization I 've used (do a grep diff ~/.subversion/config  to find out how and which tool it points to?)
 # shouldn't I perhaps use a svn alias intead of a bash alias ?

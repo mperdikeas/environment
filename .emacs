@@ -1,3 +1,4 @@
+(setq server-use-tcp t) ; listen on TCP sockets except on a UNIX system socket
 (menu-bar-mode 0)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp/"))
 
