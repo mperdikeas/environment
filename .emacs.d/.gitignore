@@ -5,3 +5,4 @@ tramp
 %backup%~
 elpa/
 server/
+.org-id-locations
