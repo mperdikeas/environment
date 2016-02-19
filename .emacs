@@ -570,6 +570,11 @@ With a prefix argument, insert a newline above the current line."
       (load-theme 'zenburn)
       :ensure t)
 
+    (use-package free-keys
+      :init
+      (global-set-key (kbd "C-h C-k") 'free-keys)
+      :ensure t)
+
     (use-package helm
       :init
       (helm-mode 1)
@@ -632,3 +637,12 @@ With a prefix argument, insert a newline above the current line."
         (mark " "
               (name 16 -1)
                             " " filename))))
+
+;; define function to shutdown emacs server instance
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+(global-set-key (kbd "C-M-k") 'server-shutdown)
