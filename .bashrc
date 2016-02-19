@@ -172,7 +172,7 @@ export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
 export ALTERNATE_EDITOR=""
 # this should be implemented as a script (see ~/tools/prompttest2)
-alias emax="emacsclient -t"                       # used to be "emacs -nw"
+# alias emax="emacsclient -t"                       # used to be "emacs -nw"
 # I don't think I need the below any more:
 #alias semac="sudo emacsclient -t"                # used to be "sudo emacs -nw"
 #alias emacsc="emacsclient -c -a emacs"           # new - opens the GUI with alternate non-daemon
@@ -209,7 +209,7 @@ export -f sedescape
 #     $
 
 alias g='gradle'
-alias e='emacs'
+alias e='emax' # now this points to the emax tool which automatically either spawns a new emacs daemon or asks you which emacs daemon to connect to
 . ~/environment/gradle-tab-completion.bash
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/home/mperdikeas/.gvm/bin/gvm-init.sh" ]] && source "/home/mperdikeas/.gvm/bin/gvm-init.sh"
