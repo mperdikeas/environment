@@ -588,7 +588,6 @@ With a prefix argument, insert a newline above the current line."
         )
       :ensure t)
 
-    (if t
     (use-package web-mode
       :init
       (progn
@@ -608,7 +607,7 @@ With a prefix argument, insert a newline above the current line."
         (eval-after-load "web-mode"
           '(set-face-background 'web-mode-current-element-highlight-face "color-88"))
         )
-      :ensure t))
+      :ensure t)
 
     )
 

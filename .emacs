@@ -423,6 +423,7 @@ With a prefix argument, insert a newline above the current line."
 
 
 
+
 (progn ;; https://jpace.wordpress.com/2015/01/09/adding-groovy-emacs-mode/
     ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
   (add-to-list 'load-path ".emacs.d/groovy-emacs-modes")
@@ -462,7 +463,8 @@ With a prefix argument, insert a newline above the current line."
 
 (add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
           (lambda ()
-            (org-indent-mode t))
+            (org-indent-mode t)
+            )
           t)
 (add-hook 'org-mode-hook #'visual-line-mode)
 
@@ -624,7 +626,6 @@ With a prefix argument, insert a newline above the current line."
       browse-url-generic-program "google-chrome")
 
 (progn ;; ibuffer stuff
-
 (global-set-key (kbd "C-x C-b") 'ibuffer) ;; http://stackoverflow.com/a/13341583/274677
 (setq ibuffer-formats                     ;; http://emacs.stackexchange.com/a/623/4003
       '((mark modified read-only " "
@@ -638,11 +639,18 @@ With a prefix argument, insert a newline above the current line."
               (name 16 -1)
                             " " filename))))
 
-;; define function to shutdown emacs server instance
+
+(progn ;; define function to shutdown emacs server instance
 (defun server-shutdown ()
   "Save buffers, Quit, and Shutdown (kill) server"
   (interactive)
   (save-some-buffers)
   (kill-emacs)
   )
-(global-set-key (kbd "C-M-k") 'server-shutdown)
+(global-set-key (kbd "C-M-k") 'server-shutdown))
+
+
+(add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
+          (lambda ()
+            (define-key org-mode-map "\M-q" 'toggle-truncate-lines) ;; http://superuser.com/q/299886/138891
+            ))
