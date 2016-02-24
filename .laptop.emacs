@@ -649,3 +649,9 @@ With a prefix argument, insert a newline above the current line."
   (kill-emacs)
   )
 (global-set-key (kbd "C-M-k") 'server-shutdown))
+
+
+(add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
+          (lambda ()
+            (define-key org-mode-map "\M-q" 'toggle-truncate-lines) ;; http://superuser.com/q/299886/138891
+            ))
