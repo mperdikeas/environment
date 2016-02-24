@@ -611,7 +611,7 @@ With a prefix argument, insert a newline above the current line."
       :ensure t))
 
     )
-))
+
 (progn ;; http://www.emacswiki.org/emacs/HalfScrolling
   (require 'view)
   (global-set-key "\C-v"   'View-scroll-half-page-forward)
