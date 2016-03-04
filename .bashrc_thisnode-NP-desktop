@@ -5,3 +5,4 @@ export PATH=~/typescript-tools/bin:/home/mperdikeas/esac-rawdar/scripts:/home/mp
 . /usr/share/autojump/autojump.sh
 xset mouse 2.0 0.9
 export PATH=~/local-tools:$PATH
+export PATH=~/.node_modules_global/bin:$PATH
