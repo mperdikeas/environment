@@ -12,3 +12,4 @@ export PATH=~/software-downloads/yEd-3.14.2:$PATH
 export PATH=~/DbVisualizer:$PATH
 # http://askubuntu.com/a/264540/89663
 unset GNOME_KEYRING_CONTROL
+export PATH=~/.node_modules_global/bin:$PATH
