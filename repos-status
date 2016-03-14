@@ -51,4 +51,8 @@ cd ~/esac-rawdar
 echo at `pwd`
 git status -s
 
+cd ~/euler-js
+echo at `pwd`
+git status -s
+
 

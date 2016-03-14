@@ -51,4 +51,8 @@ cd ~/esavo-reg-II/
 echo $(pwd)
 git push
 git status -s
+cd ~/euler-js
+echo $(pwd)
+git push
+git status -s
 
