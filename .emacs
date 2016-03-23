@@ -561,6 +561,8 @@ With a prefix argument, insert a newline above the current line."
 ;;      (add-hook 'js2-mode-hook 'ac-js2-setup-auto-complete-mode)
       (message "js2-mode-config")
       :ensure t)
+                
+    (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
 
     (use-package ace-window
       :init
