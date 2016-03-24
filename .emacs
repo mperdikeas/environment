@@ -551,7 +551,7 @@ With a prefix argument, insert a newline above the current line."
                  ;;      http://stackoverflow.com/q/26812853/274677
 
     (use-package js2-mode
-      :mode "\\.js\\'"
+      :mode "\\.jsx?\\'" 
       :init
       (setq js2-highlight-level 3) 
 ;;      (add-hook 'js2-mode-hook 'ac-js2-mode)
@@ -562,7 +562,6 @@ With a prefix argument, insert a newline above the current line."
       (message "js2-mode-config")
       :ensure t)
                 
-    (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-mode))
 
     (use-package ace-window
       :init
