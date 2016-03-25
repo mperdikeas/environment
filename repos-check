@@ -1,100 +1,33 @@
-#!/bin/bash
-cd ~/tools
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
+#!/usr/bin/env bash
 
-cd ~/java-mutil
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
+##############################################################
+# awesome script that discovers where this script lives
+# (works even if its called via symlinks)
+# source: http://stackoverflow.com/a/179231/274677
+#
+WHERE_I_LIVE="${BASH_SOURCE[0]}";
+if ([ -h "${WHERE_I_LIVE}" ]) then
+   while([ -h "${WHERE_I_LIVE}" ]) do WHERE_I_LIVE=`readlink "${WHERE_I_LIVE}"`; done
+   fi
+        pushd . > /dev/null
+        cd `dirname ${WHERE_I_LIVE}` > /dev/null
+        WHERE_I_LIVE=`pwd`;
+        popd  > /dev/null
+#
+##############################################################
 
 
-cd ~/environment
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
+. "$WHERE_I_LIVE/repos-list.sh"
 
-cd ~/ocaml-mutil
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
+for i in "${repos[@]}"
+do
+    cd ~/${i}
+    echo $(pwd)
+    git fetch -v
+    git status -s
+    git rev-parse HEAD
+    git ls-remote --heads -q
+done
 
-cd ~/playground
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
 
-cd ~/mperdikeas.github.com
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/archetypes/
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/clojure-mutil/
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/mant-tasks/
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/starjava
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/zip-diff/
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/esac-rawdar/
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/esavo-reg-II/
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
-
-cd ~/euler-js/
-echo
-git fetch -v
-git status -s
-git rev-parse HEAD
-git ls-remote --heads -q
 

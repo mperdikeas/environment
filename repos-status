@@ -1,58 +1,30 @@
-#!/bin/bash
-cd ~/tools
-echo at `pwd`
-git status -s
+#!/usr/bin/env bash
 
-cd ~/java-mutil/
-echo at `pwd`
-git status -s
+##############################################################
+# awesome script that discovers where this script lives
+# (works even if its called via symlinks)
+# source: http://stackoverflow.com/a/179231/274677
+#
+WHERE_I_LIVE="${BASH_SOURCE[0]}";
+if ([ -h "${WHERE_I_LIVE}" ]) then
+   while([ -h "${WHERE_I_LIVE}" ]) do WHERE_I_LIVE=`readlink "${WHERE_I_LIVE}"`; done
+   fi
+        pushd . > /dev/null
+        cd `dirname ${WHERE_I_LIVE}` > /dev/null
+        WHERE_I_LIVE=`pwd`;
+        popd  > /dev/null
+#
+##############################################################
 
-cd ~/environment
-echo at `pwd`
-git status -s
+. "$WHERE_I_LIVE/repos-list.sh"
 
-cd ~/ocaml-mutil
-echo at `pwd`
-git status -s
+for i in "${repos[@]}"
+do
+    cd ~/${i}
+    echo $(pwd)
+    git status -s 
+    # or do whatever with individual element of the array
+done
 
-cd ~/playground
-echo at `pwd`
-git status -s
-
-cd ~/mperdikeas.github.com
-echo at `pwd`
-git status -s
-
-cd ~/archetypes
-echo at `pwd`
-git status -s
-
-cd ~/esavo-reg-II
-echo at `pwd`
-git status -s
-
-cd ~/clojure-mutil/
-echo at `pwd`
-git status -s
-
-cd ~/mant-tasks
-echo at `pwd`
-git status -s
-
-cd ~/starjava
-echo at `pwd`
-git status -s
-
-cd ~/zip-diff
-echo at `pwd`
-git status -s
-
-cd ~/esac-rawdar
-echo at `pwd`
-git status -s
-
-cd ~/euler-js
-echo at `pwd`
-git status -s
 
 

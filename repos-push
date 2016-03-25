@@ -1,58 +1,31 @@
-#!/bin/bash
-cd ~/tools
-echo $(pwd)
-git push
-git status -s
-cd ~/java-mutil/
-echo $(pwd)
-git push
-git status -s
-cd ~/playground
-echo $(pwd)
-git push
-git status -s
-cd ~/environment
-echo $(pwd)
-git push
-git status -s
-cd ~/ocaml-mutil
-echo $(pwd)
-git push
-git status -s
-cd ~/mperdikeas.github.com/
-echo $(pwd)
-git push -v --tags
-git status -s
-cd ~/archetypes/
-echo $(pwd)
-git push
-git status -s
-cd ~/clojure-mutil/
-echo $(pwd)
-git push
-git status -s
-cd ~/mant-tasks/
-echo $(pwd)
-git push
-git status -s
-cd ~/starjava/
-echo $(pwd)
-git push
-git status -s
-cd ~/zip-diff/
-echo $(pwd)
-git push
-git status -s
-cd ~/esac-rawdar/
-echo $(pwd)
-git push
-git status -s
-cd ~/esavo-reg-II/
-echo $(pwd)
-git push
-git status -s
-cd ~/euler-js
-echo $(pwd)
-git push
-git status -s
+#!/usr/bin/env bash
+
+##############################################################
+# awesome script that discovers where this script lives
+# (works even if its called via symlinks)
+# source: http://stackoverflow.com/a/179231/274677
+#
+WHERE_I_LIVE="${BASH_SOURCE[0]}";
+if ([ -h "${WHERE_I_LIVE}" ]) then
+   while([ -h "${WHERE_I_LIVE}" ]) do WHERE_I_LIVE=`readlink "${WHERE_I_LIVE}"`; done
+   fi
+        pushd . > /dev/null
+        cd `dirname ${WHERE_I_LIVE}` > /dev/null
+        WHERE_I_LIVE=`pwd`;
+        popd  > /dev/null
+#
+##############################################################
+
+
+. "$WHERE_I_LIVE/repos-list.sh"
+
+for i in "${repos[@]}"
+do
+    cd ~/${i}
+    echo $(pwd)
+    git push
+    git status -s
+done
+
+
 

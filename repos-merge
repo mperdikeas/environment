@@ -1,30 +1,29 @@
-#!/bin/bash
-cd ~/tools; echo `pwd`
-git merge origin/master
-cd ~/java-mutil; echo `pwd`
-git merge origin/master
-cd ~/playground; echo `pwd`
-git merge origin/master
-cd ~/environment; echo `pwd`
-git merge origin/master
-cd ~/ocaml-mutil; echo `pwd`
-git merge origin/master
-cd ~/mperdikeas.github.com; echo `pwd`
-git merge origin/master
-cd ~/archetypes/; echo `pwd`
-git merge origin/master
-cd ~/clojure-mutil/; echo `pwd`
-git merge origin/master
-cd ~/mant-tasks/; echo `pwd`
-git merge origin/master
-cd ~/starjava/; echo `pwd`
-git merge origin/eurovo-mods
-cd ~/zip-diff/; echo `pwd`
-git merge origin/master
-cd ~/esac-rawdar/; echo `pwd`
-git merge origin/master
-cd ~/esavo-reg-II/; echo `pwd`
-git merge origin/master
-cd ~/euler-js/; echo `pwd`
-git merge origin/master
+#!/usr/bin/env bash
+
+##############################################################
+# awesome script that discovers where this script lives
+# (works even if its called via symlinks)
+# source: http://stackoverflow.com/a/179231/274677
+#
+WHERE_I_LIVE="${BASH_SOURCE[0]}";
+if ([ -h "${WHERE_I_LIVE}" ]) then
+   while([ -h "${WHERE_I_LIVE}" ]) do WHERE_I_LIVE=`readlink "${WHERE_I_LIVE}"`; done
+   fi
+        pushd . > /dev/null
+        cd `dirname ${WHERE_I_LIVE}` > /dev/null
+        WHERE_I_LIVE=`pwd`;
+        popd  > /dev/null
+#
+##############################################################
+
+
+. "$WHERE_I_LIVE/repos-list.sh"
+
+for i in "${repos[@]}"
+do
+    cd ~/${i}
+    echo $(pwd)
+    git merge origin/master    
+done
+
 
