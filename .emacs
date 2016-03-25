@@ -556,8 +556,7 @@ With a prefix argument, insert a newline above the current line."
       (setq js2-highlight-level 3) 
 ;;      (add-hook 'js2-mode-hook 'ac-js2-mode)
       (add-hook 'js2-mode-hook (lambda () (progn (auto-revert-mode)
-                                             (custom-set-variables
-                                              '(auto-revert-interval 0.1)))))
+                                             (setq auto-revert-interval 0.1))))
 ;;      (add-hook 'js2-mode-hook 'ac-js2-setup-auto-complete-mode)
       (message "js2-mode-config")
       :ensure t)
