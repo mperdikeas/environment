@@ -401,7 +401,7 @@ With a prefix argument, insert a newline above the current line."
     (if (= whichSolutionToUseForOrgModePDF 1) ;; http://stackoverflow.com/a/8836108
         (progn
           (delete '("\\.pdf\\'" . default) org-file-apps)
-          (add-to-list 'org-file-apps '("\\.pdf\\'" . "evince %s"))
+          (add-to-list 'org-file-apps '("\\.pdf\\'" . "okular %s"))
           (add-to-list 'org-file-apps '("\\.xls\\'" . "libreoffice %s"))          
           )
       ))
@@ -418,7 +418,7 @@ With a prefix argument, insert a newline above the current line."
                  (setcdr (assoc "\\.txt\\'" org-file-apps) "emacs %s")
                (add-to-list 'org-file-apps '("\\.txt\\'" . "emacs %s") t)))
          ;; Change .pdf association directly within the alist
-         (setcdr (assoc "\\.pdf\\'" org-file-apps) "evince %s"))))
+         (setcdr (assoc "\\.pdf\\'" org-file-apps) "okular %s"))))
 
 
 
@@ -455,7 +455,7 @@ With a prefix argument, insert a newline above the current line."
   (require 'openwith)
   (openwith-mode t)
   (setq openwith-associations '(
-                                ("\\.pdf\\'" "evince" (file))
+                                ("\\.pdf\\'" "okular" (file))
                                 ("\\.mp3\\'" "xmms" (file))
                                 ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file))
                                 ("\\.\\(?:jp?g\\|png\\)\\'" "eog" (file))
