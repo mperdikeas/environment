@@ -195,8 +195,7 @@
 
 
 
-(global-set-key (kbd "C-x C-j") 'flash-crosshairs) ;; make sure crosshairs C-x C-j overrides dired similar binding
-;; (which I believe is also available with C-x d)
+
 
 (progn ;; Emacs Ant in Java mode - I can't get the error hyperlinks to work
   (defun ant-compile ()
@@ -618,3 +617,18 @@ With a prefix argument, insert a newline above the current line."
           (lambda ()
             (define-key org-mode-map "\M-q" 'toggle-truncate-lines) ;; http://superuser.com/q/299886/138891
             ))
+
+
+(defvar my-keys-minor-mode-map ;; http://stackoverflow.com/a/683575/274677
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-x C-j") 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d 
+    map)
+  "my-keys-minor-mode keymap.")
+
+
+(define-minor-mode my-keys-minor-mode
+  "A minor mode so that my key settings override annoying major modes."
+  :init-value t
+  :lighter " my-keys")
+
+(my-keys-minor-mode 1)
