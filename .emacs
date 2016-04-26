@@ -394,17 +394,6 @@ With a prefix argument, insert a newline above the current line."
 
 
 
-
-(progn
-  (require 'openwith)
-  (openwith-mode t)
-  (setq openwith-associations '(
-                                ("\\.pdf\\'" "okular" (file))
-                                ("\\.mp3\\'" "xmms" (file))
-                                ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file))
-                                ("\\.\\(?:jp?g\\|png\\)\\'" "eog" (file))
-                                ("\\.png\\'" "eog" (file)))))
-
 (add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
           (lambda ()
             (org-indent-mode t)
@@ -565,6 +554,16 @@ With a prefix argument, insert a newline above the current line."
       )
 
 
+    (use-package openwith
+      :ensure t
+      :init
+      (setq openwith-associations '(
+                                ("\\.pdf\\'" "okular" (file))
+                                ("\\.mp3\\'" "xmms" (file))
+                                ("\\.\\(?:mpe?g\\|avi\\|wmv\\)\\'" "mplayer" ("-idx" file))
+                                ("\\.\\(?:jp?g\\|png\\)\\'" "eog" (file))
+                                ("\\.png\\'" "eog" (file))))
+      )
     )
 
 (progn ;; http://www.emacswiki.org/emacs/HalfScrolling
