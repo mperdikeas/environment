@@ -42,8 +42,6 @@
       (set-face-background hl-line-face "#2E2E00")))) ;; background only: don't change foreground. Other interesting values I've tried: 470047, 2E2E00, 333300, 191975
 
 
-
-
 (setq column-number-mode t)
 
 ;; Remove completion buffer when done
@@ -52,8 +50,6 @@
              (let ((buffer "*Completions*"))
                (and (get-buffer buffer)
                     (kill-buffer buffer)))))    
-
-(global-set-key (kbd "C-x C-l") 'join-line) ;; shadows a disabled command (lowercase region)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -88,8 +84,6 @@
 ;;(flash-crosshairs)
 
 
-
-(global-set-key (kbd "M-g g") 'goto-line)
 
 
 
@@ -140,13 +134,6 @@
                                                                 "%b"))))
   )
 
-(if nil ;; it turns out that that's not very practical when doing C-x b
-    (progn  ;; http://compgroups.net/comp.emacs/mode-line-file-name-with-path/296677
-      (require 'uniquify)
-      (setq uniquify-buffer-name-style 'forward)
-      (setq uniquify-min-dir-content '5)
-      )
-  )
 
 ;; the following presumable enables clipboard sharing between the
 ;; Emacs buffer and other applications but strangely I have found
@@ -154,14 +141,6 @@
 ;; doesn't hurt to have it.
 (setq x-select-enable-clipboard t)
 
-(progn ;; emacs F# mode
-  (setq load-path (cons "~/.emacs.d/fsharp" load-path))
-  (setq auto-mode-alist (cons '("\\.fs[iylx]?$" . fsharp-mode) auto-mode-alist))
-  (autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
-  (autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
-  (setq inferior-fsharp-program "fsharpi --readline-")
-  (setq fsharp-compiler "fsharpc")
-  )
 
 (add-to-list 'auto-mode-alist '("\\.xhtml$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.xsd$"   . nxml-mode))
@@ -608,7 +587,9 @@ With a prefix argument, insert a newline above the current line."
 
 (defvar my-keys-minor-mode-map ;; http://stackoverflow.com/a/683575/274677
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-x C-j") 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d 
+    (define-key map (kbd "C-x C-j") 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d;
+  ; (define-key map (kbd "M-g g") 'goto-line) ; this doesn't appear to be necessary
+    (define-key map (kbd "C-x C-l") 'join-line) ;; shadows a disabled command (lowercase region)
     map)
   "my-keys-minor-mode keymap.")
 
