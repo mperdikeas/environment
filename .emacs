@@ -268,11 +268,6 @@
 
 (setq Buffer-menu-buffer+size-width 60) ;; http://stackoverflow.com/a/26062716/274677
 
-(progn
-  (load "json-mode")
-  (add-to-list 'auto-mode-alist '("\\.json" . json-mode))
-  )
-(put 'downcase-region 'disabled nil)
 
 
 (setq tramp-mode nil) ;; disable tramp-mode, see: https://groups.google.com/forum/#!topic/gnu.emacs.help/OLRkGgJqgu8
@@ -558,6 +553,12 @@ With a prefix argument, insert a newline above the current line."
                                 ("\\.\\(?:jp?g\\|png\\)\\'" "eog" (file))
                                 ("\\.png\\'" "eog" (file))))
       )
+
+    (use-package json-mode
+      :ensure t
+      :init
+      (put 'downcase-region 'disabled nil))
+
     )
 
 (progn ;; http://www.emacswiki.org/emacs/HalfScrolling
