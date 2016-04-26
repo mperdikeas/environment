@@ -86,9 +86,6 @@
 
 
 
-
-
-(require 'repeat) ;; to repeat last command: "C-x z"; once pressed, additional 'z's will keep repeating it.
 (setq initial-frame-alist '((top . 200) (left . 500)))
 
 
@@ -146,10 +143,6 @@
     (load "package") ;; NB: for Emacs 23 that means you need package.el on your load path.
   )
 
-
-
-
-
 (progn ;; Inferior Lisp
   (add-hook 'clojure-mode-hook ;; copied from: http://ubercode.de/blog/make-emacs-evaluate-clojure-in-5-minutes
             (lambda ()
@@ -162,9 +155,6 @@
   ;; (setq lisp-function-doc-command "(doc %s)\n")
   ;; (setq lisp-var-doc-command "(doc %s)\n")
   )
-
-
-
 
 
 (progn ;; Emacs Ant in Java mode - I can't get the error hyperlinks to work
@@ -184,15 +174,11 @@
   )
 
 
-
-
 (progn
   ;; see: http://stackoverflow.com/questions/1128927/how-to-scroll-line-by-line-in-gnu-emacs
   (setq scroll-step            1
         scroll-conservatively  10000)
   )
-
-
 
 
 (progn;; http://unix.stackexchange.com/a/154154/24044
@@ -500,10 +486,9 @@ With a prefix argument, insert a newline above the current line."
       :init
       (add-hook 'java-mode-hook (lambda () (interactive) (column-marker-1 120)))      
       )
-    
+
+    (use-package repeat) ;; to repeat last command: "C-x z"; once pressed, additional 'z's will keep repeating it. (this appears to be on by default)
     )
-
-
 
 
 (custom-set-faces ;; http://emacs.stackexchange.com/q/18221/4003
