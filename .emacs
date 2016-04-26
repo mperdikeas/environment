@@ -394,13 +394,6 @@ With a prefix argument, insert a newline above the current line."
 
 
 
-;;(progn
-;;    (require 'openwith)
-;;    (openwith-mode t)
-;;    (setq openwith-associations '(("\\.pdf\\'" "evince" (file))))
-;;    (setq openwith-associations '(("\\.jpg\\'" "eog" (file))))
-;;    (setq openwith-associations '(("\\.png\\'" "eog" (file))))
-;;)
 
 (progn
   (require 'openwith)
