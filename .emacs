@@ -378,9 +378,6 @@ With a prefix argument, insert a newline above the current line."
       (insert (shell-command-to-string "xsel -o -b"))
       )
     )
-
-  (global-set-key [f8] 'copy-to-clipboard)
-  (global-set-key [f9] 'paste-from-clipboard)
   )
 
 
@@ -581,6 +578,9 @@ With a prefix argument, insert a newline above the current line."
       (define-key map (kbd "C-M-k"    ) 'server-shutdown)
       (define-key map (kbd "C-v"      ) 'View-scroll-half-page-forward)  ;; http://www.emacswiki.org/emacs/HalfScrolling
       (define-key map (kbd "M-v"      ) 'View-scroll-half-page-backward) ;; --||--
+
+      (define-key map (kbd "<f8>"      ) 'copy-to-clipboard)
+      (define-key map (kbd "<f9>"      ) 'paste-from-clipboard)
       map)
     "my-keys-minor-mode keymap.")
 
