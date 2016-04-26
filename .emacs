@@ -524,7 +524,7 @@ With a prefix argument, insert a newline above the current line."
   (global-set-key "\M-v"   'View-scroll-half-page-backward)
   )
 
-(define-key global-map (kbd "M-s M-s") 'replace-string)
+
 
 (custom-set-faces ;; http://emacs.stackexchange.com/q/18221/4003
   `(lazy-highlight ((t (:foreground "white" :background "SteelBlue")))))
@@ -546,14 +546,14 @@ With a prefix argument, insert a newline above the current line."
                 " " filename))))
 
 
-(progn ;; define function to shutdown emacs server instance
-(defun server-shutdown ()
+
+(defun server-shutdown () ;; define function to shutdown emacs server instance
   "Save buffers, Quit, and Shutdown (kill) server"
   (interactive)
   (save-some-buffers)
   (kill-emacs)
   )
-(global-set-key (kbd "C-M-k") 'server-shutdown))
+
 
 
 (add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
@@ -577,6 +577,8 @@ With a prefix argument, insert a newline above the current line."
     (define-key map (kbd "M-l"      )'windmove-down)   ; move to downer window
     (define-key map (kbd "C-x C-k"  ) 'compile)
     (define-key map (kbd "C-x C-b"  ) 'ibuffer)        ; used to be: 'buffer-menu
+    (define-key map (kbd "M-s M-s"  ) 'replace-string)
+    (define-key map (kbd "C-M-k"    ) 'server-shutdown)
     map)
   "my-keys-minor-mode keymap.")
 
