@@ -272,11 +272,6 @@ With a prefix argument, insert a newline above the current line."
     )
   )
 
-(progn;; http://www.emacswiki.org/emacs/ColumnMarker
-  (require 'column-marker)
-  (global-set-key [?\C-c ?c] 'column-marker-1)
-  (add-hook 'java-mode-hook (lambda () (interactive) (column-marker-1 120)))
-  )
 
 (progn;; instructed to add the below lines from [http://orgmode.org/orgguide.pdf], section 1.3
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode)) ; not needed since Emacs 22.2
@@ -518,6 +513,11 @@ With a prefix argument, insert a newline above the current line."
 
     (use-package view) ;; http://www.emacswiki.org/emacs/HalfScrolling
 
+    (use-package column-marker ;; http://www.emacswiki.org/emacs/ColumnMarker
+      :init
+      (add-hook 'java-mode-hook (lambda () (interactive) (column-marker-1 120)))      
+      )
+    
     )
 
 
@@ -580,6 +580,7 @@ With a prefix argument, insert a newline above the current line."
       (define-key map (kbd "M-v"      ) 'View-scroll-half-page-backward) ;; --||--
       (define-key map (kbd "<f8>"     ) 'copy-to-clipboard)
       (define-key map (kbd "<f9>"     ) 'paste-from-clipboard)
+      (define-key map (kbd "C-c c"    ) 'column-marker-1)
       map)
     "my-keys-minor-mode keymap.")
 
