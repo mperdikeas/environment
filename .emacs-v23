@@ -146,14 +146,6 @@
 (require 'repeat) ;; to repeat last command: "C-x z"; once pressed, additional 'z's will keep repeating it.
 (setq initial-frame-alist '((top . 200) (left . 500)))
 
-(progn ;; emacs tuareg
-  (add-to-list 'load-path "~/.emacs.d/tuareg-2.0.4/compiled") ;; the "compiled" folder was created by running "make install DEST=compiled" - it was not part of the tgz archive - read README in the archive for more
-  (add-to-list 'auto-mode-alist '("\\.ml[iylp]?" . tuareg-mode))
-  (autoload 'tuareg-mode              "tuareg"           "Major mode for editing Caml code" t)
-  (autoload 'camldebug                "camldebug"        "Run the Caml debugger" t)
-  (autoload 'tuareg-imenu-set-imenu   "tuareg-imenu"     "Configuration of imenu for tuareg" t) 
-  (add-hook 'tuareg-mode-hook 'tuareg-imenu-set-imenu)
-)
 
 (if nil ;; decided on 28.IX to turn off auto-complete and ajc-java-complete as they seem to bog down the editor
     (progn ;; AutoJavaComplete, AutoComplete and YASnippet install (together, as a group because their functionalities are linked and complementary and, further, AutoJavaComplete explicitly requires the other two
@@ -233,14 +225,6 @@
 ;; doesn't hurt to have it.
 (setq x-select-enable-clipboard t)
 
-(progn ;; emacs F# mode
-    (setq load-path (cons "~/.emacs.d/fsharp" load-path))
-    (setq auto-mode-alist (cons '("\\.fs[iylx]?$" . fsharp-mode) auto-mode-alist))
-    (autoload 'fsharp-mode "fsharp" "Major mode for editing F# code." t)
-    (autoload 'run-fsharp "inf-fsharp" "Run an inferior F# process." t)
-    (setq inferior-fsharp-program "fsharpi --readline-")
-    (setq fsharp-compiler "fsharpc")
-)
 
 (add-to-list 'auto-mode-alist '("\\.xhtml$" . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.xsd$"   . nxml-mode))
