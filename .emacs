@@ -393,6 +393,8 @@ With a prefix argument, insert a newline above the current line."
                                (interactive)
                                (outline-toggle-children)))))))
 
+  (setq ad-redefinition-action 'accept) ;; this is to silence: "`tramp-read-passwd' got redefined" according to: https://github.com/syl20bnr/spacemacs/issues/192
+
   ;; see: http://stackoverflow.com/a/21065066/274677
   ;;      http://stackoverflow.com/a/21342883/274677
   (progn ; install melpa and tss package; TODO: move more packages to the MELPA install format
