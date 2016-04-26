@@ -408,6 +408,9 @@ With a prefix argument, insert a newline above the current line."
             ("melpa" . "http://melpa.org/packages/")
             ("org" . "http://orgmode.org/elpa/"))) ;; org-mode has its own repo, see: http://stackoverflow.com/a/14838150/274677
     ;;(package-refresh-contents) ;; uncomment this line every couple of months or so ...
+    (when (< emacs-major-version 24) ; http://emacs.stackexchange.com/a/15274/4003
+      ;; For important compatibility libraries like cl-lib
+        (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
     (package-initialize)
 
     ;; Bootstrap `use-package' ;; http://www.lunaryorn.com/2015/01/06/my-emacs-configuration-with-use-package.html
@@ -516,13 +519,10 @@ With a prefix argument, insert a newline above the current line."
       :init
       (put 'downcase-region 'disabled nil))
 
+    (use-package view) ;; http://www.emacswiki.org/emacs/HalfScrolling
+
     )
 
-(progn ;; http://www.emacswiki.org/emacs/HalfScrolling
-  (require 'view)
-  (global-set-key "\C-v"   'View-scroll-half-page-forward)
-  (global-set-key "\M-v"   'View-scroll-half-page-backward)
-  )
 
 
 
@@ -561,31 +561,34 @@ With a prefix argument, insert a newline above the current line."
             (define-key org-mode-map "\M-q" 'toggle-truncate-lines) ;; http://superuser.com/q/299886/138891
             ))
 
+(progn ; organize my global keys and ensure they override others
+  (defvar my-keys-minor-mode-map ;; http://stackoverflow.com/a/683575/274677
+    (let ((map (make-sparse-keymap)))
+      (define-key map (kbd "C-x C-j"  ) 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d;
+                                        ; (define-key map (kbd "M-g g"    ) 'goto-line)      ; this doesn't appear to be necessary
+      (define-key map (kbd "C-x C-l"  ) 'join-line)      ; shadows a disabled command (lowercase region)
+      (define-key map (kbd "M-<left>" ) 'windmove-left)  ; move to left windnow
+      (define-key map (kbd "M-<right>") 'windmove-right) ; move to right window
+      (define-key map (kbd "M-<up>"   ) 'windmove-up)    ; move to upper window
+      (define-key map (kbd "M-<down>" ) 'windmove-down)  ; move to downer window
+      (define-key map (kbd "M-j"      ) 'windmove-left)  ; move to left windnow
+      (define-key map (kbd "M-;"      ) 'windmove-right) ; move to right window
+      (define-key map (kbd "M-k"      ) 'windmove-up)    ; move to upper window
+      (define-key map (kbd "M-l"      )'windmove-down)   ; move to downer window
+      (define-key map (kbd "C-x C-k"  ) 'compile)
+      (define-key map (kbd "C-x C-b"  ) 'ibuffer)        ; used to be: 'buffer-menu
+      (define-key map (kbd "M-s M-s"  ) 'replace-string)
+      (define-key map (kbd "C-M-k"    ) 'server-shutdown)
+      (define-key map (kbd "C-v"      ) 'View-scroll-half-page-forward)  ;; http://www.emacswiki.org/emacs/HalfScrolling
+      (define-key map (kbd "M-v"      ) 'View-scroll-half-page-backward) ;; --||--
+      map)
+    "my-keys-minor-mode keymap.")
 
-(defvar my-keys-minor-mode-map ;; http://stackoverflow.com/a/683575/274677
-  (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-x C-j"  ) 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d;
-  ; (define-key map (kbd "M-g g"    ) 'goto-line)      ; this doesn't appear to be necessary
-    (define-key map (kbd "C-x C-l"  ) 'join-line)      ; shadows a disabled command (lowercase region)
-    (define-key map (kbd "M-<left>" ) 'windmove-left)  ; move to left windnow
-    (define-key map (kbd "M-<right>") 'windmove-right) ; move to right window
-    (define-key map (kbd "M-<up>"   ) 'windmove-up)    ; move to upper window
-    (define-key map (kbd "M-<down>" ) 'windmove-down)  ; move to downer window
-    (define-key map (kbd "M-j"      ) 'windmove-left)  ; move to left windnow
-    (define-key map (kbd "M-;"      ) 'windmove-right) ; move to right window
-    (define-key map (kbd "M-k"      ) 'windmove-up)    ; move to upper window
-    (define-key map (kbd "M-l"      )'windmove-down)   ; move to downer window
-    (define-key map (kbd "C-x C-k"  ) 'compile)
-    (define-key map (kbd "C-x C-b"  ) 'ibuffer)        ; used to be: 'buffer-menu
-    (define-key map (kbd "M-s M-s"  ) 'replace-string)
-    (define-key map (kbd "C-M-k"    ) 'server-shutdown)
-    map)
-  "my-keys-minor-mode keymap.")
 
+  (define-minor-mode my-keys-minor-mode
+    "A minor mode so that my key settings override annoying major modes."
+    :init-value t
+    :lighter " my-keys")
 
-(define-minor-mode my-keys-minor-mode
-  "A minor mode so that my key settings override annoying major modes."
-  :init-value t
-  :lighter " my-keys")
-
-(my-keys-minor-mode 1)
+  (my-keys-minor-mode 1)
+  )
