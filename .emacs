@@ -235,12 +235,6 @@
 
 
 
-(progn ;; see http://melpa.milkbox.net/#/inf-ruby and http://stackoverflow.com/a/6385982/274677
-  (autoload 'inf-ruby "inf-ruby" "Run an inferior Ruby process" t)
-  (global-set-key (kbd "C-c C-r") 'ruby-send-region)
-  (if nil
-      (add-hook 'enh-ruby-mode-hook 'inf-ruby-minor-mode) ;; do not enable the enh-ruby-mode (I guess that means 'enhanced')
-    (add-hook 'ruby-mode-hook 'inf-ruby-minor-mode)))
 
 (global-set-key "\C-x\C-k" 'compile)
 
