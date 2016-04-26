@@ -495,8 +495,8 @@ With a prefix argument, insert a newline above the current line."
     (unless (package-installed-p 'use-package)
       (package-refresh-contents)
       (package-install 'use-package))
-    (eval-when-compile
-      (require 'use-package))
+
+      (require 'use-package)
 
     (use-package typescript
       :ensure t)
