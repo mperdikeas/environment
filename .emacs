@@ -183,7 +183,7 @@
                 (setq compile-command "ant -emacs -find build.xml "))))
   )
 
-(global-set-key "\C-x\C-b" 'buffer-menu)
+
 
 
 (progn
@@ -192,21 +192,8 @@
         scroll-conservatively  10000)
   )
 
-(progn
-  (global-set-key [M-left] 'windmove-left)  ; move to left windnow
-  (global-set-key [M-right] 'windmove-right); move to right window
-  (global-set-key [M-up] 'windmove-up)      ; move to upper window
-  (global-set-key [M-down] 'windmove-down)  ; move to downer window
-  (global-set-key (kbd "M-j") 'windmove-left)  ; move to left windnow
-  (global-set-key (kbd "M-;") 'windmove-right); move to right window
-  (global-set-key (kbd "M-k") 'windmove-up)      ; move to upper window
-  (global-set-key (kbd "M-l")'windmove-down)  ; move to downer window
-  )
 
 
-
-
-(global-set-key "\C-x\C-k" 'compile)
 
 (progn;; http://unix.stackexchange.com/a/154154/24044
   (defun last-message (&optional num)
@@ -546,18 +533,17 @@ With a prefix argument, insert a newline above the current line."
       browse-url-generic-program "google-chrome")
 
 (progn ;; ibuffer stuff
-(global-set-key (kbd "C-x C-b") 'ibuffer) ;; http://stackoverflow.com/a/13341583/274677
-(setq ibuffer-formats                     ;; http://emacs.stackexchange.com/a/623/4003
-      '((mark modified read-only " "
-              (name 30 30 :left :elide) ; change: 30s were originally 18s
-              " "
-              (size 9 -1 :right)
-              " "
-              (mode 16 16 :left :elide)
-              " " filename-and-process)
-        (mark " "
-              (name 16 -1)
-                            " " filename))))
+  (setq ibuffer-formats                     ;; http://emacs.stackexchange.com/a/623/4003
+        '((mark modified read-only " "
+                (name 30 30 :left :elide) ; change: 30s were originally 18s
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " " filename-and-process)
+          (mark " "
+                (name 16 -1)
+                " " filename))))
 
 
 (progn ;; define function to shutdown emacs server instance
@@ -578,9 +564,19 @@ With a prefix argument, insert a newline above the current line."
 
 (defvar my-keys-minor-mode-map ;; http://stackoverflow.com/a/683575/274677
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-x C-j") 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d;
-  ; (define-key map (kbd "M-g g") 'goto-line) ; this doesn't appear to be necessary
-    (define-key map (kbd "C-x C-l") 'join-line) ;; shadows a disabled command (lowercase region)
+    (define-key map (kbd "C-x C-j"  ) 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d;
+  ; (define-key map (kbd "M-g g"    ) 'goto-line)      ; this doesn't appear to be necessary
+    (define-key map (kbd "C-x C-l"  ) 'join-line)      ; shadows a disabled command (lowercase region)
+    (define-key map (kbd "M-<left>" ) 'windmove-left)  ; move to left windnow
+    (define-key map (kbd "M-<right>") 'windmove-right) ; move to right window
+    (define-key map (kbd "M-<up>"   ) 'windmove-up)    ; move to upper window
+    (define-key map (kbd "M-<down>" ) 'windmove-down)  ; move to downer window
+    (define-key map (kbd "M-j"      ) 'windmove-left)  ; move to left windnow
+    (define-key map (kbd "M-;"      ) 'windmove-right) ; move to right window
+    (define-key map (kbd "M-k"      ) 'windmove-up)    ; move to upper window
+    (define-key map (kbd "M-l"      )'windmove-down)   ; move to downer window
+    (define-key map (kbd "C-x C-k"  ) 'compile)
+    (define-key map (kbd "C-x C-b"  ) 'ibuffer)        ; used to be: 'buffer-menu
     map)
   "my-keys-minor-mode keymap.")
 
