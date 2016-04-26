@@ -315,6 +315,42 @@ With a prefix argument, insert a newline above the current line."
 
 (add-hook 'java-mode-hook #'hs-minor-mode)
 
+(custom-set-faces ;; http://emacs.stackexchange.com/q/18221/4003
+  `(lazy-highlight ((t (:foreground "white" :background "SteelBlue")))))
+
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")
+
+(progn ;; ibuffer stuff
+  (setq ibuffer-formats                     ;; http://emacs.stackexchange.com/a/623/4003
+        '((mark modified read-only " "
+                (name 30 30 :left :elide) ; change: 30s were originally 18s
+                " "
+                (size 9 -1 :right)
+                " "
+                (mode 16 16 :left :elide)
+                " " filename-and-process)
+          (mark " "
+                (name 16 -1)
+                " " filename))))
+
+
+
+(defun server-shutdown () ;; define function to shutdown emacs server instance
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+
+
+
+(add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
+          (lambda ()
+            (define-key org-mode-map "\M-q" 'toggle-truncate-lines) ;; http://superuser.com/q/299886/138891
+            ))
+
+
 (progn ;; http://stackoverflow.com/a/19625063/274677
   ;; requires that you also run "sudo apt-get install xsel"
   (defun copy-to-clipboard ()
@@ -491,40 +527,6 @@ With a prefix argument, insert a newline above the current line."
     )
 
 
-(custom-set-faces ;; http://emacs.stackexchange.com/q/18221/4003
-  `(lazy-highlight ((t (:foreground "white" :background "SteelBlue")))))
-
-(setq browse-url-browser-function 'browse-url-generic
-      browse-url-generic-program "google-chrome")
-
-(progn ;; ibuffer stuff
-  (setq ibuffer-formats                     ;; http://emacs.stackexchange.com/a/623/4003
-        '((mark modified read-only " "
-                (name 30 30 :left :elide) ; change: 30s were originally 18s
-                " "
-                (size 9 -1 :right)
-                " "
-                (mode 16 16 :left :elide)
-                " " filename-and-process)
-          (mark " "
-                (name 16 -1)
-                " " filename))))
-
-
-
-(defun server-shutdown () ;; define function to shutdown emacs server instance
-  "Save buffers, Quit, and Shutdown (kill) server"
-  (interactive)
-  (save-some-buffers)
-  (kill-emacs)
-  )
-
-
-
-(add-hook 'org-mode-hook ;; http://stackoverflow.com/a/1775652/274677
-          (lambda ()
-            (define-key org-mode-map "\M-q" 'toggle-truncate-lines) ;; http://superuser.com/q/299886/138891
-            ))
 
 (progn ; organize my global keys and ensure they override others
   (defvar my-keys-minor-mode-map ;; http://stackoverflow.com/a/683575/274677
