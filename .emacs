@@ -289,6 +289,7 @@ With a prefix argument, insert a newline above the current line."
     (eval-after-load "org"
       '(progn
          (add-to-list 'org-file-apps '("\\.xls\\'" . "libreoffice %s"))
+         (add-to-list 'org-file-apps '("\\.pptx\\'" . "libreoffice %s"))
          (if nil ;; this is messing up with my opening of txt files
              ;; .txt files aren't in the list initially, but in case that changes
              ;; in a future version of org, use if to avoid errors
