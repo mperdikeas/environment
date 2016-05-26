@@ -527,7 +527,14 @@ With a prefix argument, insert a newline above the current line."
       )
 
     (use-package repeat) ;; to repeat last command: "C-x z"; once pressed, additional 'z's will keep repeating it. (this appears to be on by default)
+
+    (use-package anzu
+      :ensure t
+      :init
+      (global-anzu-mode +1)
     )
+
+)
 
 
 
