@@ -52,6 +52,8 @@ bindsym $mod+k focus down
 bindsym $mod+l focus up
 bindsym $mod+semicolon focus right
 
+
+
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -95,6 +97,9 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
+#this is related to this SO question: http://unix.stackexchange.com/q/287306/24044
+#but it turns out that two (2) $mod+b also do the trick.
+bindsym $mod+z focus child
 
 # switch to workspace
 bindsym $mod+1 workspace number 1
