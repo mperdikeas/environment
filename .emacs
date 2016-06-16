@@ -325,7 +325,7 @@ With a prefix argument, insert a newline above the current line."
 (progn ;; ibuffer stuff
   (setq ibuffer-formats                     ;; http://emacs.stackexchange.com/a/623/4003
         '((mark modified read-only " "
-                (name 30 30 :left :elide) ; change: 30s were originally 18s
+                (name 50 50 :left :elide)
                 " "
                 (size 9 -1 :right)
                 " "
