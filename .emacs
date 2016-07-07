@@ -506,6 +506,7 @@ With a prefix argument, insert a newline above the current line."
     (use-package openwith
       :ensure t
       :init
+      (openwith-mode t)
       (setq openwith-associations '(
                                 ("\\.pdf\\'" "okular" (file))
                                 ("\\.mp3\\'" "xmms" (file))
@@ -544,10 +545,11 @@ With a prefix argument, insert a newline above the current line."
       (define-key map (kbd "C-x C-j"  ) 'flash-crosshairs) ;;  C-x C-j overrides dired similar binding but it can also be accessed with with C-x d;
                                         ; (define-key map (kbd "M-g g"    ) 'goto-line)      ; this doesn't appear to be necessary
       (define-key map (kbd "C-x C-l"  ) 'join-line)      ; shadows a disabled command (lowercase region)
-      (define-key map (kbd "M-<left>" ) 'windmove-left)  ; move to left windnow
-      (define-key map (kbd "M-<right>") 'windmove-right) ; move to right window
-      (define-key map (kbd "M-<up>"   ) 'windmove-up)    ; move to upper window
-      (define-key map (kbd "M-<down>" ) 'windmove-down)  ; move to downer window
+;      don't define the below four (4) as they are needed in org-mode for the move item / increase / decrease indentation functionality      
+;      (define-key map (kbd "M-<left>" ) 'windmove-left)  ; move to left windnow
+;      (define-key map (kbd "M-<right>") 'windmove-right) ; move to right window
+;      (define-key map (kbd "M-<up>"   ) 'windmove-up)    ; move to upper window
+;      (define-key map (kbd "M-<down>" ) 'windmove-down)  ; move to downer window
       (define-key map (kbd "M-j"      ) 'windmove-left)  ; move to left windnow
       (define-key map (kbd "M-;"      ) 'windmove-right) ; move to right window
       (define-key map (kbd "M-k"      ) 'windmove-up)    ; move to upper window
