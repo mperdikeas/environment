@@ -7,7 +7,7 @@ Most of these files, and definitely the following;
     .dircolors
     .emacs
     .emacs.d
-    .i3
+    .i3 (or .i3.Dell)
     repos-list.sh
 
     ... will need to be soft-linked from the home directory.
