@@ -7,8 +7,11 @@ Most of these files, and definitely the following;
     .dircolors
     .emacs
     .emacs.d
+    .i3
+    repos-list.sh
 
     ... will need to be soft-linked from the home directory.
 
 I also keep (for reference) local [.bashrc] file modifications applied
 in various systems, e.g. file ".bashrc_thisnode-lenovo".
+
