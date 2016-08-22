@@ -56,14 +56,17 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" "d6a00ef5e53adf9b6fe417d2b4404895f26210c52bb8716971be106550cea257" default)))
+ '(custom-safe-themes
+   (quote
+    ("cdbd0a803de328a4986659d799659939d13ec01da1f482d838b68038c1bb35e8" "f5eb916f6bd4e743206913e6f28051249de8ccfd070eae47b5bde31ee813d55f" "d6a00ef5e53adf9b6fe417d2b4404895f26210c52bb8716971be106550cea257" default)))
  '(inhibit-startup-screen t)
- '(org-agenda-files nil t))
+ '(org-agenda-files nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(lazy-highlight ((t (:foreground "white" :background "SteelBlue"))))
  '(linum ((((background dark)) :foreground "green") (t :foreground "gray"))))
 
 
@@ -316,8 +319,7 @@ With a prefix argument, insert a newline above the current line."
 
 (add-hook 'java-mode-hook #'hs-minor-mode)
 
-(custom-set-faces ;; http://emacs.stackexchange.com/q/18221/4003
-  `(lazy-highlight ((t (:foreground "white" :background "SteelBlue")))))
+
 
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
