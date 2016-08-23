@@ -7,10 +7,12 @@
 
 case "$1" in
     suspend)
-        nmcli nm wifi off
+    # Ubuntu 14.04: nmcli nm wifi off
+        nmcli r wifi off
         ;;
     resume)
-        nmcli nm wifi on
+        # Ubuntu 14.04: nmcli nm wifi on
+        nmcli r wifi on
         ;;
     *)
         ;;
