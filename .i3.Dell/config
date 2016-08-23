@@ -216,8 +216,14 @@ bindsym $mod+n exec i3-input -F 'rename workspace to "%s"' -P 'New name for this
 # bindings for controlling volume (in case ALSA is used)
 # check if ALSA is used by doing a:
 # $aplay -l
-bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
-bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
-bindsym XF86AudioMute        exec "amixer -q sset Master,0 toggle"
+# NB: these used to be as follows:
+# bindsym XF86AudioRaiseVolume exec "amixer -q sset Master,0 1+ unmute"
+# bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
+# bindsym XF86AudioMute        exec "amixer -q sset Master,0 toggle"
+
+bindsym XF86AudioRaiseVolume exec "amixer -D pulse sset Master 5%+"
+bindsym XF86AudioLowerVolume exec "amixer -D pulse sset Master 5%-"
+bindsym XF86AudioMute        exec "amixer -D pulse sset Master 0%"
 
 exec --no-startup-id xsetroot -solid "#333333"
+
