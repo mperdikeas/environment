@@ -3,3 +3,4 @@ export PATH=~/esac-rawdar/scripts:$PATH
 export PATH=~/typescript-tools/bin:$PATH
 export PATH=~/.node_modules_global/lib/node_modules/typescript/bin:$PATH
 export PATH=~/esavo-reg-II/scripts:$PATH
+export NODE_PATH=$NODE_PATH:~/.node_modules_global/lib/node_modules/
