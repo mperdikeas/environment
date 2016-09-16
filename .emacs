@@ -540,9 +540,7 @@ With a prefix argument, insert a newline above the current line."
     (use-package folding
       :ensure t
       :config
-      (if (load "folding" 'nomessage 'noerror)
-          (folding-mode-add-find-file-hook))
-      )
+      (folding-mode-add-find-file-hook))
 
 )
 
@@ -588,5 +586,5 @@ With a prefix argument, insert a newline above the current line."
 (progn
   (defun describe-server-name ()
     (interactive)
-    (message "%s" (symbol-value 'server-name))
-    (global-set-key  (kbd "C-h C-s") 'describe-server-name)))
+    (message "%s" (symbol-value 'server-name)))
+    (global-set-key  (kbd "C-h C-s") 'describe-server-name))
