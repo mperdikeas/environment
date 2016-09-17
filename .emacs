@@ -537,10 +537,13 @@ With a prefix argument, insert a newline above the current line."
       (global-anzu-mode +1)
       )
 
-    (use-package folding
+    (use-package folding ;; http://emacs.stackexchange.com/a/27093/4003
       :ensure t
       :config
-      (folding-mode-add-find-file-hook))
+      (folding-install-hooks)
+      (defun my-always-fold ()
+        (setq-local folded-file t))
+      (advice-add #'folding-mode-find-file :before #'my-always-fold))
 
 )
 
