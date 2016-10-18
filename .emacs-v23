@@ -1,6 +1,7 @@
 ;; version for Emacs 23
 (menu-bar-mode 0)
 (add-to-list 'load-path "~/.emacs.d")
+(add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp/"))
 
 (progn ;; progn
 (global-linum-mode 1)
@@ -82,9 +83,9 @@
 
 (progn ;; ace-jump-mode
   (require 'ace-jump-mode) 
-    (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
-    (define-key global-map (kbd "C-c C-c SPC") 'ace-jump-char-mode)
-    (define-key global-map (kbd "C-c C-c C-c SPC") 'ace-jump-line-mode)
+    (define-key global-map (kbd "C-c C-SPC") 'ace-jump-mode)
+    (define-key global-map (kbd "C-c C-c C-SPC") 'ace-jump-char-mode)
+    (define-key global-map (kbd "C-c C-c C-c C-SPC") 'ace-jump-line-mode)
   ;;;; if you also use viper mode:
   ;; (define-key viper-vi-global-user-map (kbd "SPC") 'ace-jump-mode)
 )
@@ -388,10 +389,13 @@
 
 (setq Buffer-menu-buffer+size-width 60) ;; http://stackoverflow.com/a/26062716/274677
 
+(if nil ;; encountered a problem when trying to configure Emacs v23 on CfA and commented this out
 (progn
     (load "json-mode")
     (add-to-list 'auto-mode-alist '("\\.json" . json-mode))
 )
+)
+
 (put 'downcase-region 'disabled nil)
 
 
