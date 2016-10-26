@@ -475,3 +475,25 @@ With a prefix argument, insert a newline above the current line."
         (load "web-mode")
         (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode)))
 )
+
+(defun server-shutdown () ;; define function to shutdown emacs server instance
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+)
+
+
+(progn ; organize my global keys and ensure they override others
+  (defvar my-keys-minor-mode-map ;; http://stackoverflow.com/a/683575/274677
+    (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "C-M-k") 'server-shutdown)
+    map)
+    "my-keys-minor-mode keymap.")
+  (define-minor-mode my-keys-minor-mode
+    "A minor mode so that my key settings override annoying major modes."
+    :init-value t
+    :lighter " my-keys")
+
+  (my-keys-minor-mode 1)
+)
