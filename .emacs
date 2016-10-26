@@ -1,4 +1,5 @@
-(setq server-use-tcp t) ; listen on TCP sockets except on a UNIX system socket
+;; set this to the appropriate value in conjunction with the [~/environment/emax] script
+;; (setq server-use-tcp t) ; listen on TCP sockets instead of on UNIX domain sockets
 (menu-bar-mode 0)
 (add-to-list 'load-path (expand-file-name "~/.emacs.d/elisp/"))
 
