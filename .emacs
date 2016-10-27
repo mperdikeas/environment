@@ -497,12 +497,23 @@ With a prefix argument, insert a newline above the current line."
 
     (use-package clojure-mode :ensure t)
     (use-package cider :ensure t)
-    (use-package ace-jump-mode
-      :ensure t
-      :init
-      (bind-key "C-c C-SPC" 'ace-jump-mode)
-      (bind-key "C-c C-c C-SPC" 'ace-jump-char-mode)
-      (bind-key "C-c C-c C-c C-SPC" 'ace-jump-line-mode)
+    (if nil
+        ;; case A: use the bindings that allow me to work with org-mode as well
+        (use-package ace-jump-mode
+         :ensure t
+         :init
+         (bind-key "C-c C-SPC" 'ace-jump-mode)
+         (bind-key "C-c C-c C-SPC" 'ace-jump-char-mode)
+         (bind-key "C-c C-c C-c C-SPC" 'ace-jump-line-mode)
+        )
+       ;; case B: use the bindings that allow me to maintain the same bindings as used in my RHEL 6 machine @ CfA
+       (use-package ace-jump-mode
+         :ensure t
+         :init
+         (bind-key "C-c SPC" 'ace-jump-mode)
+         (bind-key "C-c C-c SPC" 'ace-jump-char-mode)
+         (bind-key "C-c C-c C-c SPC" 'ace-jump-line-mode)
+        )
       )
 
 
