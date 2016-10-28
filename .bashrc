@@ -193,8 +193,6 @@ export LC_ALL=$LANG
 # autojump @ home (I will have to merge it with the above)
 [[ -s /usr/share/autojump/autojump.sh ]] && . /usr/share/autojump/autojump.sh
 
-export PATH=$PATH:/opt/NeuroCode/bin
-
 alias h='xdg-open .'
 
 alias bd='. bd -s'
@@ -211,8 +209,6 @@ export -f sedescape
 alias g='gradle'
 alias e='emax' # now this points to the emax tool which automatically either spawns a new emacs daemon or asks you which emacs daemon to connect to
 . ~/environment/gradle-tab-completion.bash
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/home/mperdikeas/.gvm/bin/gvm-init.sh" ]] && source "/home/mperdikeas/.gvm/bin/gvm-init.sh"
 
 export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
