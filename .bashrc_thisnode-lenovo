@@ -15,3 +15,4 @@ unset GNOME_KEYRING_CONTROL
 export PATH=~/.node_modules_global/bin:$PATH
 export NODE_PATH=$NODE_PATH:~/.node_modules_global/lib/node_modules
 export PATH=~/ant-template:$PATH
+alias nd9=ssh-to-newdevel9-through-pogo1
