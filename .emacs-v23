@@ -233,6 +233,8 @@
 (add-to-list 'auto-mode-alist '("\\.xslt$"  . nxml-mode))
 (add-to-list 'auto-mode-alist '("\\.xjb$"   . nxml-mode))
 
+(add-to-list 'auto-mode-alist '("\\.jsp"   . web-mode))
+
 
 
 (if
