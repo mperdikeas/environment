@@ -599,8 +599,22 @@ With a prefix argument, insert a newline above the current line."
   (my-keys-minor-mode 1)
   )
 
+;; This is progressively added stuff that I would at some point have to move
+;; back above the [use-package] blocks
 (progn
   (defun describe-server-name ()
     (interactive)
     (message "%s" (symbol-value 'server-name)))
     (global-set-key  (kbd "C-h C-s") 'describe-server-name))
+
+;; http://emacs.stackexchange.com/q/10414/4003
+(defun toggle-maximize-buffer () "Toggle maximize buffer"
+       (interactive)
+       (if (= 1 (length (window-list)))
+           (set-window-configuration my-saved-window-configuration)
+         (progn
+           (setq my-saved-window-configuration (current-window-configuration))
+           (delete-other-windows))))
+
+(define-key my-keys-minor-mode-map (kbd "C-M-u") 'toggle-maximize-buffer)
+
