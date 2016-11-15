@@ -556,7 +556,11 @@ With a prefix argument, insert a newline above the current line."
       (folding-install-hooks)
       (defun my-always-fold ()
         (setq-local folded-file t))
-      (advice-add #'folding-mode-find-file :before #'my-always-fold))
+      (advice-add #'folding-mode-find-file :before #'my-always-fold)
+      ;; for the below see this: http://emacs.stackexchange.com/q/28674/4003
+      (folding-add-to-marks-list 'json-mode "non-sensical-marks-for-JSON-files" "foo")
+      (folding-add-to-marks-list 'js2-mode  "// {{{" "// }}}")
+      )
 
 )
 
