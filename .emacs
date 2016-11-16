@@ -557,11 +557,14 @@ With a prefix argument, insert a newline above the current line."
       (defun my-always-fold ()
         (setq-local folded-file t))
       (advice-add #'folding-mode-find-file :before #'my-always-fold)
-      ;; for the below see this: http://emacs.stackexchange.com/q/28674/4003
-      (folding-add-to-marks-list 'json-mode "non-sensical-marks-for-JSON-files" "foo")
       (folding-add-to-marks-list 'js2-mode  "// {{{" "// }}}")
       (folding-add-to-marks-list 'css-mode  "/* {{{" "}}} /*")
-      (folding-add-to-marks-list 'fundamental-mode "non-sensical-marks-for-fundamental-mode" "foo")
+      ;; below are modes for which folding does not really make sense; see this: http://emacs.stackexchange.com/q/28674/4003
+      (folding-add-to-marks-list 'json-mode           "non-sensical-begin-mark" "non-sensical-begin-mark")
+      (folding-add-to-marks-list 'fundamental-mode    "non-sensical-begin-mark" "non-sensical-begin-mark")
+      (folding-add-to-marks-list 'makefile-gmake-mode "non-sensical-begin-mark" "non-sensical-begin-mark")
+      (folding-add-to-marks-list 'web-mode            "non-sensical-begin-mark" "non-sensical-begin-mark")
+      (folding-add-to-marks-list 'conf-space-mode     "non-sensical-begin-mark" "non-sensical-begin-mark")
       )
 
 )
