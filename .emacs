@@ -560,6 +560,8 @@ With a prefix argument, insert a newline above the current line."
       ;; for the below see this: http://emacs.stackexchange.com/q/28674/4003
       (folding-add-to-marks-list 'json-mode "non-sensical-marks-for-JSON-files" "foo")
       (folding-add-to-marks-list 'js2-mode  "// {{{" "// }}}")
+      (folding-add-to-marks-list 'css-mode  "/* {{{" "}}} /*")
+      (folding-add-to-marks-list 'fundamental-mode "non-sensical-marks-for-fundamental-mode" "foo")
       )
 
 )
