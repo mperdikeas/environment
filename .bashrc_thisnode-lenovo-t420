@@ -1,2 +1,2 @@
 alias nd9=ssh-to-newdevel9-through-pogo1
-export PATH=$PATH:~/local-tools
+export PATH=$PATH:~/DbVisualizer
