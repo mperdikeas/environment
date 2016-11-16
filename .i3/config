@@ -209,7 +209,9 @@ bindsym Ctrl+Shift+2 exec --no-startup-id "setxkbmap gr"
 # scrot & eog
 # for some weird reason the below line started hijacking the $mod+Print key binding
 # bindsym Print exec scrot -e 'mv $f /tmp/ && eog /tmp/$f'
-bindsym $mod+Print --release exec scrot -s -e 'mv $f /tmp/ && eog /tmp/$f'
+bindsym $mod+Print       --release exec scrot       -s -e 'mv $f /tmp/ && eog /tmp/$f'
+# take a delayed picture of the entire screen ten (10) seconds from now
+bindsym $mod+Shift+Print --release exec scrot -d 10 -e 'mv $f /tmp/ && eog /tmp/$f' 
 
 
 # rename workspace
