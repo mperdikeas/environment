@@ -1,6 +1,6 @@
 2012.02.10 repository created to keep track of various configuration files
 
-Most of these files, and definitely the following;
+[1] Most of these files, and definitely the following;
 
     .bashrc
     .gitconfig
@@ -9,9 +9,10 @@ Most of these files, and definitely the following;
     .emacs.d
     .i3 (or .i3.Dell)
     repos-list.sh
+    the applicable [local-tools-*] directory depending on your system
+    the applicable local .bashrc file (e.g. ".bashrc_thisnode-lenovo") depending on your system
 
     ... will need to be soft-linked from the home directory.
 
-I also keep (for reference) local [.bashrc] file modifications applied
-in various systems, e.g. file ".bashrc_thisnode-lenovo".
+[2] install the cron jobs found in the cron directory
 
