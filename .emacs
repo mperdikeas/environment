@@ -560,12 +560,22 @@ With a prefix argument, insert a newline above the current line."
       (folding-add-to-marks-list 'js2-mode  "// {{{" "// }}}")
       (folding-add-to-marks-list 'css-mode  "/* {{{" "}}} /*")
       ;; below are modes for which folding does not really make sense; see this: http://emacs.stackexchange.com/q/28674/4003
-      (folding-add-to-marks-list 'json-mode           "non-sensical-begin-mark" "non-sensical-begin-mark")
-      (folding-add-to-marks-list 'fundamental-mode    "non-sensical-begin-mark" "non-sensical-begin-mark")
-      (folding-add-to-marks-list 'makefile-gmake-mode "non-sensical-begin-mark" "non-sensical-begin-mark")
-      (folding-add-to-marks-list 'web-mode            "non-sensical-begin-mark" "non-sensical-begin-mark")
-      (folding-add-to-marks-list 'conf-space-mode     "non-sensical-begin-mark" "non-sensical-begin-mark")
-      )
+      (let ((disabled-modes-for-folding '('json-mode 'fundamental-mode 'makefile-gmake-mode
+                                                     'web-mode 'conf-space-mode 'nxml-mode 'conf-javaprop-mode
+           )))
+        (dolist (x disabled-modes-for-folding)
+          (folding-add-to-marks-list x "non-sensical-begin-mark" "non-sensical-begin-mark")
+          ))
+;;      (if nil
+;;          (progn
+;;      (folding-add-to-marks-list 'json-mode           "non-sensical-begin-mark" "non-sensical-begin-mark")
+;;      (folding-add-to-marks-list 'fundamental-mode    "non-sensical-begin-mark" "non-sensical-begin-mark")
+;;      (folding-add-to-marks-list 'makefile-gmake-mode "non-sensical-begin-mark" "non-sensical-begin-mark")
+;;      (folding-add-to-marks-list 'web-mode            "non-sensical-begin-mark" "non-sensical-begin-mark")
+;;      (folding-add-to-marks-list 'conf-space-mode     "non-sensical-begin-mark" "non-sensical-begin-mark")
+;;      (folding-add-to-marks-list 'nxml-mode           "non-sensical-begin-mark" "non-sensical-begin-mark")      
+     )
+
 
 )
 
