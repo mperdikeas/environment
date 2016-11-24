@@ -1,6 +1,6 @@
 alias nd9=ssh-to-newdevel9-through-pogo1
 export PATH=$PATH:~/DbVisualizer
-export CATALINA_HOME=/opt/tomcat9
+export CATALINA_HOME=/opt/tomcat8.5
 # strangely the below is already set in my environment but I can't figure
 # out from where:
 #     export JAVA_HOME=/usr/lib/jvm/java-8-oracle
