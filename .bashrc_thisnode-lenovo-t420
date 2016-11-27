@@ -5,3 +5,4 @@ export CATALINA_HOME=/opt/tomcat8.5
 # out from where:
 #     export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 export JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
+export PATH=$PATH:~/ant-template
