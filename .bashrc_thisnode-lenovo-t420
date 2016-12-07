@@ -1,4 +1,5 @@
-alias nd9=ssh-to-newdevel9-through-pogo1
+alias nd9p=ssh-to-newdevel9-through-pogo1
+alias nd9="ssh-to-newdevel9-through-pogo1 -p"
 export PATH=$PATH:~/DbVisualizer
 export CATALINA_HOME=/opt/tomcat8.5
 # strangely the below is already set in my environment but I can't figure
