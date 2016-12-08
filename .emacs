@@ -562,6 +562,7 @@ With a prefix argument, insert a newline above the current line."
       ;; below are modes for which folding does not really make sense; see this: http://emacs.stackexchange.com/q/28674/4003
       (let ((disabled-modes-for-folding '(json-mode fundamental-mode makefile-gmake-mode
                                           org-mode  web-mode conf-space-mode nxml-mode conf-javaprop-mode
+                                          help-mode
            )))
         (dolist (x disabled-modes-for-folding)
           (folding-add-to-marks-list x "non-sensical-begin-mark" "non-sensical-begin-mark")
