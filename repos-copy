@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+##############################################################
+# awesome script that discovers where this script lives
+# (works even if its called via symlinks)
+# source: http://stackoverflow.com/a/179231/274677
+#
+WHERE_I_LIVE="${BASH_SOURCE[0]}";
+if ([ -h "${WHERE_I_LIVE}" ]) then
+   while([ -h "${WHERE_I_LIVE}" ]) do WHERE_I_LIVE=`readlink "${WHERE_I_LIVE}"`; done
+fi
+pushd . > /dev/null
+cd `dirname ${WHERE_I_LIVE}` > /dev/null
+WHERE_I_LIVE=`pwd`;
+popd  > /dev/null
+#
+##############################################################
+. "$WHERE_I_LIVE/repos-list.sh"
+if [[ ($# -ne 1) ]]
+then
+    echo "usage is $0 <directory to copy repos to>"
+else
+    BASE=$1
+    readonly TIMESTAMP=$( date '+%Y-%m-%d_%0H%0M%0S' )
+    readonly DEST=$BASE/$TIMESTAMP
+    mkdir -p $DEST
+    readonly DEST_ABS=$(realpath $DEST)
+    printf "copying all repos to $DEST_ABS\n"
+    readonly START=$(date +%s)
+    for i in "${repos[@]}" ; do
+        cd ~/${i}
+        echo $(pwd)
+        mkdir $DEST_ABS/${i}
+        cp -a .git $DEST_ABS/${i}/
+    done
+    readonly END=$(date +%s)
+    readonly DIFF=$(echo "$END - $START" | bc)
+    printf "Done in $DIFF secs.\n"
+fi
