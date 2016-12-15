@@ -567,16 +567,11 @@ With a prefix argument, insert a newline above the current line."
         (dolist (x disabled-modes-for-folding)
           (folding-add-to-marks-list x "non-sensical-begin-mark" "non-sensical-begin-mark")
           ))
-;;      (if nil
-;;          (progn
-;;      (folding-add-to-marks-list 'json-mode           "non-sensical-begin-mark" "non-sensical-begin-mark")
-;;      (folding-add-to-marks-list 'fundamental-mode    "non-sensical-begin-mark" "non-sensical-begin-mark")
-;;      (folding-add-to-marks-list 'makefile-gmake-mode "non-sensical-begin-mark" "non-sensical-begin-mark")
-;;      (folding-add-to-marks-list 'web-mode            "non-sensical-begin-mark" "non-sensical-begin-mark")
-;;      (folding-add-to-marks-list 'conf-space-mode     "non-sensical-begin-mark" "non-sensical-begin-mark")
-;;      (folding-add-to-marks-list 'nxml-mode           "non-sensical-begin-mark" "non-sensical-begin-mark")      
      )
 
+    (use-package volatile-highlights
+    :config
+      (volatile-highlights-mode t))
 
 )
 
