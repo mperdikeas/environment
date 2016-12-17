@@ -1,4 +1,3 @@
-
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -224,3 +223,8 @@ export PROMPT_COMMAND='if [ "$(id -u)" -ne 0 ]; then echo "$(date "+%Y-%m-%d.%H:
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 alias x='exit'
 export PATH=$PATH:~/local-tools:~/local-tools-sensitive
+alias gs='git status -s'
+alias gq='git add . -A -n'
+alias ga='git add . -A'
+alias gd='git diff --no-ext-diff'
+alias gdd='git diff'

@@ -1,3 +1,4 @@
+# scripts to connect to my NEWDEVEL9 machine with or without a password prompt
 alias nd9p=ssh-to-newdevel9-through-pogo1
 alias nd9="ssh-to-newdevel9-through-pogo1 -p"
 export PATH=$PATH:~/DbVisualizer
@@ -8,3 +9,8 @@ export CATALINA_HOME=/opt/tomcat8.5
 export JRE_HOME=/usr/lib/jvm/java-8-oracle/jre
 export PATH=$PATH:~/ant-template
 export PATH=$PATH:~/esavo-reg-II/scripts
+# CfA VPN
+alias v="sudo vpnc sao.conf"
+alias vd="sudo vpnc-disconnect"
+# scripts to connect to my NEWDEVEL9 machine through the VPN (they require the VPN to be up)
+alias vnd9="ssh mperdike@newdevel9"
