@@ -204,7 +204,6 @@ export -f sedescape
 #     how < do you (escape \[this\] & "that")\. ? >
 #     $
 
-alias g='gradle'
 alias e='emax' # now this points to the emax tool which automatically either spawns a new emacs daemon or asks you which emacs daemon to connect to
 . ~/environment/gradle-tab-completion.bash
 

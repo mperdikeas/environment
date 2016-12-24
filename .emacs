@@ -550,6 +550,7 @@ With a prefix argument, insert a newline above the current line."
       (global-anzu-mode +1)
       )
 
+    (if nil ;; 2016-12-23 I decided to stop using this package because it messed up with the M-g g goto-line binding and produced unstable results regarding the M-g binding
     (use-package folding ;; http://emacs.stackexchange.com/a/27093/4003
       :ensure t
       :config
@@ -567,11 +568,12 @@ With a prefix argument, insert a newline above the current line."
         (dolist (x disabled-modes-for-folding)
           (folding-add-to-marks-list x "non-sensical-begin-mark" "non-sensical-begin-mark")
           ))
-     )
+      )
+    )
 
     (use-package volatile-highlights
     :config
-      (volatile-highlights-mode t))
+    (volatile-highlights-mode t))
 
 )
 
