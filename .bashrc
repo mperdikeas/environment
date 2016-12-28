@@ -227,3 +227,8 @@ alias gq='git add . -A -n'
 alias ga='git add . -A'
 alias gd='git diff --no-ext-diff'
 alias gdd='git diff'
+gcmF() {
+    git commit -m "$*"
+}
+alias gcm=gcmF
+
