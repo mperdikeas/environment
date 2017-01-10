@@ -15,3 +15,4 @@ alias vd="sudo vpnc-disconnect"
 # scripts to connect to my NEWDEVEL9 machine through the VPN (they require the VPN to be up)
 alias vnd9="ssh mperdike@newdevel9"
 export PATH=$PATH:~/miniconda/bin
+export PATH=$PATH:~/java-package-refactor/script
