@@ -5,5 +5,5 @@ declare -a repos=("tools" "java-mutil" "environment" "ocaml-mutil" "playground"
                   "js-filtered-datastore" "faker-datastore" "js-react-fixed-data-table-wrapper" "js-react-catch-the-lion"
                   "js-geometry-2d" "js-react-tetris" "js-react-custom-validators"
                   "environment-sensitive" "js-structural-sharing" "js-string-tokenize" "cfa" "js-react-stack-piling-and-tumbling"
-                  "js-fixed-size-lifo" "java-package-refactor"
+                  "js-fixed-size-lifo" "java-package-refactor" "emacs"
                  )
