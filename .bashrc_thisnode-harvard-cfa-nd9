@@ -1,0 +1,77 @@
+# start-of lines taken / translated from [.cshrc]
+# 
+umask 022	
+
+# Architecture specific settings
+
+export PLATFORM=$(uname)
+export OS_REV=$(uname -r | cut -d. -f1)
+export MACHINE=$(uname -m)
+export MANPATH="/usr/man:/usr/share/man:/usr/local/man:/usr/X11R6/man:/usr/local/share/man"
+
+set -o noclobber
+# in [.cshrc] this is "unset autologout"
+unset TMOUT 
+
+# end-of lines taken / translated from [.cshrc]
+
+# start-of-lines taken / translated from [.cshrc.user]
+export PATH=/soft/saord/bin:$PATH
+export TEXINPUTS=/data/tex/share/texmf.local
+alias ciao='. /soft/cia/bin/ciao.bash'
+# end-of-lines taken / translated from [.cshrc.user]
+
+# customizations suggested by James Overly with his email 2016-10-28_17:23
+export ASCDS_BLD_WWW_INSTALL=/vobs/ASC_BUILD
+export ASCDS_BLD_INSTALL=/vobs/ASC_BUILD
+
+# customizations suggested by James Overly with his email 2016-10-28_17:39
+# (excluding those delivered with the previous email)
+export BuildOS=Linux64
+export OSTYPE=linux
+export CC_SYS=gnu
+export PRINTER=lp364bw1
+export LPDEST=lp364bw1
+#umask 002 # James told me to set umask to 022 after all - as this is what .cshrc has
+
+alias cm="clearmake -C $CC_SYS"
+export CLEARCASE_BLD_UMASK=22
+export PATH=$PATH:/usr/atria/bin
+alias ci=checkin
+alias co=checkout
+alias ct=cleartool
+# alias ctci='cleartool checkin'       # I prefer: ct ci
+# alias ctco='cleartool checkout'      # I prefer: ct co
+# alias ctmt='cleartool mount vob'     # I prefer: ct mount vob
+# alias ctpwv='cleartool pwv'          # I prefer: ct pwv
+# alias ctset='cleartool setview'      # I prefer: ct setview
+# alias ctuco='cleartool uncheckout'   # I prefer: ct uco
+# alias ctview='cleartool lsview'      # I prefer: ct lsview
+# alias ctvob='cleartool lsvob'        # I prefer: ct lsvob
+alias uco='uncheckout'
+alias xcc='setenv LANG en_US; xclearcase &'
+
+# customizations suggested by Panagoula Zografou with her email 2016-10-27_15:55
+alias ctmv='ct setview -exec "newgrp ccase" mperdike_dev_view'
+
+# customization suggested by Michael Tibbetts email 2016-10-31_15:21
+alias cmake='clearmake -C gnu MAKE=clearmake UIROOT=/vobs/ASC_BUILD/src'
+
+# customizations suggeted by Peter Harbo with his email 2016-11-16_15:58 - start
+# for the purpose of connecting to Sybase (translated from the original c shell code):
+export SYBASE=/soft/SYBASE15.7
+export SYBASE_OCS=OCS-15_0
+export DSLISTEN=SYBASE
+export DSQUERY=/soft/SYBASE15.7/interfaces
+export PATH=/soft/SYBASE15.7/OCS-15_0/bin:$PATH
+
+. $SYBASE/SYBASE.sh
+# customizations suggeted by Peter Harbo with his email 2016-11-16_15:58 - end
+
+# my own customizations start
+#
+export PATH=~/ant-template:$PATH
+alias v='cd /view/mperdike_dev_view/vobs/'
+# my own customizations end
+
+
