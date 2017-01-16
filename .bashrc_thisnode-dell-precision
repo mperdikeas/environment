@@ -1,3 +1,0 @@
-export PATH=~/.node_modules_global/bin:$PATH
-alias skype='LD_PRELOAD=/usr/lib/i386-linux-gnu/me‌​sa/libGL.so.1 skype'
-amixer -D pulse sset Master 50% -q
