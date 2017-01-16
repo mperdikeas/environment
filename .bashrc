@@ -205,7 +205,6 @@ export -f sedescape
 #     $
 
 alias e='emax' # now this points to the emax tool which automatically either spawns a new emacs daemon or asks you which emacs daemon to connect to
-. ~/environment/gradle-tab-completion.bash
 
 export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
