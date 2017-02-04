@@ -225,3 +225,9 @@ bindsym XF86AudioLowerVolume exec "amixer -q sset Master,0 1- unmute"
 bindsym XF86AudioMute        exec "amixer -q sset Master,0 toggle"
 
 exec --no-startup-id xsetroot -solid "#333333"
+
+# https://faq.i3wm.org/question/2/how-can-i-use-networkmanager-with-i3.1.html
+# apparently this fails to cause the nm-applet to automatically appear in the tray
+# instead, I have to manually launch nm-applet myself from a terminal using:
+# $ nm-applet
+exec --no-startup-id nm-applet
