@@ -227,7 +227,14 @@ bindsym XF86AudioMute        exec "amixer -q sset Master,0 toggle"
 exec --no-startup-id xsetroot -solid "#333333"
 
 # https://faq.i3wm.org/question/2/how-can-i-use-networkmanager-with-i3.1.html
-# apparently this fails to cause the nm-applet to automatically appear in the tray
-# instead, I have to manually launch nm-applet myself from a terminal using:
-# $ nm-applet
+# This usually, if not always, works after a reboot. You can also try to
+# launch the nm-applet by opening a terminal and typing:
+#     $ nm-applet
+# However the above will only show the nm-applet on the monitor that's configured as primary
+# in xrandr. Use:
+#     $ xrandr | grep primary
+# ... to find which monitor is configured as primary and then use:
+#     $ xrandr --output <output> --primary
+# ... to change that if necessary.
+# See more in: https://i3wm.org/docs/userguide.html#_tray_output
 exec --no-startup-id nm-applet
