@@ -23,7 +23,8 @@ for i in "${repos[@]}"
 do
     cd ~/${i}
     echo $(pwd)
-    git merge origin/master    
+    git merge origin/master
+    git submodule update --recursive --remote
 done
 
 
