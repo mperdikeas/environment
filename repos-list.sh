@@ -6,4 +6,5 @@ declare -a repos=("tools" "java-mutil" "environment" "ocaml-mutil" "playground"
                   "js-geometry-2d" "js-react-tetris" "js-react-custom-validators"
                   "environment-sensitive" "js-structural-sharing" "js-string-tokenize" "js-react-stack-piling-and-tumbling"
                   "js-fixed-size-lifo" "java-package-refactor" "emacs" "bashrc"
+                  "algebra-with-javascript"
                  )
