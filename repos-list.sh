@@ -7,5 +7,5 @@ declare -a repos=("tools" "java-mutil" "environment" "ocaml-mutil" "playground"
                   "environment-sensitive" "js-structural-sharing" "js-string-tokenize" "js-react-stack-piling-and-tumbling"
                   "js-fixed-size-lifo" "java-package-refactor" "emacs" "bashrc"
                   "js-algebra" "js-trees" "js-flow-common-types" "js-minmax-wt-alpha-beta-pruning" "js-minmax-naive-but-instructive"
-                  "js-checkers-rules-and-eval" "mant-tasks"
+                  "js-checkers-rules-and-eval" "mant-tasks" "google-foobar"
                  )
