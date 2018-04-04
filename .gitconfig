@@ -7,6 +7,7 @@
         sstatus = status -s --ignored
         ppush = "!sh -c 'git push --all && git push --tags'"
         df = difftool
+        branchdate = !git for-each-ref --sort='-authordate' --format='%(refname)%09%(authordate)' refs/heads | sed -e 's-refs/heads/--'
 [color]
 	ui = true
         diff=always
