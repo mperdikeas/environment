@@ -10,5 +10,5 @@ declare -a repos=("tools" "java-mutil" "environment" "ocaml-mutil" "playground"
                   "js-checkers-rules-and-eval" "mant-tasks" "google-foobar" "kids-math-exercises" "py-abstract-algebra" "ant-template"
                   "sscce-ant-compile-trigger" "py-algorithms" "job-applications" "jar-zipgroupfileset-problem-SSCCE"
                   "js-vibrations" "py-number-theory" "py-probability" "js-cubehelix" "js-cubehelix-demo"
-                  "js-towers-of-hanoi" "archetype-webpack-babel-mocha-react" "archetype-java-ant-ivy" "archetype-JSON-web-tokens-JJWT"
+                  "js-towers-of-hanoi" "archetype-webpack-babel-mocha-react" "archetype-java-ant-ivy" "archetype-JSON-web-tokens-JJWT" "digiterra"
                  )
