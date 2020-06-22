@@ -22,4 +22,6 @@
 [push]
 	default = simple
 [credential]
-	helper = cache --timeout=2678400
+        # this doth seem to work also:
+	#     helper = cache --timeout=2678400
+        helper = store
