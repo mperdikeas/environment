@@ -12,5 +12,5 @@ declare -a repos=("tools" "java-mutil" "environment" "ocaml-mutil" "playground"
                   "js-vibrations" "py-number-theory" "py-probability" "js-cubehelix" "js-cubehelix-demo"
                   "js-towers-of-hanoi" "archetype-webpack-babel-mocha-react" "archetype-java-ant-ivy" "archetype-JSON-web-tokens-JJWT" "digiterra"
                   "demo-spa-and-web-services-with-jwt-auth-type-01" "js-react-leaflet" "archetype-react-router" "archetype-js-grokking-rest-syntax"
-                  "archetype-ts-node-playground" "archetype-ts-antd-playground" "ts-react-iacs"
+                  "archetype-ts-node-playground" "archetype-ts-antd-playground" "ts-react-iacs" "sscce-typescript-react-eslint"
                  )
