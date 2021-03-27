@@ -21,7 +21,7 @@ if ([ -h "${WHERE_I_LIVE}" ]) then
 
 for i in "${repos[@]}"
 do
-    cd ~/${i}
+    cd "${WHERE_I_LIVE}/../${i}"
     echo $(pwd)
     git merge origin/master
     git submodule update --recursive --remote
