@@ -20,8 +20,10 @@
         name = mperdikeas
         email = mperdikeas@gmail.com
 [push]
-	default = simple
+	default = current
 [credential]
         # this doth seem to work also:
 	#     helper = cache --timeout=2678400
         helper = store
+[gc]
+	auto = 0
