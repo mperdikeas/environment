@@ -1,3 +1,6 @@
 [submodule "bashrc"]
 	path = bashrc
 	url = https://github.com/mperdikeas/bashrc
+[submodule "emacs"]
+	path = emacs
+	url = https://github.com/mperdikeas/emacs.git
