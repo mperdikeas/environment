@@ -22,8 +22,8 @@
 [push]
 	default = current
 [credential]
+	helper = cache --timeout=86400
         # this doth seem to work also:
-	#     helper = cache --timeout=2678400
-        helper = store
+	#     helper = store
 [gc]
 	auto = 0
