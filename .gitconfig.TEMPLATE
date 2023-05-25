@@ -8,6 +8,15 @@
         ppush = "!sh -c 'git push --all && git push --tags'"
         df = difftool
         branchdate = !git for-each-ref --sort='-authordate' --format='%(refname)%09%(authordate)' refs/heads | sed -e 's-refs/heads/--'
+
+        # https://stackoverflow.com/a/39026300/274677        
+        stash-untracked = "!f() {    \
+            git stash;               \
+            git stash -u;            \
+            git stash pop stash@{1}; \
+        }; f"
+
+
 [color]
 	ui = true
         diff=always
@@ -22,8 +31,10 @@
 [push]
 	default = current
 [credential]
-	helper = cache --timeout=86400
-        # this doth seem to work also:
-	#     helper = store
+        username = mperdikeas@gmail.com
+        password = REPLACE_THIS_WITH_THE_GITHUB_PERSONAL_ACCESS_TOKEN
+	helper = store
 [gc]
 	auto = 0
+
+
