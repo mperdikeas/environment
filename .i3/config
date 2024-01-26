@@ -238,3 +238,9 @@ exec --no-startup-id xsetroot -solid "#333333"
 # ... to change that if necessary.
 # See more in: https://i3wm.org/docs/userguide.html#_tray_output
 exec --no-startup-id nm-applet
+
+## screenshots
+### provenance: https://dev.to/dianjuar/i3wm-screenshot-shortcuts-3n7b
+###             with some modifications including changing the date format as suggested here:
+###                https://unix.stackexchange.com/a/164834/24044
+bindsym Print exec --no-startup-id maim "/home/$USER/Pictures/$(date --iso-8601=seconds)".png

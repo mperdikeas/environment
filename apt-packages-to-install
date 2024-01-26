@@ -9,4 +9,5 @@ sudo apt-get install dos2unix
 sudo apt-get install ocaml
 sudo apt-get install ocaml
 sudo apt-get install ncurses-term # this is necessary for 256 colors
+sudo apt install maim
 
