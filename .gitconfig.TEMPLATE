@@ -25,6 +25,7 @@
 [diff]
 	tool = vimdiff
         external = git-meld
+	colorMoved = default
 [user]
         name = mperdikeas
         email = mperdikeas@gmail.com
