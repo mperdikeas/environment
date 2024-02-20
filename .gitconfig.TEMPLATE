@@ -25,6 +25,7 @@
 [diff]
 	tool = vimdiff
         external = git-meld
+        # cf.: REF1
 	colorMoved = default
 [user]
         name = mperdikeas
