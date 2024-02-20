@@ -30,6 +30,8 @@
         email = mperdikeas@gmail.com
 [push]
 	default = current
+        # cf.: REF1
+	autoSetupRemote = true
 [credential]
         username = mperdikeas@gmail.com
         password = REPLACE_THIS_WITH_THE_GITHUB_PERSONAL_ACCESS_TOKEN
@@ -39,5 +41,5 @@
 
 
 [merge]
-        # https://jvns.ca/blog/2024/02/16/popular-git-config-options/
+        # REF1: https://jvns.ca/blog/2024/02/16/popular-git-config-options/
 	conflictstyle = zdiff3
