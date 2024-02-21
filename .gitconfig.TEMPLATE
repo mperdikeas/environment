@@ -44,5 +44,6 @@
 
 [merge]
         # REF1: https://jvns.ca/blog/2024/02/16/popular-git-config-options/
-	conflictstyle = zdiff3
+        # zdiff3 is available only in git version 2.35 and beyond
+	conflictstyle = diff3
 	tool = meld
