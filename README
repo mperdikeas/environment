@@ -1,12 +1,11 @@
 2012.02.10 repository created to keep track of various configuration files
 
-[1] Most of these files, and definitely the following;
+[1] Many of these files, and definitely the following;
 
     .bashrc
     .gitconfig
     .dircolors
     .emacs
-    .emacs.d
     .i3 (or .i3.Dell)
     repos-list.sh
     the applicable [local-tools-*] directory depending on your system
